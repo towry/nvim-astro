@@ -1,4 +1,20 @@
 --- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/globals.lua
+------------------
+---===
+local cache = {} ---@type table<(fun()), table<string, any>>
+---@generic T: fun()
+---@param fn T
+---@return T
+local function util_memoize(fn)
+  return function(...)
+    local key = vim.inspect({ ... })
+    cache[fn] = cache[fn] or {}
+    if cache[fn][key] == nil then cache[fn][key] = fn(...) end
+    return cache[fn][key]
+  end
+end
+
+local function nvim_empty_argc() return vim.fn.argc(-1) == 0 end
 
 --- @class CommandArgs
 --- @field args string
@@ -19,6 +35,36 @@ local function nvim_has_keymap(key, mode) return vim.fn.hasmapto(key, mode) == 1
 local CREATE_UNDO = vim.api.nvim_replace_termcodes("<c-G>u", true, true, true)
 local function nvim_create_undo()
   if vim.api.nvim_get_mode().mode == "i" then vim.api.nvim_feedkeys(CREATE_UNDO, "n", false) end
+end
+
+local _cwd = vim.fn.getcwd(-1, -1)
+--- Cwd for workspaces root, not the per project workspace root.
+local function nvim_workspaces_root_()
+  --- NOTE: need better implementation.
+  return _cwd
+end
+
+--- Return the cwd related to tab.
+local function nvim_tab_root() return vim.fn.getcwd(-1, 0) end
+
+---@param bufnr number
+---@param winid number
+local function nvim_smart_close(bufnr, winid)
+  bufnr = bufnr or 0
+  winid = winid or 0
+
+  if vim.wo[winid].previewwindow then
+    vim.cmd.pclose()
+    return
+  elseif vim.api.nvim_win_get_config(0).relative ~= "" then
+    vim.cmd.fclose()
+    return
+  elseif vim.bo[bufnr].buftype ~= "" then
+    vim.cmd("silent! bd")
+    return
+  else
+    vim.cmd("silent! hide")
+  end
 end
 
 ---@private
@@ -86,7 +132,7 @@ end
 
 local git_is_perform_merge_in_nvim = function()
   if vim.g.nvim_is_start_as_merge_tool == 1 then return true end
-  local tail = vim.fn.expand "%:t"
+  local tail = vim.fn.expand("%:t")
   local args = { "MERGE_MSG", "COMMIT_EDITMSG" }
   if vim.tbl_contains(args, tail) then
     vim.g.nvim_is_start_as_merge_tool = 1
@@ -94,8 +140,8 @@ local git_is_perform_merge_in_nvim = function()
   end
   return false
 end
-local git_is_using_nvim_as_tool = function()
-  if vim.fn.argc(-1) == 0 then return false end
+local git_start_nvim = function()
+  if nvim_empty_argc() then return false end
   local argv = vim.v.argv
   local args = { { "-d" }, { "-c", "DiffConflicts" } }
   -- each table in args is pairs of args that may exists in argv to determin the
@@ -168,7 +214,7 @@ end
 --- Retrieve the focusable alternative buffer.
 --- @return number|nil
 local function buffer_alt_focusable_bufnr()
-  local altnr = vim.fn.bufnr "#"
+  local altnr = vim.fn.bufnr("#")
   if not altnr or altnr < 1 then return end
   -- if the buffer keep delete by other plugin wrongly, this will be a problem.
   -- plugin must be fixed.
@@ -208,6 +254,15 @@ local function keymap_super(c)
   return string.format("<Char-0xAE>%s", c)
 end
 
+--- Get visual selected word
+local function nvim_visual_text()
+  if vim.fn.exists("*getregion()") == 1 then
+    local list = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
+    return #list > 0 and list[1] or ""
+  end
+  return ""
+end
+
 local function nvim_get_range()
   if vim.fn.mode() == "n" then
     local pos = vim.api.nvim_win_get_cursor(0)
@@ -221,6 +276,18 @@ local function nvim_get_range()
     vim.fn.getpos("v")[2],
     vim.fn.getpos(".")[2],
   }
+end
+
+local util_toggle_dark = function(mode)
+  if vim.o.background == mode then return end
+
+  if vim.o.background == "light" then
+    vim.o.background = "dark"
+    vim.notify("Light out 🌛 ", vim.log.levels.INFO)
+  else
+    vim.o.background = "light"
+    vim.notify("Light on 🌞 ", vim.log.levels.INFO)
+  end
 end
 
 --- @param option_to_toggle string hidden=true or --no-hidden
@@ -303,9 +370,8 @@ local plugin_has_ai_suggestion_text = function()
 
   return false
 end
-
 ---
-local is_windows = vim.uv.os_uname().version:match "Windows"
+local is_windows = vim.uv.os_uname().version:match("Windows")
 local path_separator = is_windows and "\\" or "/"
 ---@param path string
 local path_remove_last_separator = function(path)
@@ -314,12 +380,87 @@ local path_remove_last_separator = function(path)
   return path
 end
 
----@param opts AstroCoreOpts
+---@param opts AstroCoreOpts | fun(plugin: LazyPlugin, opts: AstroCoreOpts):AstroCoreOpts
 local astro_extend_core = function(opts)
   return {
     "AstroNvim/astrocore",
-    opts = opts,
+    opts = opts or {},
   }
+end
+
+local path_is_fs_root = function(path)
+  if is_windows then
+    return path:match("^%a:$")
+  else
+    return path == "/"
+  end
+end
+
+-- Iterate the path until we find the rootdir.
+local path_iterate_parents = function(path)
+  local PlenaryPath = require("plenary.path")
+  local function it(_, v)
+    if v and not path_is_fs_root(v) then
+      v = PlenaryPath:new(v).parent()
+    else
+      return
+    end
+    if v and vim.uv.fs_realpath(v) then
+      return v, path
+    else
+      return
+    end
+  end
+
+  return it, path, path
+end
+
+local function path_search_ancestors_callback(startpath, func)
+  vim.validate({ func = { func, "f" } })
+  if func(startpath) then return startpath end
+  local guard = 100
+  for path in path_iterate_parents(startpath) do
+    -- Prevent infinite recursion if our algorithm breaks
+    guard = guard - 1
+    if guard == 0 then return end
+
+    if func(path) then return path end
+  end
+end
+
+local function path_is_homedir(path)
+  local homeDir = vim.uv.os_homedir() or ""
+  homeDir = homeDir:gsub("[\\/]+$", "") -- Remove trailing path separators
+  path = path:gsub("[\\/]+$", "") -- Remove trailing path separators
+  return path == homeDir
+end
+
+local lsp_get_autocmd_arg_client = function(args)
+  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  return client
+end
+
+do
+  vim.g.very_lazy_loaded = 0
+  nvim_augroup("SetupVeryLazyVar", {
+    event = "User",
+    once = true,
+    pattern = "VeryLazy",
+    command = function() vim.g.very_lazy_loaded = 1 end,
+  })
+end
+local lazy_call = function(method, ...)
+  local up = table.unpack or unpack
+  local args = { ... }
+  if vim.g.very_lazy_loaded == 1 then
+    method(up(args))
+    return
+  end
+  nvim_augroup("lazy_call", {
+    event = "User",
+    pattern = "VeryLazy",
+    command = function() method(up(args)) end,
+  })
 end
 
 return {
@@ -329,7 +470,12 @@ return {
   nvim_has_keymap = nvim_has_keymap,
   nvim_get_range = nvim_get_range,
   nvim_create_undo = nvim_create_undo,
-  git_is_using_nvim_as_tool = git_is_using_nvim_as_tool,
+  nvim_empty_argc = nvim_empty_argc,
+  nvim_workspaces_root = util_memoize(nvim_workspaces_root_),
+  nvim_tab_root = nvim_tab_root,
+  nvim_smart_close = nvim_smart_close,
+  nvim_visual_text = nvim_visual_text,
+  git_start_nvim = util_memoize(git_start_nvim),
   buffer_is_empty = buffer_is_empty,
   buffer_set_options = buffer_set_options,
   buffer_focus_or_current = buffer_focus_or_current,
@@ -341,6 +487,15 @@ return {
   util_toggle_cmd_option = util_toggle_cmd_option,
   util_mk_pattern_table = util_mk_pattern_table,
   util_falsy = util_falsy,
+  util_memoize = util_memoize,
+  util_toggle_dark = util_toggle_dark,
   path_remove_last_separator = path_remove_last_separator,
   astro_extend_core = astro_extend_core,
+  path_iterate_parents = path_iterate_parents,
+  path_search_ancestors_callback = path_search_ancestors_callback,
+  path_is_homedir = path_is_homedir,
+  lsp_get_autocmd_arg_client = lsp_get_autocmd_arg_client,
+  lazy_call = lazy_call,
+  plugin_has_ai_suggestions = plugin_has_ai_suggestions,
+  plugin_has_ai_suggestion_text = plugin_has_ai_suggestion_text,
 }

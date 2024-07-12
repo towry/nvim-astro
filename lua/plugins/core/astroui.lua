@@ -10,10 +10,18 @@ return {
   opts = {
     -- change colorscheme
     colorscheme = "nordfox",
+    background = "dark",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
+        FzfLuaNormal = { link = "NormalFloat" },
+        FzfLuaBorder = { link = "FloatBorder" },
+        FzfLuaPreviewNormal = { link = "NormalFloat" },
+        CocUnusedHighlight = { link = "DiagnosticUnderlineHint" },
+        MiniIndentscopeSymbol = { link = "IndentBlanklineChar" },
+        IndentLine = { link = "IndentBlanklineChar" },
+        IndentLineCurrent = { link = "IndentBlanklineContextChar" },
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
@@ -32,6 +40,12 @@ return {
       LSPLoading8 = "⠧",
       LSPLoading9 = "⠇",
       LSPLoading10 = "⠏",
+      ---
+      Diagnostic = "󰒡",
+      DiagnosticError = "E",
+      DiagnosticHint = "H",
+      DiagnosticInfo = "I",
+      DiagnosticWarn = "W",
     },
   },
 }
