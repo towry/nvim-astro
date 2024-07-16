@@ -2,7 +2,6 @@ local V = require("v")
 
 return {
   "j-hui/fidget.nvim",
-  event = { "VeryLazy" },
   enabled = not V.git_start_nvim(),
   specs = {
     { "rcarriga/nvim-notify", optional = true, enabled = false },
@@ -27,4 +26,7 @@ return {
       },
     },
   },
+  init = function()
+    vim.notify = function(...) require("fidget").notify(...) end
+  end,
 }

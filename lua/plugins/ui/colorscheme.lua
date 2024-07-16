@@ -1,10 +1,15 @@
+local colorscheme = "nordfox"
 return {
   "AstroNvim/astroui",
+  opts = {
+    colorscheme = colorscheme,
+  },
   dependencies = {
     {
       "rebelot/kanagawa.nvim",
       priority = 1000,
       event = "VeryLazy",
+      cond = colorscheme == "kanagawa",
       opts = {
         compile = true,
         undercurl = true, -- enable undercurls
@@ -72,6 +77,7 @@ return {
       "EdenEast/nightfox.nvim",
       priority = 1000,
       event = "VeryLazy",
+      cond = (colorscheme):match(".*fox"),
       opts = {
         options = {
           transparent = false,
