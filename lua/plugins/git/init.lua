@@ -177,4 +177,26 @@ return {
       end,
     },
   },
+  {
+    "akinsho/toggleterm.nvim",
+    optional = true,
+    dependencies = {
+      V.astro_extend_core({
+        mappings = {
+          n = {
+            ["<leader>gt"] = {
+              "<cmd>lua require('plugins.git._tig').toggle_tig()<cr>",
+              desc = "Toggle tig",
+            },
+          },
+        },
+        commands = {
+          TigFile = {
+            function() require("plugins.git._tig").toggle_tig_file_history() end,
+            desc = "Tig current file",
+          },
+        },
+      }),
+    },
+  },
 }
