@@ -13,31 +13,31 @@ return {
     -- Configure core features of AstroNvim
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
-      autopairs = true,                                 -- enable autopairs at start
-      cmp = true,                                       -- enable completion at start
-      diagnostics_mode = 2,                             -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
-      highlighturl = true,                              -- highlight URLs at start
-      notifications = false,                            -- enable notifications at start
+      autopairs = true, -- enable autopairs at start
+      cmp = true, -- enable completion at start
+      diagnostics_mode = 2, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      highlighturl = true, -- highlight URLs at start
+      notifications = false, -- enable notifications at start
     },
     rooter = {
       autochdir = true,
       scope = vim.g.internal_rooter_scope or "tab",
       notify = true,
       detector = {
-        "lsp",                                                 -- highest priority is getting workspace from running language servers
-        { ".git", "_darcs",   ".hg",         ".bzr", ".svn" }, -- next check for a version controlled parent directory
-        { "lua",  "MakeFile", "package.json" },                -- lastly check for known project root files
+        "lsp", -- highest priority is getting workspace from running language servers
+        { ".git", "_darcs", ".hg", ".bzr", ".svn" }, -- next check for a version controlled parent directory
+        { "lua", "MakeFile", "package.json" }, -- lastly check for known project root files
       },
       ignore = {
         servers = {
-          'null-ls',
-          'efm',
-          'tailwindcss',
+          "null-ls",
+          "efm",
+          "tailwindcss",
         },
         dirs = {
           "~/.cargo/*",
-        }
-      }
+        },
+      },
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
@@ -46,13 +46,13 @@ return {
     },
     -- vim options can be configured here
     options = {
-      opt = {                  -- vim.opt.<key>
+      opt = { -- vim.opt.<key>
         background = "dark",
         relativenumber = true, -- sets vim.opt.relativenumber
-        number = true,         -- sets vim.opt.number
-        spell = false,         -- sets vim.opt.spell
-        signcolumn = "yes",    -- sets vim.opt.signcolumn to yes
-        wrap = false,          -- sets vim.opt.wrap
+        number = true, -- sets vim.opt.number
+        spell = false, -- sets vim.opt.spell
+        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
+        wrap = false, -- sets vim.opt.wrap
         cmdheight = 1,
         fillchars = {
           stl = " ",
@@ -101,6 +101,10 @@ return {
         function(params) vim.cmd(([[tab exec "diffsplit" bufname(%s)]]):format(params.args)) end,
         desc = "Git diff with bufnr",
       },
+    },
+
+    autocmds = {
+      resession_auto_save = nil,
     },
   },
 }
