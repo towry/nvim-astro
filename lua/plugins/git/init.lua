@@ -105,6 +105,7 @@ return {
         virt_text = true,
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         ignore_whitespace = false,
+        delay = 300,
       },
       current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
       sign_priority = 6,
