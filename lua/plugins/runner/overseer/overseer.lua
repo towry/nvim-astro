@@ -26,6 +26,15 @@ return {
   keys = {
     { "<localleader>m", ":OverMake ", desc = "OverMake" },
     { "<localleader>o", desc = "Overseer" },
+    {
+      "<localleader>ob",
+      function()
+        require("overseer").run_template({
+          name = vim.bo.filetype .. "." .. "build",
+        })
+      end,
+      desc = "Overseer run default filetype's build template ",
+    },
     { "<localleader>o;", "<cmd>OverseerRestartLast<cr>", desc = "Restart last task" },
     { "<localleader>oo", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
     { "<localleader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
@@ -37,7 +46,7 @@ return {
     {
       "<localleader>ov",
       '<cmd>lua require("plugins.runner.overseer.utils").open_vsplit_last()<cr>',
-      desc = "Open last in vsplit",
+      desc = " Open last output window in vsplit",
     },
     {
       "<localleader>oq",
@@ -66,7 +75,7 @@ return {
       strategy = {
         astrocore.is_available("toggleterm.nvim") and "toggleterm" or "terminal",
         -------- toggleterm
-        open_on_start = true,
+        open_on_start = false,
         direction = "tab",
         auto_scroll = true,
         quit_on_exit = "never",
@@ -74,6 +83,16 @@ return {
       templates = { "builtin" },
       auto_detect_success_color = true,
       dap = true,
+      component_aliases = {
+        default = {
+          { "display_duration", detail_level = 2 },
+          "on_output_summarize",
+          "on_exit_set_status",
+          "on_complete_notify",
+          "on_complete_dispose",
+          "unique",
+        },
+      },
       task_list = {
         default_detail = 2,
         max_width = { 100, 0.6 },

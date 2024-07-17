@@ -17,11 +17,11 @@ end
 
 M.add_window_to_stack = function(bufnr)
   if not last_window or not vim.api.nvim_win_is_valid(last_window) then
-    M.create_window(bufnr, "topleft", get_size)
+    M.create_window(bufnr, "bottomright", get_size)
     return
   end
   vim.api.nvim_set_current_win(last_window)
-  M.create_window(bufnr, "topleft")
+  M.create_window(bufnr, "bottomright")
   M.resize_windows_on_stack()
 end
 
@@ -32,7 +32,7 @@ M.create_window = function(bufnr, modifier, size)
     size = size()
   end
 
-  vim.keymap.set("n", "q", "<cmd>q<cr>", { bufer = vim.api.nvim_get_current_buf(), desc = "quit" })
+  vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = vim.api.nvim_get_current_buf(), desc = "quit" })
 
   local cmd = "split"
   if modifier ~= "" then cmd = modifier .. " " .. size .. cmd end
