@@ -193,7 +193,7 @@ local function buffer_set_options(buf, opts)
 end
 --- Focus the buffer or set it as current buffer.
 --- @param bufnr number
---- @param tabonly boolean Only check windows in current tab.
+--- @param tabonly? boolean Only check windows in current tab.
 local function buffer_focus_or_current(bufnr, tabonly)
   if tabonly == nil then tabonly = true end
 

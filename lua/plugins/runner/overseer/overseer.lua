@@ -26,6 +26,15 @@ return {
   keys = {
     { "<localleader>m", ":OverMake ", desc = "OverMake" },
     { "<localleader>o", desc = "Overseer" },
+    {
+      "<localleader>ob",
+      function()
+        require("overseer").run_template({
+          name = vim.bo.filetype .. "." .. "build",
+        })
+      end,
+      desc = "Overseer run default filetype's build template ",
+    },
     { "<localleader>o;", "<cmd>OverseerRestartLast<cr>", desc = "Restart last task" },
     { "<localleader>oo", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
     { "<localleader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
@@ -37,7 +46,7 @@ return {
     {
       "<localleader>ov",
       '<cmd>lua require("plugins.runner.overseer.utils").open_vsplit_last()<cr>',
-      desc = "Open last in vsplit",
+      desc = " Open last output window in vsplit",
     },
     {
       "<localleader>oq",
@@ -58,44 +67,64 @@ return {
     -- { '<localleader>ot', '<cmd>OverseerTaskAction<cr>', desc = 'Select a task to run an action on' },
     { "<localleader>oC", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
   },
-  opts = {
-    -- https://github.com/stevearc/overseer.nvim/blob/master/doc/reference.md#setup-options
-    -- strategy = "terminal",
-    strategy = "terminal",
-    templates = { "builtin" },
-    auto_detect_success_color = true,
-    dap = true,
-    task_list = {
-      default_detail = 2,
-      max_width = { 100, 0.6 },
-      min_width = { 50, 0.4 },
-      direction = "right",
-      bindings = {
-        ["<C-t>"] = "<CMD>OverseerQuickAction open tab<CR>",
-        ["="] = "IncreaseDetail",
-        ["-"] = "DecreaseDetail",
-        ["<C-y>"] = "ScrollOutputUp",
-        ["<C-n>"] = "ScrollOutputDown",
-        ["<C-k>"] = false,
-        ["<C-j>"] = false,
-        ["<C-l>"] = false,
-        ["<C-h>"] = false,
+  opts = function(_, opts)
+    local astrocore = require("astrocore")
+    return vim.tbl_deep_extend("force", {
+      -- https://github.com/stevearc/overseer.nvim/blob/master/doc/reference.md#setup-options
+      -- strategy = "terminal",
+      strategy = {
+        astrocore.is_available("toggleterm.nvim") and "toggleterm" or "terminal",
+        -------- toggleterm
+        open_on_start = false,
+        direction = "tab",
+        auto_scroll = true,
+        quit_on_exit = "never",
       },
-    },
-    form = {
-      border = "single",
-    },
-    confirm = {
-      border = "single",
-    },
-    task_win = {
-      border = "single",
-    },
-    help_win = {
-      border = "single",
-    },
-    task_launcher = {},
-  },
+      templates = { "builtin" },
+      auto_detect_success_color = true,
+      dap = true,
+      component_aliases = {
+        default = {
+          { "display_duration", detail_level = 2 },
+          "on_output_summarize",
+          "on_exit_set_status",
+          "on_complete_notify",
+          "on_complete_dispose",
+          "unique",
+        },
+      },
+      task_list = {
+        default_detail = 2,
+        max_width = { 100, 0.6 },
+        min_width = { 50, 0.4 },
+        direction = "right",
+        bindings = {
+          ["<C-t>"] = "<CMD>OverseerQuickAction open tab<CR>",
+          ["="] = "IncreaseDetail",
+          ["-"] = "DecreaseDetail",
+          ["<C-y>"] = "ScrollOutputUp",
+          ["<C-n>"] = "ScrollOutputDown",
+          ["<C-k>"] = false,
+          ["<C-j>"] = false,
+          ["<C-l>"] = false,
+          ["<C-h>"] = false,
+        },
+      },
+      form = {
+        border = "single",
+      },
+      confirm = {
+        border = "single",
+      },
+      task_win = {
+        border = "single",
+      },
+      help_win = {
+        border = "single",
+      },
+      task_launcher = {},
+    }, opts)
+  end,
   config = function(_, opts)
     vim.g.plugin_overseer_loaded = 1
     local overseer = require("overseer")
@@ -203,6 +232,7 @@ return {
             cmd = vim.fn.expandcmd(vim.fn.escape(cmd, "`"))
             local task = require("overseer").new_task({
               cmd = cmd,
+              strategy = "terminal",
               components = {
                 {
                   "on_output_quickfix",
@@ -232,6 +262,10 @@ return {
             vim.b.over_dispatch = cmd
             local expanded_cmd = vim.fn.expandcmd(vim.fn.escape(cmd, "`"))
             local task = require("overseer").new_task({
+              strategy = {
+                "toggleterm",
+                open_on_start = false,
+              },
               cmd = expanded_cmd,
               components = {
                 { "on_output_quickfix", open = not params.bang, open_height = 8 },

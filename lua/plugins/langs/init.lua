@@ -5,4 +5,5 @@ return {
   },
   { import = "plugins.langs.typescript" },
   { import = "plugins.langs.vue" },
+  { import = "plugins.langs.nim" },
 }

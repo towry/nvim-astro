@@ -105,6 +105,7 @@ return {
         virt_text = true,
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         ignore_whitespace = false,
+        delay = 300,
       },
       current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
       sign_priority = 6,
@@ -175,6 +176,28 @@ return {
 
         astrocore.set_mappings(maps, { buffer = bufnr })
       end,
+    },
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    optional = true,
+    dependencies = {
+      V.astro_extend_core({
+        mappings = {
+          n = {
+            ["<leader>gt"] = {
+              "<cmd>lua require('plugins.git._tig').toggle_tig()<cr>",
+              desc = "Toggle tig",
+            },
+          },
+        },
+        commands = {
+          TigFile = {
+            function() require("plugins.git._tig").toggle_tig_file_history() end,
+            desc = "Tig current file",
+          },
+        },
+      }),
     },
   },
 }

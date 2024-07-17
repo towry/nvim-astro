@@ -28,7 +28,7 @@ end)
 M.buffers_open_default = wrap(function(selected, opts)
   local actions = require("fzf-lua.actions")
   local path = require("fzf-lua.path")
-  local Buffer = require("userlib.runtime.buffer")
+  local V = require("v")
 
   if #selected > 1 then
     actions.vimcmd_buf("b", selected, opts)
@@ -39,7 +39,7 @@ M.buffers_open_default = wrap(function(selected, opts)
   if not entry.bufnr then return end
   assert(type(entry.bufnr) == "number")
 
-  Buffer.set_current_buffer_focus(entry.bufnr)
+  V.buffer_focus_or_current(entry.bufnr)
 end)
 
 return M

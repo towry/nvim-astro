@@ -22,6 +22,8 @@ require("lazy").setup({
   defaults = {
     lazy = true,
   },
+  dev = { patterns = {}, path = "~/workspace/git-repos" },
+
   ui = { backdrop = 40 },
   performance = {
     rtp = {
