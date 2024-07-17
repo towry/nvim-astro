@@ -17,11 +17,11 @@ end
 
 M.add_window_to_stack = function(bufnr)
   if not last_window or not vim.api.nvim_win_is_valid(last_window) then
-    M.create_window(bufnr, "bottomright", get_size)
+    M.create_window(bufnr, "botright", get_size)
     return
   end
   vim.api.nvim_set_current_win(last_window)
-  M.create_window(bufnr, "bottomright")
+  M.create_window(bufnr, "botright")
   M.resize_windows_on_stack()
 end
 
