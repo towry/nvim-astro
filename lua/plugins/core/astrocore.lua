@@ -43,6 +43,9 @@ return {
     diagnostics = {
       virtual_text = true,
       underline = true,
+      float = {
+        border = "single",
+      },
     },
     -- vim options can be configured here
     options = {
