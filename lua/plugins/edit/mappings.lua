@@ -8,6 +8,7 @@ return {
       mappings = {
         i = {
           ["jj"] = { "<ESC>", nowait = true, noremap = true },
+          ["<C-s>"] = { "<cmd>update!<cr>", desc = "Save File", noremap = true, nowait = true },
         },
 
         -- first key is the mode
