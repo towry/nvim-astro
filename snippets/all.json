@@ -1,0 +1,31 @@
+{
+  "Eslint disable next line": {
+    "body": ["// eslint-disable-next-line"],
+    "prefix": ["eslint_disable"]
+  },
+  "Prettier ignore comment": {
+    "body": ["// prettier-ignore"],
+    "prefix": ["ignore_prettier", "prettier_ignore"]
+  },
+  "generate snippet package": {
+    "body": [
+      "{",
+      " \"name\": \"user-snippets\",",
+      " \"description\": \"User snippets for VS Code\",",
+      " \"contributes\": {",
+      "   \"snippets\": [",
+      "     {",
+      "       \"language\": \"all\",",
+      "       \"path\": \"./all.json\"",
+      "     }",
+      "    ]",
+      "  }",
+      "}"
+    ],
+    "prefix": ["snippet_package"]
+  },
+  "sass element": {
+    "body": ["@include element(\"${1}\") {", "  ${2}", "}"],
+    "prefix": ["sass-element"]
+  }
+}
