@@ -32,10 +32,9 @@ M.create_window = function(bufnr, modifier, size)
     size = size()
   end
 
-  vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = vim.api.nvim_get_current_buf(), desc = "quit" })
-
-  local cmd = "split"
-  if modifier ~= "" then cmd = modifier .. " " .. size .. cmd end
+  local smart_split = V.nvim_smart_split()
+  local cmd = smart_split.cmd
+  if modifier ~= "" then cmd = modifier .. " " .. cmd end
   vim.cmd(cmd)
 
   local winid = vim.api.nvim_get_current_win()
@@ -49,6 +48,8 @@ M.create_window = function(bufnr, modifier, size)
   vim.wo[winid].winfixwidth = true
   vim.wo[winid].winfixheight = true
   vim.wo[winid].wrap = true
+
+  vim.keymap.set("n", "q", "<cmd>hide<cr>", { buffer = bufnr, desc = "quit" })
 
   vim.api.nvim_create_autocmd("WinClosed", {
     group = augroup,

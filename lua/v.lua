@@ -30,6 +30,20 @@ local function nvim_command(name, rhs, opts)
   vim.api.nvim_create_user_command(name, rhs, opts)
 end
 
+local function nvim_smart_split()
+  local cols = vim.o.columns
+  local lns = vim.o.lines
+
+  local cmd = "split"
+  local dir = "botright"
+  if math.floor(cols / lns) > 1.3 then cmd = "vsplit" end
+
+  return {
+    cmd = cmd,
+    modifier = dir,
+  }
+end
+
 local function nvim_has_keymap(key, mode) return vim.fn.hasmapto(key, mode) == 1 end
 
 local CREATE_UNDO = vim.api.nvim_replace_termcodes("<c-G>u", true, true, true)
@@ -480,6 +494,7 @@ return {
   lazy_get_plugin_opts = lazy_get_plugin_opts,
   register_global = register_global,
   nvim_command = nvim_command,
+  nvim_smart_split = nvim_smart_split,
   nvim_augroup = nvim_augroup,
   nvim_has_keymap = nvim_has_keymap,
   nvim_get_range = nvim_get_range,
