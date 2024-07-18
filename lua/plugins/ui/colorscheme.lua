@@ -93,6 +93,9 @@ return {
                 fg = "palette.blue",
                 bg = "palette.bg0",
               },
+              WinSeparator = {
+                fg = "palette.blue",
+              },
               FloatBorder = { link = "NormalFloat" },
               FzfLuaNormal = { link = "NormalFloat" },
               FzfLuaBorder = { link = "FloatBorder" },
