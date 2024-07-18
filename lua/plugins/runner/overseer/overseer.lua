@@ -1,6 +1,8 @@
 local V = require("v")
 
 return {
+  ---- NOTE: If task buffer is opened and then deleted, it will not be visible in
+  ---overseer output window again.
   -- https://github.com/stevearc/overseer.nvim
   "stevearc/overseer.nvim",
   cmd = {
@@ -56,7 +58,7 @@ return {
     {
       "<localleader>ot",
       function()
-        local ovutils = require("plugins.runner.overseers.utils")
+        local ovutils = require("plugins.runner.overseer.utils")
         ovutils.run_action_on_tasks({
           unique = true,
           recent_first = true,

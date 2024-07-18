@@ -59,9 +59,9 @@ local function nvim_smart_close(bufnr, winid)
   elseif vim.api.nvim_win_get_config(0).relative ~= "" then
     vim.cmd.fclose()
     return
-  elseif vim.bo[bufnr].buftype ~= "" then
-    vim.cmd("silent! bd")
-    return
+    -- for now, do not use bd to delete the buffer to close,
+    -- because some buffer owned by overseer's task, if we delete it,
+    -- we may not be able to see it again.
   else
     vim.cmd("silent! hide")
   end
