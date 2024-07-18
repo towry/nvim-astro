@@ -166,6 +166,9 @@ return {
         overseer.run_action(tasks[1], "restart")
       end
     end, {})
+
+    --- prevent o insert line
+    vim.keymap.set("n", "<localleader>o", "<NOP>", {})
   end,
   dependencies = {
     "nvim-lua/plenary.nvim",
