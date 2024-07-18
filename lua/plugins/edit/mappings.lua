@@ -16,6 +16,7 @@ return {
           ["<Leader>/"] = false,
           ["<Leader>q"] = false,
           ["<Leader>w"] = false,
+          ["gs"] = "+Surrounding",
           ["<c-w><space>"] = {
             function() require("which-key").show({ keys = "<c-w>", loop = true }) end,
             desc = "Window Hydra mode (which-key)",

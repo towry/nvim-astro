@@ -463,7 +463,20 @@ local lazy_call = function(method, ...)
   })
 end
 
+---@param name string
+local function lazy_get_plugin(name) return require("lazy.core.config").spec.plugins[name] end
+
+---@param name string
+local function lazy_get_plugin_opts(name)
+  local plugin = lazy_get_plugin(name)
+  if not plugin then return {} end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
+end
+
 return {
+  lazy_get_plugin = lazy_get_plugin,
+  lazy_get_plugin_opts = lazy_get_plugin_opts,
   register_global = register_global,
   nvim_command = nvim_command,
   nvim_augroup = nvim_augroup,

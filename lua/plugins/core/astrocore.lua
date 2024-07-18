@@ -56,6 +56,7 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        timeoutlen = 400, -- which-key delay
         cmdheight = 1,
         fillchars = {
           stl = " ",
