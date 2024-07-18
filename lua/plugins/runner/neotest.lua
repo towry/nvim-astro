@@ -42,6 +42,11 @@ return {
     },
   },
   specs = {},
+  opts = {
+    floating = {
+      border = "single",
+    },
+  },
   config = function(_, opts)
     vim.diagnostic.config({
       virtual_text = {
