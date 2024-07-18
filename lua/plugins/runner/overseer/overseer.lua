@@ -28,22 +28,45 @@ return {
   keys = {
     { "<localleader>m", ":OverMake ", desc = "OverMake" },
     { "<localleader>o", desc = "Overseer" },
-    {
-      "<localleader>ob",
-      function()
-        require("overseer").run_template({
-          name = vim.bo.filetype .. "." .. "build",
-        })
-      end,
-      desc = "Overseer run default filetype's build template ",
-    },
     { "<localleader>o;", "<cmd>OverseerRestartLast<cr>", desc = "Restart last task" },
     { "<localleader>oo", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
     { "<localleader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
+    {
+      "<localleader>o1",
+      function()
+        require("plugins.runner.overseer.utils").start_template_by_tags({
+          "BUILD",
+        })
+      end,
+      desc = "Select template to BUILD and open the output of task",
+    },
+    {
+      "<localleader>o2",
+      function()
+        require("plugins.runner.overseer.utils").start_template_by_tags({
+          "RUN",
+        })
+      end,
+      desc = "Select template to RUN and open the output of task",
+    },
+    {
+      "<localleader>o3",
+      function()
+        require("plugins.runner.overseer.utils").start_template_by_tags({
+          "TEST",
+        })
+      end,
+      desc = "Select template to TEST and open the output of task",
+    },
+    {
+      "<localleader>o<space>",
+      function() require("plugins.runner.overseer.utils").start_template_and_open() end,
+      desc = "Start template and open",
+    },
     { "<localleader>oR", "<cmd>OverseerRunCmd<cr>", desc = "Run shell cmd" },
     { "<localleader>oc", "<cmd>OverseerClose<cr>", desc = "Close" },
-    { "<localleader>os", "<cmd>OverseerSaveBundle<cr>", desc = "Save bundle" },
-    { "<localleader>ol", "<cmd>OverseerLoadBundle<cr>", desc = "Load bundle" },
+    { "<localleader>oS", "<cmd>OverseerSaveBundle<cr>", desc = "Save bundle" },
+    { "<localleader>oL", "<cmd>OverseerLoadBundle<cr>", desc = "Load bundle" },
     { "<localleader>od", "<cmd>OverseerDeleteBundle<cr>", desc = "Delete bundle" },
     {
       "<localleader>ov",
@@ -55,18 +78,6 @@ return {
       "<cmd>OverseerQuickAction<cr>",
       desc = "Run an action on the most recent task, or the task under the cursor",
     },
-    {
-      "<localleader>ot",
-      function()
-        local ovutils = require("plugins.runner.overseer.utils")
-        ovutils.run_action_on_tasks({
-          unique = true,
-          recent_first = true,
-        })
-      end,
-      desc = "List tasks",
-    },
-    -- { '<localleader>ot', '<cmd>OverseerTaskAction<cr>', desc = 'Select a task to run an action on' },
     { "<localleader>oC", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
   },
   opts = function(_, opts)

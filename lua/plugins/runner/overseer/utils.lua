@@ -82,8 +82,9 @@ function M.get_last_task()
 end
 
 --- https://github.com/pianocomposer321/dotfiles-yadm/blob/d8f7da6c19095353eb43c5fa8023148cff4440f4/.config/nvim/lua/user/overseer_util.lua
-function M.open_vsplit_last()
-  local task = M.get_last_task()
+--- @param task_ overseer.Task?
+function M.open_vsplit_last(task_)
+  local task = task_ or M.get_last_task()
   if task then
     local bufnr = task:get_bufnr()
     if not bufnr then
@@ -95,9 +96,35 @@ function M.open_vsplit_last()
   end
 end
 
+---@param opts overseer.Param?
+function M.start_template_and_open(opts)
+  local ov = require("overseer")
+  ov.run_template(opts, function(task)
+    if not task then
+      vim.notify("No task found", vim.log.levels.INFO)
+      return
+    end
+    M.open_vsplit_last(task)
+  end)
+end
+
+function M.start_template_by_tags(tags)
+  local ov = require("overseer")
+  ov.run_template({
+    tags = tags,
+  }, function(task)
+    if not task then
+      vim.notify("No task found", vim.log.levels.INFO)
+      return
+    end
+    M.open_vsplit_last(task)
+  end)
+end
+
+--- If no template task run before, there will be no tasks.
 function M.run_action_on_tasks(opts)
-  local task_list = require("overseer.task_list")
-  local tasks = task_list.list_tasks({ unique = true, recent_first = true })
+  local ov = require("overseer")
+  local tasks = ov.list_tasks(opts)
   local action_util = require("overseer.action_util")
 
   if #tasks == 0 then
