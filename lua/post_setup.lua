@@ -57,32 +57,6 @@ v.nvim_augroup("CheckOutsideChange", {
   event = { "WinEnter", "BufWinEnter", "BufWinLeave", "BufRead", "BufEnter", "FocusGained" },
   command = "silent! checktime",
 })
-v.nvim_augroup("TerminalAutocommands", {
-  event = { "TermClose" },
-  command = vim.schedule_wrap(function(args)
-    if vim.api.nvim_get_current_buf() ~= args.buf or not vim.api.nvim_buf_is_valid(args.buf) then
-      -- Overseer will open term, and close shortly.
-      return
-    end
-
-    --- automatically close a terminal if the job was successful
-    if v.util_falsy(vim.v.event.status) and v.util_falsy(vim.bo[args.buf].ft) then
-      vim.cmd.bdelete({ args.buf, bang = true })
-    end
-  end),
-}, {
-  event = { "TermOpen" },
-  pattern = "term://*",
-  command = vim.schedule_wrap(function(ctx)
-    if vim.api.nvim_get_current_buf() ~= ctx.buf then
-      -- Overseer will open term, and close shortly.
-      return
-    end
-    vim.cmd.setlocal("sidescrolloff=0")
-    vim.cmd("startinsert")
-    if vim.g.set_terminal_keymaps then vim.g.set_terminal_keymaps(ctx.buf) end
-  end),
-})
 v.nvim_augroup("SetKeyOnCmdWin", {
   event = { "CmdwinEnter" },
   command = function(ctx)

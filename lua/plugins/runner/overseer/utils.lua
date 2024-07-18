@@ -112,12 +112,13 @@ function M.start_template_by_tags(tags)
   local ov = require("overseer")
   ov.run_template({
     tags = tags,
+    autostart = true,
   }, function(task)
     if not task then
       vim.notify("No task found", vim.log.levels.INFO)
       return
     end
-    ov.run_action(task, "open hsplit")
+    M.open_vsplit_last()
   end)
 end
 
