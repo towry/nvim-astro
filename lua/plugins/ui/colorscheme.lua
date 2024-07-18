@@ -5,6 +5,7 @@ return {
     colorscheme = colorscheme,
   },
   dependencies = {
+    require("plugins.ui.catppucin"),
     {
       "rebelot/kanagawa.nvim",
       priority = 1000,
