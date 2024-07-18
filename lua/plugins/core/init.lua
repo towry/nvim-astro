@@ -8,7 +8,7 @@ return {
     "folke/which-key.nvim",
     opts = {
       notify = false,
-      -- delay = function(ctx) return ctx.plugin and 0 or 200 end,
+      delay = function(ctx) return ctx.plugin and 0 or 200 end,
       modes = {
         --- issue 1: if press C-d in visual mode, the which-key window will be scrolled down instead of
         --- scroll down the selection.
