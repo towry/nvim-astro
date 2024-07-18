@@ -7,14 +7,20 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
+      -- delay = function(ctx) return ctx.plugin and 0 or 200 end,
       modes = {
         --- issue 1: if press C-d in visual mode, the which-key window will be scrolled down instead of
         --- scroll down the selection.
         -- x = false,
       },
-      preset = "modern",
+      preset = "helix",
       win = {
+        no_overlap = false,
         border = "single",
+        title_pos = "left",
+        wo = {
+          winblend = 20,
+        },
       },
     },
   },
