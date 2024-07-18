@@ -75,12 +75,19 @@ return {
               if win_count <= 1 then
                 local choice = vim.fn.confirm("Close last window in tab?", "&Yes\n&No", 2)
                 if choice == 2 then return end
-                return
               end
               V.nvim_smart_close(0, 0)
               vim.cmd('echo "hide current window"')
             end,
             desc = "Kill current window",
+          },
+          ["<C-c><C-f>"] = {
+            function()
+              local current_buf = vim.api.nvim_get_current_buf()
+              vim.cmd("tabnew")
+              vim.cmd("b" .. current_buf)
+            end,
+            desc = "Drop float win to new tab",
           },
           ["<C-c><C-d>"] = {
             function()
