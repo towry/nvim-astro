@@ -117,7 +117,7 @@ function M.start_template_by_tags(tags)
       vim.notify("No task found", vim.log.levels.INFO)
       return
     end
-    M.open_vsplit_last(task)
+    ov.run_action(task, "open hsplit")
   end)
 end
 

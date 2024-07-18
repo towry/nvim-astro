@@ -89,8 +89,9 @@ return {
         astrocore.is_available("toggleterm.nvim") and "toggleterm" or "terminal",
         -------- toggleterm
         open_on_start = false,
-        direction = "tab",
+        direction = vim.o.columns / vim.o.lines > 2 and "right" or "bottom",
         auto_scroll = true,
+        close_on_exit = false,
         quit_on_exit = "never",
       },
       templates = { "builtin" },
