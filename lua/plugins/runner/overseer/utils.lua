@@ -39,6 +39,10 @@ M.create_window = function(bufnr, modifier, size)
   vim.cmd(cmd)
 
   local winid = vim.api.nvim_get_current_win()
+  if not bufnr then
+    vim.notify("buf is nil", vim.log.levels.ERROR)
+    return
+  end
   windows[bufnr] = winid
   last_window = winid
   count_windows = count_windows + 1
@@ -81,6 +85,10 @@ function M.open_vsplit_last()
   local task = M.get_last_task()
   if task then
     local bufnr = task:get_bufnr()
+    if not bufnr then
+      vim.notify("No task buf found", vim.log.levels.ERROR)
+      return
+    end
     M.add_window_to_stack(bufnr)
     vim.api.nvim_win_set_buf(0, bufnr)
   end
