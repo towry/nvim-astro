@@ -327,6 +327,7 @@ end
 
 --- Returns a table that when accessed by key, match with pattern from
 --- key in the tbl
+--- @deprecated not working
 --- @param tbl table
 --- @return table
 local util_mk_pattern_table = function(tbl)

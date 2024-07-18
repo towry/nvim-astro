@@ -4,40 +4,33 @@
 
 local v = require("v")
 do -- smart close
-  local function smart_close()
-    if vim.fn.winnr("$") ~= 1 then vim.api.nvim_win_close(0, true) end
-  end
-  local smart_close_ft = v.util_mk_pattern_table({
-    ["help"] = true,
-    ["qf"] = true,
-    ["log"] = true,
-    ["query"] = true,
-    ["dbui"] = true,
-    ["lspinfo"] = true,
-    ["git.*"] = true,
-    ["Neogit.*"] = true,
-    ["neotest-*"] = true,
-    ["fugitive.*"] = true,
-    ["copilot.*"] = true,
-    ["startuptime"] = true,
-  })
-  local smart_close_buftypes = v.util_mk_pattern_table({
-    nofile = true,
-  })
+  local smart_close_ft = {
+    "PlenaryTestPopup",
+    "help",
+    "qf",
+    "log",
+    "query",
+    "dbui",
+    "lspinfo",
+    "checkhealth",
+    "git",
+    "neotest-output",
+    "neotest-summary",
+    "neotest-output-panel",
+    "fugitive",
+    "dbout",
+    "startuptime",
+  }
   v.nvim_augroup("SmartWinClose", {
     event = "FileType",
+    pattern = smart_close_ft,
     command = function(event)
-      ------ not working
-      -- local is_unmapped = not v.nvim_has_keymap("q", "n")
-      -- local buftype = vim.bo[event.buf].buftype
-      -- local filetype = vim.bo[event.buf].filetype
-      -- local is_eligible = is_unmapped
-      --     or vim.wo.previewwindow
-      --     or smart_close_buftypes[buftype]
-      --     or smart_close_ft[filetype]
-      --
-      -- if not is_eligible then return end
-      -- vim.keymap.set("n", "q", smart_close, { buffer = event.buf, silent = true, nowait = true })
+      vim.bo[event.buf].buflisted = false
+      vim.keymap.set("n", "q", "<cmd>close<cr>", {
+        buffer = event.buf,
+        silent = true,
+        desc = "Quit buffer",
+      })
     end,
   }, {
     event = { "BufEnter" },
