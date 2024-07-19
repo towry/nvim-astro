@@ -15,7 +15,7 @@ return {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 2, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
       highlighturl = true, -- highlight URLs at start
       notifications = false, -- enable notifications at start
     },
@@ -41,7 +41,11 @@ return {
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
-      virtual_text = true,
+      virtual_text = {
+        virt_text_pos = "eol",
+        spacing = 1,
+        hl_mode = "blend",
+      },
       underline = true,
       float = {
         border = "single",
@@ -108,7 +112,7 @@ return {
     },
 
     autocmds = {
-      resession_auto_save = nil,
+      resession_auto_save = false,
     },
   },
 }
