@@ -8,12 +8,13 @@ return {
         -- if the file type is one of following, the window will be ignored
         filetype = {
           "fzf",
+          "neo-tree",
         },
 
         -- if the file type is one of following, the window will be ignored
         buftype = {
           "prompt",
-          "nowrite",
+          "nofile",
           "acwrite",
           "quickfix",
         },
