@@ -133,6 +133,18 @@ return {
             return client.supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
           end,
         },
+        ["<Leader>xd"] = {
+          "<cmd>lua vim.diagnostic.setloclist()<cr>",
+          desc = "Send all diagnostics to quickfix",
+        },
+        ["<Leader>xe"] = {
+          "<cmd>lua vim.diagnostic.setloclist({severity = vim.diagnostic.severity.ERROR })<cr>",
+          desc = "Send error diagnostics to quickfix",
+        },
+        ["<Leader>xw"] = {
+          "<cmd>lua vim.diagnostic.setloclist({severity = vim.diagnostic.severity.WARN })<cr>",
+          desc = "Send error diagnostics to quickfix",
+        },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
