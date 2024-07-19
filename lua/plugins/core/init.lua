@@ -6,24 +6,28 @@ return {
   { import = "plugins.core.smart-split" },
   {
     "folke/which-key.nvim",
-    opts = {
-      notify = false,
-      delay = function(ctx) return ctx.plugin and 0 or 200 end,
-      modes = {
-        --- issue 1: if press C-d in visual mode, the which-key window will be scrolled down instead of
-        --- scroll down the selection.
-        -- x = false,
-      },
-      preset = "helix",
-      win = {
+    opts = function(_, opts)
+      opts.notify = true
+      opts.triggers = opts.triggers or {
+        { "<auto>", mode = "nixsotc" },
+      }
+      table.insert(opts.triggers, {
+        "<leader>z+",
+        mode = "n",
+      })
+      opts.delay = function(ctx) return ctx.plugin and 0 or 200 end
+      opts.defer = function(ctx) return ctx.mode == "V" or ctx.mode == "<C-V>" end
+
+      opts.preset = "helix"
+      opts.win = {
         no_overlap = false,
         border = "single",
         title_pos = "left",
         wo = {
           winblend = 20,
         },
-      },
-    },
+      }
+    end,
   },
   {
     "hrsh7th/nvim-cmp",

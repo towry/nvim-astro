@@ -3,7 +3,7 @@ local M = {}
 
 local picker_mod = "plugins.finder.fzf-lua._pickers"
 
-M.open = function(new_cwd)
+M.open = vim.schedule_wrap(function(new_cwd)
   new_cwd = V.path_remove_last_separator(new_cwd)
   --- NOTE: wip
   local nicely_cwd = new_cwd
@@ -110,6 +110,6 @@ M.open = function(new_cwd)
     --   desc = "Mark project",
     -- })
   end)
-end
+end)
 
 return M
