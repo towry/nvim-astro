@@ -11,10 +11,6 @@ return {
       opts.triggers = opts.triggers or {
         { "<auto>", mode = "nixsotc" },
       }
-      table.insert(opts.triggers, {
-        "<leader>z+",
-        mode = "n",
-      })
       opts.delay = function(ctx) return ctx.plugin and 0 or 200 end
       opts.defer = function(ctx) return ctx.mode == "V" or ctx.mode == "<C-V>" end
 

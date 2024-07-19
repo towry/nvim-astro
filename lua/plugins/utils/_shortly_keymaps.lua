@@ -5,33 +5,38 @@ M.shortly_prefix = "<leader>z+"
 ---@param fn function
 M.open = function(fn)
   local buf = vim.api.nvim_get_current_buf()
-
-  local set = function(...)
-    local args = { ... }
-    local mode = args[1]
-    local key = args[2]
-    local command = args[3]
-    local opts = args[4] or {}
-    if type(mode == "string") then mode = { mode } end
+  local set = function(key, cmd, opts_)
+    local mode = "n"
     local keys = M.shortly_prefix .. key
-    vim.keymap.set(
-      mode,
-      keys,
-      command,
-      vim.tbl_deep_extend("force", opts, {
-        buffer = buf,
-      })
-    )
+    local command = function()
+      if type(cmd) == "string" then
+        vim.cmd(cmd)
+      elseif type(cmd) == "function" then
+        cmd()
+      end
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(buf) and V.nvim_has_keymap("n", keys) then
+          pcall(
+            function()
+              vim.keymap.del("n", keys, {
+                buffer = buf,
+              })
+            end
+          )
+        end
+      end)
+    end
+    local opts = vim.tbl_deep_extend("force", {
+      remap = false,
+      nowait = true,
+      buffer = buf,
+    }, opts_)
+    vim.keymap.set(mode, keys, command, opts)
   end
-  local is_unset = false
   --- actually this is not neccessary
-  local unset = function()
-    if is_unset then return end
-    is_unset = true
-    if not vim.api.nvim_buf_is_loaded(buf) then return end
-  end
+  local unset = function() end
 
-  fn(set, unset, buf)
+  fn(set, unset)
 
   vim.schedule(function() M.show_on_keys(M.shortly_prefix) end)
 end
