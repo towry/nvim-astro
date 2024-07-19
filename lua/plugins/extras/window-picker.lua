@@ -15,6 +15,7 @@ return {
           "prompt",
           "nowrite",
           "acwrite",
+          "quickfix",
         },
       },
     },
@@ -34,6 +35,14 @@ return {
           include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
+          bo = {
+            filetype = {
+              "fzf",
+            },
+            buftype = {
+              "acwrite",
+            },
+          },
         })
         if not win then return end
         vim.api.nvim_set_current_win(win)
@@ -49,6 +58,14 @@ return {
           include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
+          bo = {
+            filetype = {
+              "fzf",
+            },
+            buftype = {
+              "acwrite",
+            },
+          },
         })
         if not win then return end
         vim.api.nvim_win_close(win, false)
