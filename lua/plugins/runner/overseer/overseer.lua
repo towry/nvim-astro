@@ -98,7 +98,7 @@ return {
       dap = true,
       component_aliases = {
         default = {
-          { "display_duration", detail_level = 2 },
+          { "display_duration" },
           "on_output_summarize",
           "on_exit_set_status",
           "on_complete_notify",
