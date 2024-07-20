@@ -23,6 +23,10 @@ return {
           ["<Leader>c"] = false,
           ["<Leader>C"] = false,
           ["<Leader>n"] = false,
+          ["<leader>-"] = {
+            "<cmd>Neotree source=buffers float reveal action=focus<cr>",
+            desc = "Open buffers",
+          },
           ["<Leader>e"] = "󱏒 Explore",
           ["<Leader>o"] = false,
           ["<Leader>ee"] = { "<Cmd>Neotree toggle<CR>", desc = "Toggle Explorer" },
@@ -80,15 +84,15 @@ return {
             end,
             desc = "Kill current window",
           },
-          ["<leader>z+"] = {
-            function()
-              require("which-key").show({
-                keys = "<leader>z+",
-                global = false,
-              })
-            end,
-            desc = "z+",
-          },
+          -- ["<leader>z+"] = {
+          --   function()
+          --     require("which-key").show({
+          --       keys = "<leader>z+",
+          --       global = false,
+          --     })
+          --   end,
+          --   desc = "z+",
+          -- },
           ["<C-c><C-f>"] = {
             function()
               local current_buf = vim.api.nvim_get_current_buf()
