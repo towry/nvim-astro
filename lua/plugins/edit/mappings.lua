@@ -23,23 +23,8 @@ return {
           ["<Leader>c"] = false,
           ["<Leader>C"] = false,
           ["<Leader>n"] = false,
-          ["<leader>-"] = {
-            "<cmd>Neotree source=buffers float reveal action=focus<cr>",
-            desc = "Open buffers",
-          },
           ["<Leader>e"] = "󱏒 Explore",
           ["<Leader>o"] = false,
-          ["<Leader>ee"] = { "<Cmd>Neotree toggle<CR>", desc = "Toggle Explorer" },
-          ["<Leader>e."] = {
-            function()
-              if vim.bo.filetype == "neo-tree" then
-                vim.cmd.wincmd("p")
-              else
-                vim.cmd.Neotree("focus")
-              end
-            end,
-            desc = "Toggle Explorer Focus",
-          },
           ["<Leader>nf"] = {
             ":new<cr>",
             desc = "New file",
