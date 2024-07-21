@@ -84,15 +84,6 @@ return {
             end,
             desc = "Kill current window",
           },
-          -- ["<leader>z+"] = {
-          --   function()
-          --     require("which-key").show({
-          --       keys = "<leader>z+",
-          --       global = false,
-          --     })
-          --   end,
-          --   desc = "z+",
-          -- },
           ["<C-c><C-f>"] = {
             function()
               local current_buf = vim.api.nvim_get_current_buf()
