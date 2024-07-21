@@ -33,7 +33,7 @@ M.open = function(fn)
 
   require("which-key").add({
     "<leader>z+",
-    group = "Temporary once purpuse keymaps",
+    group = "Temporary once keymaps",
     expand = function() return M.get_maps() end,
   })
 
