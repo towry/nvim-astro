@@ -8,13 +8,15 @@ return {
         -- if the file type is one of following, the window will be ignored
         filetype = {
           "fzf",
+          "neo-tree",
         },
 
         -- if the file type is one of following, the window will be ignored
         buftype = {
           "prompt",
-          "nowrite",
+          "nofile",
           "acwrite",
+          "quickfix",
         },
       },
     },
@@ -34,6 +36,14 @@ return {
           include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
+          bo = {
+            filetype = {
+              "fzf",
+            },
+            buftype = {
+              "acwrite",
+            },
+          },
         })
         if not win then return end
         vim.api.nvim_set_current_win(win)
@@ -49,6 +59,14 @@ return {
           include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
+          bo = {
+            filetype = {
+              "fzf",
+            },
+            buftype = {
+              "acwrite",
+            },
+          },
         })
         if not win then return end
         vim.api.nvim_win_close(win, false)

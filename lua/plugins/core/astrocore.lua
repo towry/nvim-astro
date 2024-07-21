@@ -41,7 +41,11 @@ return {
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
-      virtual_text = true,
+      virtual_text = {
+        virt_text_pos = "eol",
+        spacing = 1,
+        hl_mode = "blend",
+      },
       underline = true,
       float = {
         border = "single",
@@ -50,12 +54,12 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        background = "dark",
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        timeoutlen = 400, -- which-key delay
         cmdheight = 1,
         fillchars = {
           stl = " ",
@@ -107,7 +111,7 @@ return {
     },
 
     autocmds = {
-      resession_auto_save = nil,
+      resession_auto_save = false,
     },
   },
 }

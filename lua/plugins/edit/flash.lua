@@ -43,7 +43,7 @@ return {
               function() require("flash").jump() end,
               desc = "Flash",
             },
-            ["gs"] = {
+            ["gS"] = {
               function() require("flash").treesitter() end,
               desc = "Flash Treesitter",
             },

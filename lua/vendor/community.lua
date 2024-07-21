@@ -4,7 +4,6 @@ return {
   --- langs
   { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
   { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.nim" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   -- { import = "astrocommunity.completion.codeium-nvim" },

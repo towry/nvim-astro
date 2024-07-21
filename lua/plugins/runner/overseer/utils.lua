@@ -32,19 +32,24 @@ M.create_window = function(bufnr, modifier, size)
     size = size()
   end
 
-  vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = vim.api.nvim_get_current_buf(), desc = "quit" })
-
-  local cmd = "split"
-  if modifier ~= "" then cmd = modifier .. " " .. size .. cmd end
+  local smart_split = V.nvim_smart_split()
+  local cmd = smart_split.cmd
+  if modifier ~= "" then cmd = modifier .. " " .. cmd end
   vim.cmd(cmd)
 
   local winid = vim.api.nvim_get_current_win()
+  if not bufnr then
+    vim.notify("buf is nil", vim.log.levels.ERROR)
+    return
+  end
   windows[bufnr] = winid
   last_window = winid
   count_windows = count_windows + 1
   vim.wo[winid].winfixwidth = true
   vim.wo[winid].winfixheight = true
   vim.wo[winid].wrap = true
+
+  vim.keymap.set("n", "q", "<cmd>hide<cr>", { buffer = bufnr, desc = "quit" })
 
   vim.api.nvim_create_autocmd("WinClosed", {
     group = augroup,
@@ -77,18 +82,50 @@ function M.get_last_task()
 end
 
 --- https://github.com/pianocomposer321/dotfiles-yadm/blob/d8f7da6c19095353eb43c5fa8023148cff4440f4/.config/nvim/lua/user/overseer_util.lua
-function M.open_vsplit_last()
-  local task = M.get_last_task()
+--- @param task_ overseer.Task?
+function M.open_vsplit_last(task_)
+  local task = task_ or M.get_last_task()
   if task then
     local bufnr = task:get_bufnr()
+    if not bufnr then
+      vim.notify("No task buf found", vim.log.levels.ERROR)
+      return
+    end
     M.add_window_to_stack(bufnr)
     vim.api.nvim_win_set_buf(0, bufnr)
   end
 end
 
+---@param opts overseer.Param?
+function M.start_template_and_open(opts)
+  local ov = require("overseer")
+  ov.run_template(opts, function(task)
+    if not task then
+      vim.notify("No task found", vim.log.levels.INFO)
+      return
+    end
+    M.open_vsplit_last(task)
+  end)
+end
+
+function M.start_template_by_tags(tags)
+  local ov = require("overseer")
+  ov.run_template({
+    tags = tags,
+    autostart = true,
+  }, function(task)
+    if not task then
+      vim.notify("No task found", vim.log.levels.INFO)
+      return
+    end
+    M.open_vsplit_last()
+  end)
+end
+
+--- If no template task run before, there will be no tasks.
 function M.run_action_on_tasks(opts)
-  local task_list = require("overseer.task_list")
-  local tasks = task_list.list_tasks({ unique = true, recent_first = true })
+  local ov = require("overseer")
+  local tasks = ov.list_tasks(opts)
   local action_util = require("overseer.action_util")
 
   if #tasks == 0 then

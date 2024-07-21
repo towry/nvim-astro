@@ -2,48 +2,49 @@ local M = {}
 
 M.shortly_prefix = "<leader>z+"
 
----@param fn function
+M.maps = {}
+
+M.get_maps = function() return vim.tbl_deep_extend("force", {}, M.maps) end
+
+---@param fn function(key:string, cmd:string|func, opts:table)
 M.open = function(fn)
   local buf = vim.api.nvim_get_current_buf()
-  local clues = {}
-
-  local bufset = require("v").keymap_buf_set(buf)
-  local set = function(...)
-    local args = { ... }
-    local mode = args[1]
-    local key = args[2]
-    local command = args[3]
-    local opts = args[4] or {}
-    table.insert(clues, { mode = mode, keys = M.shortly_prefix .. key, desc = opts.desc })
-    if type(mode == "string") then mode = { mode } end
-    local keys = M.shortly_prefix .. key
-    bufset(mode, keys, command, opts)
+  M.maps = {}
+  local set = function(key, cmd, opts_)
+    local opts = vim.tbl_deep_extend("force", {
+      remap = false,
+      nowait = true,
+      buffer = buf,
+    }, opts_)
+    M.maps[#M.maps + 1] = {
+      key,
+      cmd,
+      desc = opts.desc,
+      buffer = opts.buffer,
+      nowait = true,
+      noremap = true,
+      mode = "n",
+    }
   end
-  local is_unset = false
   --- actually this is not neccessary
-  local unset = function()
-    if is_unset then return end
-    is_unset = true
-    if not vim.api.nvim_buf_is_loaded(buf) then return end
-    vim.b[buf].miniclue_config = {}
-  end
+  local unset = function() M.maps = {} end
 
-  fn(set, unset, buf)
+  fn(set, unset)
 
-  vim.b[buf].miniclue_config = {
-    clues = clues,
-    window = {
-      delay = 30,
-    },
-  }
-  vim.schedule(function()
-    -- require("mini.clue").ensure_buf_triggers(buf)
-    M.show_on_keys(M.shortly_prefix)
-  end)
+  require("which-key").add({
+    "<leader>z+",
+    group = "Temporary once keymaps",
+    expand = function() return M.get_maps() end,
+  })
+
+  vim.schedule(function() M.show_on_keys(M.shortly_prefix) end)
 end
 
 M.show_on_keys = function(keys)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "mit", false)
+  vim.defer_fn(
+    function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), "mit", false) end,
+    1
+  )
 end
 
 --- @param helps {mode:string,lhs:string,desc:string}[]

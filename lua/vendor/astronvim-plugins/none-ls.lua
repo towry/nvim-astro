@@ -2,9 +2,10 @@
 
 ---@type LazySpec
 return {
-  -- "nvimtools/none-ls.nvim",
-  "pze/none-ls.nvim",
+  "nvimtools/none-ls.nvim",
+  -- "pze/none-ls.nvim",
   main = "null-ls",
+  lazy = true,
   event = "User AstroFile",
   specs = {
     { "nvim-lua/plenary.nvim", lazy = true },
