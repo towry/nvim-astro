@@ -61,7 +61,7 @@ return {
         local win = require("window-picker").pick_window({
           selection_chars = "123456789ABCDEFGHIJKLMN",
           hint = "floating-big-letter",
-          prompt_message = "Focus window: ",
+          prompt_message = "Kill window: ",
           filter_rules = {
             autoselect_one = false,
             include_current_win = true,
