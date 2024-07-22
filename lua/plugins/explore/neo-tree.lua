@@ -13,7 +13,7 @@ return {
       {
         event = "neo_tree_window_after_open",
         handler = function(args)
-          vim.cmd([[setlocal relativenumber]])
+          vim.cmd([[setlocal number]])
           if args.source == "buffers" then
             vim.cmd([[hi link NeoTreeDirectoryName NeoTreeDimText]])
             vim.cmd([[hi link NeoTreeDirectoryIcon NeoTreeDimText]])
@@ -22,10 +22,6 @@ return {
             vim.cmd([[hi clear NeoTreeDirectoryIcon]])
           end
         end,
-      },
-      {
-        event = "neo_tree_window_before_close",
-        handler = function() vim.cmd([[setlocal norelativenumber]]) end,
       },
     },
 
