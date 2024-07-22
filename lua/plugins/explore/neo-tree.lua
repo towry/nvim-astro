@@ -11,11 +11,20 @@ return {
     },
     event_handlers = {
       {
-        event = "neo_tree_buffer_enter",
-        handler = function() vim.cmd([[setlocal relativenumber]]) end,
+        event = "neo_tree_window_after_open",
+        handler = function(args)
+          vim.cmd([[setlocal relativenumber]])
+          if args.source == "buffers" then
+            vim.cmd([[hi link NeoTreeDirectoryName NeoTreeDimText]])
+            vim.cmd([[hi link NeoTreeDirectoryIcon NeoTreeDimText]])
+          else
+            vim.cmd([[hi clear NeoTreeDirectoryName]])
+            vim.cmd([[hi clear NeoTreeDirectoryIcon]])
+          end
+        end,
       },
       {
-        event = "neo_tree_buffer_leave",
+        event = "neo_tree_window_before_close",
         handler = function() vim.cmd([[setlocal norelativenumber]]) end,
       },
     },
@@ -177,9 +186,9 @@ return {
             backdrop = false,
             matches = false,
             groups = {
-              match = "DiffDelete",
-              current = "DiffDelete",
-              label = "DiffDelete",
+              match = "DiffAdd",
+              current = "DiffAdd",
+              label = "DiffAdd",
             },
           },
         })
