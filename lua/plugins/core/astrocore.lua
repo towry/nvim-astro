@@ -20,7 +20,7 @@ return {
       notifications = false, -- enable notifications at start
     },
     rooter = {
-      autochdir = true,
+      autochdir = false,
       scope = vim.g.internal_rooter_scope or "tab",
       notify = true,
       detector = {

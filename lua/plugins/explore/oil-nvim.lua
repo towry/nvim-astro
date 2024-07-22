@@ -101,8 +101,8 @@ return {
       opts = {
         mappings = {
           n = {
-            ["<leader>f|"] = { [[:pclose | vert Oil<cr>]], desc = "Open oil in vertical split" },
-            ["<leader>f-"] = {
+            ["<leader>eO"] = { [[:pclose | vert Oil<cr>]], desc = "Open oil in vertical split" },
+            ["<leader>eo"] = {
               function()
                 if vim.bo.buftype ~= "" then return end
                 -- otherwise error: A preview window already opened

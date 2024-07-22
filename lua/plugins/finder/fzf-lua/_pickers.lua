@@ -17,7 +17,7 @@ local function callgrep(_opts, callfn)
   opts.no_header = false
   opts.formatter = "path.filename_first"
   opts.rg_opts = opts.rg_opts
-      or [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --fixed-strings --]]
+    or [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --fixed-strings --]]
 
   opts.actions = vim.tbl_extend("keep", {
     -- press ctrl-e in fzf picker to switch to rgflow.
@@ -129,6 +129,10 @@ function M.folders(opts)
       local entry = path.entry_to_file(first_selected, selected_opts)
       local entry_path = entry.path
       if not entry_path then return end
+      if type(opts.on_select) == "function" then
+        vim.schedule(function() opts.on_select(V.path_remove_last_separator(entry_path)) end)
+        return
+      end
       require("plugins.utils._folder-action").open(entry_path)
     end,
     ["ctrl-g"] = function(_, o)

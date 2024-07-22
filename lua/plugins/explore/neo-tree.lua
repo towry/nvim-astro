@@ -20,6 +20,18 @@ return {
       },
     },
 
+    window = {
+      popup = { -- settings that apply to float position only
+        size = {
+          height = "60%",
+          width = "70%",
+        },
+        position = "50%", -- 50% means center it
+        -- you can also specify border here, if you want a different setting from
+        -- the global popup_border_style.
+      },
+    },
+
     commands = {
       system_open = function(state) (vim.ui.open)(state.tree:get_node():get_id()) end,
       reveal_last_buf = function()
@@ -47,9 +59,20 @@ return {
           reveal_force_cwd = true, -- change cwd without asking if needed
         })
       end,
+      reveal_node_in_tree = function(state)
+        local node = state.tree:get_node()
+        if (node.type == "directory" or node:has_children()) and node:is_expanded() then return end
+
+        require("neo-tree.command").execute({
+          source = "filesystem",
+          position = state.current_position,
+          action = "focus",
+          reveal_file = node.path,
+        })
+      end,
       go_to_root = function()
         require("neo-tree.command").execute({
-          dir = vim.uv.cwd(),
+          dir = V.nvim_workspaces_root(),
           action = "focus",
           source = "filesystem", -- OPTIONAL, this is the default value
           reveal_force_cwd = true, -- change cwd without asking if needed
@@ -115,7 +138,19 @@ return {
         local path = node:get_id()
         local cwd = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
 
-        require("userlib.mini.clue.folder-action").open(cwd)
+        require("plugins.utils._folder-action").open(cwd)
+      end,
+      fuzzy_search_dir = function(state)
+        require("plugins.finder.fzf-lua._pickers").folders({
+          on_select = function(path)
+            require("neo-tree.command").execute({
+              source = "filesystem",
+              position = state.current_position,
+              action = "focus",
+              reveal_file = path,
+            })
+          end,
+        })
       end,
       unfocus = function() vim.cmd("wincmd p") end,
       flash_jump = function()
@@ -127,34 +162,101 @@ return {
               function(win) return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "neo-tree" end,
             },
           },
-          jump = {
-            jumplist = false,
-          },
           label = {
-            after = { 0, 0 },
+            after = { 0, 1 },
+            before = false,
             style = "overlay",
             reuse = "all",
-            min_pattern_length = 1,
           },
-          pattern = "^",
+          pattern = "\\.[a-z0-9]\\+\\s#\\d\\+\\s",
+          action = function(match, state)
+            vim.api.nvim_win_call(match.win, function() vim.api.nvim_win_set_cursor(match.win, { match.pos[1], 0 }) end)
+            state:restore()
+          end,
           highlight = {
             backdrop = false,
             matches = false,
             groups = {
-              match = "Search",
-              current = "Search",
-              label = "Search",
+              match = "DiffDelete",
+              current = "DiffDelete",
+              label = "DiffDelete",
+            },
+          },
+        })
+      end,
+      flash_jump_open = function(tree_state)
+        require("flash").jump({
+          labels = "asdfghjklwertyuiopzxcvbnm1234567890",
+          search = {
+            mode = "search",
+            max_length = 0,
+            exclude = {
+              function(win) return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "neo-tree" end,
+            },
+          },
+          label = {
+            after = { 0, 1 },
+            before = false,
+            -- before = { 0, 0 },
+            style = "overlay",
+            reuse = "lowercase",
+          },
+          action = function(match, state)
+            state:restore()
+            vim.schedule(function()
+              if not vim.api.nvim_win_is_valid(match.win) then return end
+              vim.api.nvim_win_call(match.win, function()
+                vim.api.nvim_win_set_cursor(match.win, { match.pos[1], 0 })
+                ---@diagnostic disable-next-line: missing-parameter
+                require("neo-tree.sources.common.commands").open(tree_state)
+              end)
+            end)
+          end,
+          pattern = "\\.[a-z0-9]\\+\\s#\\d\\+\\s",
+          highlight = {
+            backdrop = false,
+            matches = false,
+            groups = {
+              match = "DiffDelete",
+              current = "DiffDelete",
+              label = "DiffDelete",
             },
           },
         })
       end,
     },
 
+    filesystem = {
+      follow_current_file = {
+        enabled = true, -- This will find and focus the file in the active buffer every time
+        --               -- the current file is changed while the tree is open.
+        leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      },
+      window = {
+        mappings = {
+          ["V"] = "open_vsplit",
+          ["<leader>fo"] = "fuzzy_search_dir",
+          ["/"] = false,
+          ["M"] = "action_in_dir",
+        },
+      },
+    },
     buffers = {
+      follow_current_file = {
+        enabled = true, -- This will find and focus the file in the active buffer every time
+        --              -- the current file is changed while the tree is open.
+        leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      },
+      group_empty_dirs = true, -- when true, empty directories will be grouped together
+
       window = {
         mappings = {
           ["<esc>"] = false,
           ["s"] = "flash_jump",
+          ["-"] = "flash_jump_open",
+          ["M"] = "action_in_dir",
+          ["V"] = "open_vsplit",
+          ["e"] = { "reveal_node_in_tree", desc = "Reveal node in tree", nowait = true },
         },
       },
     },
@@ -170,13 +272,16 @@ return {
               "<cmd>Neotree source=buffers float reveal action=focus<cr>",
               desc = "Open buffers",
             },
-            ["<Leader>ee"] = { "<Cmd>Neotree toggle<CR>", desc = "Toggle Explorer" },
-            ["<Leader>e."] = {
+            ["_"] = {
+              "<cmd>Neotree source=filesystem float reveal action=focus<cr>",
+              desc = "Open file tree",
+            },
+            ["<Leader>ee"] = {
               function()
                 if vim.bo.filetype == "neo-tree" then
                   vim.cmd.wincmd("p")
                 else
-                  vim.cmd.Neotree("focus")
+                  vim.cmd("Neotree focus position=left reveal=true")
                 end
               end,
               desc = "Toggle Explorer Focus",
