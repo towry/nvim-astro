@@ -60,6 +60,16 @@ end
 
 --- Return the cwd related to tab.
 local function nvim_tab_root() return vim.fn.getcwd(-1, 0) end
+--- Return the lsp or pattern root
+local function nvim_root()
+  local fallback = nvim_workspaces_root_()
+  if not package.loaded["astrocore"] then return fallback end
+  local ret = require("astrocore.rooter").detect()
+  if not ret or #ret <= 0 then return fallback end
+  local paths = ret[1].paths or {}
+  if #paths <= 0 then return fallback end
+  return paths[1]
+end
 
 ---@param bufnr number
 ---@param winid number
@@ -501,6 +511,7 @@ return {
   nvim_create_undo = nvim_create_undo,
   nvim_empty_argc = nvim_empty_argc,
   nvim_workspaces_root = util_memoize(nvim_workspaces_root_),
+  nvim_root = nvim_root,
   nvim_tab_root = nvim_tab_root,
   nvim_smart_close = nvim_smart_close,
   nvim_visual_text = nvim_visual_text,

@@ -128,6 +128,7 @@ return {
           maps.n["<leader>fo"] = {
             function()
               require(PickerMod).folders({
+                cwd = V.nvim_root(),
                 cwd_header = true,
               })
             end,
@@ -175,7 +176,11 @@ return {
 
           do
             maps.n["<Leader>fc"] = {
-              function() require("fzf-lua").grep_cword() end,
+              function()
+                require("fzf-lua").grep_cword({
+                  cwd = V.nvim_root(),
+                })
+              end,
               desc = "Find word under cursor",
             }
             if rooter_is_on then
@@ -194,7 +199,14 @@ return {
             desc = "Find commands history",
           }
           maps.n["<Leader>f:"] = { function() require("fzf-lua").commands() end, desc = "Find commands" }
-          maps.n["<Leader>ff"] = { function() require("fzf-lua").files() end, desc = "Find files" }
+          maps.n["<Leader>ff"] = {
+            function()
+              require("fzf-lua").files({
+                cwd = V.nvim_root(),
+              })
+            end,
+            desc = "Find files",
+          }
           if rooter_is_on then
             maps.n["<Leader>fF"] = {
               function()
@@ -216,12 +228,17 @@ return {
 
           if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
             maps.n["<Leader>fg"] = {
-              function() require("fzf-lua").live_grep_native() end,
+              function()
+                require("fzf-lua").live_grep_native({
+                  cwd = V.nvim_root(),
+                })
+              end,
               desc = "Grep words",
             }
             maps.v["<Leader>fg"] = {
               function()
                 require("fzf-lua").live_grep_native({
+                  cwd = V.nvim_root(),
                   query = V.nvim_visual_text(),
                 })
               end,
