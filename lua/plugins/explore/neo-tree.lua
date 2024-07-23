@@ -274,11 +274,17 @@ return {
         mappings = {
           n = {
             ["-"] = {
-              "<cmd>Neotree source=buffers float reveal action=focus<cr>",
+              function()
+                vim.cmd("Neotree close")
+                vim.defer_fn(function() vim.cmd([[Neotree source=buffers float reveal action=focus]]) end, 1)
+              end,
               desc = "Open buffers",
             },
             ["_"] = {
-              "<cmd>Neotree source=filesystem float reveal action=focus<cr>",
+              function()
+                vim.cmd("Neotree close")
+                vim.defer_fn(function() vim.cmd([[Neotree source=filesystem float reveal action=focus]]) end, 1)
+              end,
               desc = "Open file tree",
             },
             ["<Leader>ee"] = {
