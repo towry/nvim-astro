@@ -53,6 +53,7 @@ return {
           formatter = "path.filename_first",
         },
         winopts = {
+          backdrop = 100,
           border = "single",
           preview = {
             delay = 150,
