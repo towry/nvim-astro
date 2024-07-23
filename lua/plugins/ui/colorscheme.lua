@@ -78,7 +78,7 @@ return {
         "EdenEast/nightfox.nvim",
         priority = 1000,
         event = "VeryLazy",
-        cond = (vim.g.colorscheme):match(".*fox"),
+        cond = (vim.g.colorscheme):match(".*fox") ~= nil,
         opts = {
           options = {
             transparent = false,
