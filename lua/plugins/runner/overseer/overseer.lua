@@ -32,6 +32,18 @@ return {
     { "<localleader>oo", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
     { "<localleader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
     {
+      "<localleader>ob",
+      function()
+        vim.cmd("noau update")
+        require("plugins.runner.overseer.utils").start_template_by_tags({
+          "BUILD",
+        }, {
+          silent = true,
+        })
+      end,
+      desc = "Select template to BUILD",
+    },
+    {
       "<localleader>o1",
       function()
         require("plugins.runner.overseer.utils").start_template_by_tags({
@@ -64,7 +76,7 @@ return {
       desc = "Start template and open",
     },
     { "<localleader>oR", "<cmd>OverseerRunCmd<cr>", desc = "Run shell cmd" },
-    { "<localleader>oc", "<cmd>OverseerClose<cr>", desc = "Close" },
+    { "<localleader>oC", "<cmd>OverseerClose<cr>", desc = "Close" },
     { "<localleader>oS", "<cmd>OverseerSaveBundle<cr>", desc = "Save bundle" },
     { "<localleader>oL", "<cmd>OverseerLoadBundle<cr>", desc = "Load bundle" },
     { "<localleader>od", "<cmd>OverseerDeleteBundle<cr>", desc = "Delete bundle" },
