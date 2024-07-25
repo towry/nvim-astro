@@ -8,8 +8,8 @@ return {
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   -- { import = "astrocommunity.completion.codeium-nvim" },
   -- edit
-  { import = "astrocommunity.motion.tabout-nvim" },
+  -- { import = "astrocommunity.motion.tabout-nvim" },
   vim.env.TMUX and {
-    import = "astrocommunity.completion.cmp-tmux",
-  } or {},
+      import = "astrocommunity.completion.cmp-tmux",
+    } or {},
 }
