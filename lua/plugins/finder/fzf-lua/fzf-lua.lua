@@ -48,7 +48,7 @@ return {
       config.defaults.actions.files["ctrl-o"] = local_actions.files_open_in_window
 
       return vim.tbl_deep_extend("force", opts, {
-        "max-perf",
+        "default",
         defaults = {
           formatter = "path.filename_first",
         },
@@ -61,10 +61,10 @@ return {
             flip_columns = 240,
             horizontal = "right:45%",
             vertical = "down:40%",
-            winopts = {
-              cursorlineopt = "line",
-              foldcolumn = 0,
-            },
+            -- winopts = {
+            --   cursorlineopt = "line",
+            --   foldcolumn = 0,
+            -- },
           },
         },
         fzf_colors = false,
