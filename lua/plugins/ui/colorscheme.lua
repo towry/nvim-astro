@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "minifox"
 return {
   {
     "AstroNvim/astroui",
@@ -87,7 +87,43 @@ return {
               types = "italic,bold",
             },
           },
+          palettes = {
+            -- adapt to solarized light palette
+            dayfox = {
+              black = "#002b36",
+              red = "#dc322f",
+              green = "#859900",
+              yellow = "#b58900",
+              blue = "#268bd2",
+              magenta = "#d33682",
+              cyan = "#2aa198",
+              white = "#eee8d5",
+              orange = "#cb4b16",
+              pink = "#6c71c4",
+
+              comment = "#909995",
+
+              bg0 = "#eee8d5", -- Dark bg (status line and float)
+              bg1 = "#F6EED9", -- Default bg
+              bg2 = "#ECE8D8", -- Lighter bg (colorcolm folds)
+              -- bg3 = "#ece3cc", -- Lighter bg (cursor line)
+              -- bg4 = "#909995", -- Conceal, border fg
+              --
+              fg0 = "#93a1a1", -- Lighter fg
+              fg1 = "#53676d", -- Default fg
+              -- fg2 = "#3a4d53", -- Darker fg (status line)
+              -- fg3 = "#53676d", -- Darker fg (line numbers, fold colums)
+              --
+              sel0 = "#ece3cc", -- Popup bg, visual selection bg
+              sel1 = "#c6c9c5", -- Popup sel bg, search bg
+            },
+          },
           groups = {
+            dayfox = {
+              CursorLine = {
+                bg = "#ece3cc",
+              },
+            },
             all = {
               WidgetTextHighlight = {
                 fg = "palette.blue",
