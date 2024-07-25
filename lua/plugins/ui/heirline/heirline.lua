@@ -66,6 +66,7 @@ return {
 
         -- add the vim mode component
         status.component.mode({
+          condition = status.condition.is_active,
           -- enable mode text with padding as well as an icon before it
           mode_text = {
             icon = { kind = "VimIcon", padding = { right = 1, left = 1 } },
@@ -111,6 +112,7 @@ return {
         status.component.fill(),
         -- add a component to display LSP clients, disable showing LSP progress, and use the right separator
         status.component.lsp({
+          condition = status.condition.is_active,
           lsp_progress = false,
           padding = { right = 1 },
           surround = { separator = "right" },
