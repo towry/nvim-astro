@@ -10,6 +10,7 @@ return {
         filetype = {
           "fzf",
           "neo-tree",
+          "fidget",
         },
 
         -- if the file type is one of following, the window will be ignored
@@ -41,6 +42,7 @@ return {
             bo = {
               filetype = {
                 "fzf",
+                "fidget",
               },
               buftype = {
                 "acwrite",
@@ -66,6 +68,7 @@ return {
             bo = {
               filetype = {
                 "fzf",
+                "fidget",
               },
               buftype = {
                 "acwrite",
