@@ -2,9 +2,10 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.icon.mini-icons" },
   --- langs
-  { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
+  -- { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.nim" },
+  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   -- { import = "astrocommunity.completion.codeium-nvim" },
   -- edit

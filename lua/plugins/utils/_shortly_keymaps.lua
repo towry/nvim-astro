@@ -18,8 +18,12 @@ M.open = function(fn)
     }, opts_)
     M.maps[#M.maps + 1] = {
       key,
-      cmd,
+      function()
+        if type(cmd) == "string" then return cmd end
+        if type(cmd) == "function" then cmd() end
+      end,
       desc = opts.desc,
+      expr = type(cmd) == "string",
       buffer = opts.buffer,
       nowait = true,
       noremap = true,
