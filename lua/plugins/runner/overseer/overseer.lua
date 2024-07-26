@@ -28,9 +28,9 @@ return {
   keys = {
     { "<localleader>m", ":OverMake ", desc = "OverMake" },
     { "<localleader>o", desc = "Overseer" },
-    { "<localleader>o;", "<cmd>OverseerRestartLast<cr>", desc = "Restart last task" },
-    { "<localleader>oo", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
-    { "<localleader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
+    { "<localleader>o<space>", "<cmd>OverseerRestartLast<cr>", desc = "Restart last task" },
+    { "<localleader>ot", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
+    { "<localleader>oo", "<cmd>OverseerRun<cr>", desc = "Run" },
     {
       "<localleader>ob",
       function()
@@ -71,7 +71,7 @@ return {
       desc = "Select template to TEST and open the output of task",
     },
     {
-      "<localleader>o<space>",
+      "<localleader>or",
       function() require("plugins.runner.overseer.utils").start_template_and_open() end,
       desc = "Start template and open",
     },
