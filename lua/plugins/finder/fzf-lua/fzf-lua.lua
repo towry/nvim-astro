@@ -48,11 +48,13 @@ return {
       config.defaults.actions.files["ctrl-o"] = local_actions.files_open_in_window
 
       return vim.tbl_deep_extend("force", opts, {
-        "max-perf",
+        "default",
         defaults = {
           formatter = "path.filename_first",
+          file_icons = true,
         },
         winopts = {
+          backdrop = 100,
           border = "single",
           preview = {
             delay = 150,
@@ -60,10 +62,10 @@ return {
             flip_columns = 240,
             horizontal = "right:45%",
             vertical = "down:40%",
-            winopts = {
-              cursorlineopt = "line",
-              foldcolumn = 0,
-            },
+            -- winopts = {
+            --   cursorlineopt = "line",
+            --   foldcolumn = 0,
+            -- },
           },
         },
         fzf_colors = false,
@@ -128,6 +130,7 @@ return {
           maps.n["<leader>fo"] = {
             function()
               require(PickerMod).folders({
+                cwd = V.nvim_root(),
                 cwd_header = true,
               })
             end,
@@ -175,7 +178,11 @@ return {
 
           do
             maps.n["<Leader>fc"] = {
-              function() require("fzf-lua").grep_cword() end,
+              function()
+                require("fzf-lua").grep_cword({
+                  cwd = V.nvim_root(),
+                })
+              end,
               desc = "Find word under cursor",
             }
             if rooter_is_on then
@@ -194,7 +201,14 @@ return {
             desc = "Find commands history",
           }
           maps.n["<Leader>f:"] = { function() require("fzf-lua").commands() end, desc = "Find commands" }
-          maps.n["<Leader>ff"] = { function() require("fzf-lua").files() end, desc = "Find files" }
+          maps.n["<Leader>ff"] = {
+            function()
+              require("fzf-lua").files({
+                cwd = V.nvim_root(),
+              })
+            end,
+            desc = "Find files",
+          }
           if rooter_is_on then
             maps.n["<Leader>fF"] = {
               function()
@@ -216,12 +230,17 @@ return {
 
           if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
             maps.n["<Leader>fg"] = {
-              function() require("fzf-lua").live_grep_native() end,
+              function()
+                require("fzf-lua").live_grep_native({
+                  cwd = V.nvim_root(),
+                })
+              end,
               desc = "Grep words",
             }
             maps.v["<Leader>fg"] = {
               function()
                 require("fzf-lua").live_grep_native({
+                  cwd = V.nvim_root(),
                   query = V.nvim_visual_text(),
                 })
               end,

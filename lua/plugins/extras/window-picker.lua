@@ -1,5 +1,6 @@
 return {
   "s1n7ax/nvim-window-picker",
+  version = "*",
   opts = {
     filter_rules = {
       autoselect_one = true,
@@ -9,6 +10,7 @@ return {
         filetype = {
           "fzf",
           "neo-tree",
+          "fidget",
         },
 
         -- if the file type is one of following, the window will be ignored
@@ -32,16 +34,19 @@ return {
       function()
         local win = require("window-picker").pick_window({
           selection_chars = "123456789ABCDEFGHIJKLMN",
-          autoselect_one = false,
-          include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
-          bo = {
-            filetype = {
-              "fzf",
-            },
-            buftype = {
-              "acwrite",
+          filter_rules = {
+            include_current_win = true,
+            autoselect_one = false,
+            bo = {
+              filetype = {
+                "fzf",
+                "fidget",
+              },
+              buftype = {
+                "acwrite",
+              },
             },
           },
         })
@@ -55,16 +60,19 @@ return {
       function()
         local win = require("window-picker").pick_window({
           selection_chars = "123456789ABCDEFGHIJKLMN",
-          autoselect_one = false,
-          include_current_win = true,
           hint = "floating-big-letter",
           prompt_message = "Focus window: ",
-          bo = {
-            filetype = {
-              "fzf",
-            },
-            buftype = {
-              "acwrite",
+          filter_rules = {
+            autoselect_one = false,
+            include_current_win = true,
+            bo = {
+              filetype = {
+                "fzf",
+                "fidget",
+              },
+              buftype = {
+                "acwrite",
+              },
             },
           },
         })

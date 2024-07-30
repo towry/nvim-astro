@@ -5,7 +5,6 @@ local picker_mod = "plugins.finder.fzf-lua._pickers"
 
 M.open = vim.schedule_wrap(function(new_cwd)
   new_cwd = V.path_remove_last_separator(new_cwd)
-  --- NOTE: wip
   local nicely_cwd = new_cwd
 
   require("plugins.utils._shortly_keymaps").open(function(set, unset)
@@ -20,6 +19,7 @@ M.open = vim.schedule_wrap(function(new_cwd)
     end, {
       desc = "Open files",
     })
+
     set("p", function()
       require(picker_mod).folders({
         cwd = new_cwd,
@@ -29,7 +29,8 @@ M.open = vim.schedule_wrap(function(new_cwd)
     end, {
       desc = "Open folders",
     })
-    set("s", function()
+
+    set("g", function()
       require(picker_mod).live_grep({
         cwd = new_cwd,
         cwd_header = true,
@@ -66,9 +67,6 @@ M.open = vim.schedule_wrap(function(new_cwd)
       }
     )
 
-    set("g", function() require("rgflow").open(nil, nil, new_cwd) end, {
-      desc = "Grep on it",
-    })
     set("r", function()
       require("fzf-lua").oldfiles({
         cwd_header = true,
@@ -105,9 +103,6 @@ M.open = vim.schedule_wrap(function(new_cwd)
     set("c", function() vim.cmd(string.format("ToggleTerm dir=%s", new_cwd)) end, {
       desc = "Open in terminal",
     })
-    -- set("n", "p", function() require("userlib.mini.visits").add_project(new_cwd, vim.cfg.runtime__starts_cwd) end, {
-    --   desc = "Mark project",
-    -- })
   end)
 end)
 

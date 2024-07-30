@@ -24,7 +24,7 @@ local modules = {
   "mason",
   "mini-bufremove",
   "neo-tree",
-  "neodev",
+  "lazydev",
   -- "none-ls",
   require("vendor.astronvim-plugins.none-ls"),
   "resession",

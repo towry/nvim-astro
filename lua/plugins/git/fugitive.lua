@@ -90,7 +90,7 @@ return {
         -- https://github.com/niuiic/git-log.nvim/blob/main/lua/git-log/init.lua
         local file_name = vim.api.nvim_buf_get_name(0)
         local line_range = V.nvim_get_range()
-        local cmd = string.format([[vert Git log --max-count=100 -L %s,%s:%s]], line_range[1], line_range[2], file_name)
+        local cmd = string.format([[vert Git log --max-count=30 -L %s,%s:%s]], line_range[1], line_range[2], file_name)
         vim.print(cmd)
         vim.cmd(cmd)
       end,

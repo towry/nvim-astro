@@ -101,9 +101,8 @@ return {
       opts = {
         mappings = {
           n = {
-            ["<Leader>f-"] = { function() require("oil").open() end, desc = "Open folder in Oil" },
-            ["<leader>f|"] = { [[:pclose | vert Oil<cr>]], desc = "Open oil in vertical split" },
-            ["-"] = {
+            ["<leader>eO"] = { [[:pclose | vert Oil<cr>]], desc = "Open oil in vertical split" },
+            ["<leader>eo"] = {
               function()
                 if vim.bo.buftype ~= "" then return end
                 -- otherwise error: A preview window already opened

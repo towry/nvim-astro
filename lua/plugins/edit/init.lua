@@ -16,4 +16,14 @@ return {
 
   { import = "plugins.edit.mappings" },
   { import = "plugins.edit.boole" },
+  {
+    "norcalli/nvim-colorizer.lua",
+    optional = true,
+    opts = {
+      exclusions = {
+        "neo-tree",
+        "fzf-lua",
+      },
+    },
+  },
 }

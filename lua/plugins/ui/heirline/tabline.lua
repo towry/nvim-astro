@@ -1,4 +1,5 @@
 local status = require("astroui.status")
+local component_loader = require("plugins.ui.heirline.component_")
 
 local Codeium = status.component.builder({
   condition = function()
@@ -32,7 +33,58 @@ return { -- bufferline
     provider = function(self) return (" "):rep(self.winwidth + 1) end,
     hl = { bg = "tabline_bg" },
   },
-  status.heirline.make_buflist(status.component.tabline_file_info()), -- component for each buffer tab
+
+  {
+    -- define a simple component where the provider is just a folder icon
+    status.component.builder({
+      -- astronvim.get_icon gets the user interface icon for a closed folder with a space after it
+      { provider = require("astroui").get_icon("FolderClosed") },
+      -- add padding after icon
+      padding = { right = 1 },
+      -- set the foreground color to be used for the icon
+      hl = { fg = "bg" },
+      -- use the right separator and define the background color
+      surround = { separator = "right", color = "folder_icon_bg" },
+    }),
+    -- add a file information component and only show the current working directory name
+    status.component.file_info({
+      -- we only want filename to be used and we can change the fname
+      -- function to get the current working directory name
+      filename = {
+        fname = function(nr) return vim.fn.getcwd(nr) end,
+        padding = { left = 1, right = 1 },
+      },
+      -- disable all other elements of the file_info component
+      filetype = false,
+      file_icon = false,
+      file_modified = false,
+      file_read_only = false,
+      -- use no separator for this part but define a background color
+      surround = {
+        separator = "none",
+        color = "file_info_bg",
+        condition = false,
+      },
+    }),
+  },
+
+  -- add a component for the current git branch if it exists and use no separator for the sections
+  status.component.git_branch({
+    git_branch = { padding = { left = 1 } },
+    surround = { separator = "none" },
+  }),
+
+  -- add a component for the current git diff if it exists and use no separator for the sections
+  status.component.git_diff({
+    padding = { left = 1 },
+    surround = { separator = "none" },
+  }),
+
+  component_loader.overseer({
+    padding = { left = 1 },
+  }),
+
+  ----------------------------------
   status.component.fill({ hl = { bg = "tabline_bg" } }), -- fill the rest of the tabline with background color
   Codeium,
   { -- tab list

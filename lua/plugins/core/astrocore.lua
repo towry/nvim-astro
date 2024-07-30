@@ -20,7 +20,7 @@ return {
       notifications = false, -- enable notifications at start
     },
     rooter = {
-      autochdir = true,
+      autochdir = false,
       scope = vim.g.internal_rooter_scope or "tab",
       notify = true,
       detector = {
@@ -54,6 +54,7 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
+        laststatus = 2,
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell

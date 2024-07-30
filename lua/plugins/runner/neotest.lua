@@ -31,13 +31,12 @@ return {
       },
     },
     {
-      "folke/neodev.nvim",
+      "folke/lazydev.nvim",
+      optional = true,
       opts = function(_, opts)
         opts.library = opts.library or {}
-        if opts.library.plugins ~= true then
-          opts.library.plugins = require("astrocore").list_insert_unique(opts.library.plugins, { "neotest" })
-        end
-        opts.library.types = true
+        opts.library =
+          require("astrocore").list_insert_unique(opts.library, { path = "neotest", words = { "neotest" } })
       end,
     },
   },

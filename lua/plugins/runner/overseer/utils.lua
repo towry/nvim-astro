@@ -108,7 +108,9 @@ function M.start_template_and_open(opts)
   end)
 end
 
-function M.start_template_by_tags(tags)
+function M.start_template_by_tags(tags, call_opts)
+  call_opts = call_opts or {}
+
   local ov = require("overseer")
   ov.run_template({
     tags = tags,
@@ -118,7 +120,8 @@ function M.start_template_by_tags(tags)
       vim.notify("No task found", vim.log.levels.INFO)
       return
     end
-    M.open_vsplit_last()
+
+    if call_opts.silent ~= true then M.open_vsplit_last() end
   end)
 end
 

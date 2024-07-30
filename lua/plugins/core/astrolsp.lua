@@ -6,6 +6,7 @@
 ---- vim.g.{sometable} doesnt update by key
 local vim_g_internal_ft_formatter = {}
 _G.vim_g_internal_ft_formatter = vim_g_internal_ft_formatter
+vim.g.lsp_handler_setup = 0
 
 ---@type LazySpec
 return {
@@ -13,7 +14,7 @@ return {
   ---@type AstroLSPOpts
   opts = {
     -- Configuration table of features provided by AstroLSP
-    features = {
+    features = vim.g.vscode and {} or {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
@@ -22,7 +23,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true, -- enable or disable format on save globally
+        enabled = vim.g.vscode and false or true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -67,6 +68,26 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      vtsls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              -- log = 'verbose',
+              maxTsServerMemory = 1800,
+            },
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+          javascript = {
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -152,6 +173,16 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+      if vim.g.lsp_handler_setup == 0 then
+        vim.g.lsp_handler_setup = 1
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+          border = "single",
+          title = "Symbol Hover",
+          max_width = 80,
+        })
+        vim.lsp.handlers["textDocument/signatureHelp"] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
+      end
     end,
   },
 }
