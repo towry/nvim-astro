@@ -6,6 +6,7 @@
 ---- vim.g.{sometable} doesnt update by key
 local vim_g_internal_ft_formatter = {}
 _G.vim_g_internal_ft_formatter = vim_g_internal_ft_formatter
+vim.g.lsp_handler_setup = 0
 
 ---@type LazySpec
 return {
@@ -172,6 +173,16 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+      if vim.g.lsp_handler_setup == 0 then
+        vim.g.lsp_handler_setup = 1
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+          border = "single",
+          title = "Symbol Hover",
+          max_width = 80,
+        })
+        vim.lsp.handlers["textDocument/signatureHelp"] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
+      end
     end,
   },
 }
