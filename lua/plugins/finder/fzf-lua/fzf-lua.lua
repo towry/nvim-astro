@@ -51,7 +51,7 @@ return {
         "default",
         defaults = {
           formatter = "path.filename_first",
-          file_icons = false,
+          file_icons = true,
         },
         winopts = {
           backdrop = 100,
