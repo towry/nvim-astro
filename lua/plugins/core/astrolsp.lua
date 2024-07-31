@@ -69,6 +69,7 @@ return {
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       vtsls = {
+        commands = require("plugins.lsp.commands_.init"),
         settings = {
           typescript = {
             tsserver = {
