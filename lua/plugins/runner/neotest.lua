@@ -44,6 +44,17 @@ return {
   opts = {
     floating = {
       border = "single",
+      max_height = 0.9,
+      max_width = 0.9,
+    },
+    status = {
+      enabled = true,
+    },
+    strategies = {
+      integrated = {
+        height = 40,
+        width = 120,
+      },
     },
   },
   config = function(_, opts)
