@@ -189,6 +189,10 @@ return {
               "<cmd>lua require('plugins.git._tig').toggle_tig()<cr>",
               desc = "Toggle tig",
             },
+            ["<leader>gx"] = {
+              "<cmd>lua require('plugins.git._git-fixup').fixup()<cr>",
+              desc = "Fixup current staged",
+            },
           },
         },
         commands = {

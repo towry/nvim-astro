@@ -44,6 +44,18 @@ return {
       desc = "Select template to BUILD",
     },
     {
+      "<localleader>ob",
+      function()
+        vim.cmd("noau update")
+        require("plugins.runner.overseer.utils").start_template_by_tags({
+          "BUILD",
+        }, {
+          silent = true,
+        })
+      end,
+      desc = "Select template to BUILD",
+    },
+    {
       "<localleader>o1",
       function()
         require("plugins.runner.overseer.utils").start_template_by_tags({

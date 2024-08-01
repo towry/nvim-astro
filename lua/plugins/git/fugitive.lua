@@ -155,11 +155,6 @@ return {
       desc = "Git blame current file with range",
     },
     {
-      "<leader>gx",
-      "<cmd>silent OverDispatch! git add -- % && git diff --cached --check --quiet || git commit --amend --no-edit<cr>",
-      desc = "Git amend all",
-    },
-    {
       "gj",
       function()
         require("plugins.git._git-commit").open(function(prefix)
