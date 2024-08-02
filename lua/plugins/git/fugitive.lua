@@ -155,30 +155,6 @@ return {
       desc = "Git blame current file with range",
     },
     {
-      "gj",
-      function()
-        require("plugins.git._git-commit").open(function(prefix)
-          if not prefix then return end
-          vim.ui.input({
-            prompt = prefix,
-          }, function(input)
-            -- if input is trimmed empty
-            if vim.trim(input or "") == "" then
-              vim.notify("Empty commit message", vim.log.levels.ERROR)
-              return
-            end
-
-            input = prefix .. " " .. input
-
-            vim.cmd(string.format('OverDispatch! git commit -m "%s"', input))
-          end)
-        end)
-      end,
-      desc = "Git commit",
-      noremap = true,
-      silent = true,
-    },
-    {
       "<leader>gc",
       function()
         -- use vim.ui.input to write commit message and then commit with the

@@ -1,5 +1,6 @@
 local M = {}
 
+---@deprecated
 ---@param callback function
 M.open = function(callback)
   local _ = function(prefix)
