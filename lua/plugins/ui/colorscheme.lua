@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "minifox"
 return {
   {
     "AstroNvim/astroui",
