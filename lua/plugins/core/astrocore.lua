@@ -61,6 +61,7 @@ return {
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
         timeoutlen = 400, -- which-key delay
+        completeopt = "menu,menuone,noselect,fuzzy",
         cmdheight = 1,
         fillchars = {
           stl = " ",
