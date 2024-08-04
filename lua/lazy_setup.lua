@@ -20,7 +20,7 @@ require("lazy").setup({
   -- Configure any other `lazy.nvim` configuration options here
   install = { colorscheme = { "default" } },
   defaults = {
-    lazy = true,
+    lazy = not vim.g.vscode,
   },
   dev = { patterns = {}, path = "~/workspace/git-repos" },
 
