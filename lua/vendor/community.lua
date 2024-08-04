@@ -6,6 +6,7 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.nim" },
   { import = "astrocommunity.pack.nix" },
+  { import = "astrocommunity.pack.ocaml" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   { import = "astrocommunity.lsp.lsplinks-nvim" },
   { import = "astrocommunity.lsp.lsp-signature-nvim" },
