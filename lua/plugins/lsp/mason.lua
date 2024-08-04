@@ -7,6 +7,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     -- overrides `require("mason-lspconfig").setup(...)`
     opts = {
+      automatic_installation = false,
       ensure_installed = {
         "lua_ls",
         -- add more arguments for adding more language servers
