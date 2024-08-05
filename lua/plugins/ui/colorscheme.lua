@@ -48,6 +48,9 @@ return {
               --- tabline etc
               lotusWhite4 = "#C5C0AF",
               lotusWhite5 = "#eee8d5",
+
+              -- + dragon more darker
+              dragonBlack3 = "#111111",
             },
             theme = {
               all = {
