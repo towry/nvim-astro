@@ -181,7 +181,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(
         opts.ensure_installed,
-        { "vtsls", "eslint-lsp", prettier_provider, "js-debug-adapter" }
+        { "vtsls", prettier_provider, "js-debug-adapter" }
       )
     end,
   },
