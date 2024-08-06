@@ -7,7 +7,6 @@ return {
     "nvimtools/none-ls-extras.nvim",
   },
   optional = true,
-  -- "pze/none-ls.nvim",
   opts = function(_, opts)
     -- Check supported formatters and linters
     -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -17,7 +16,6 @@ return {
     -- (If you wish to replace, use `opts.sources = {}` instead of the `list_insert_unique` function)
     opts.sources = require("astrocore").list_insert_unique(opts.sources, {
       require("null-ls.builtins.formatting.ocamlformat"),
-      require("none-ls.code_actions.eslint"),
     })
   end,
 }

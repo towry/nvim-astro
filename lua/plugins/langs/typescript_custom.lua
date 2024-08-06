@@ -15,4 +15,14 @@ return {
       "haydenmeade/neotest-jest",
     },
   },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.sources = require("astrocore").list_insert_unique(opts.sources, {
+        require("none-ls.code_actions.eslint"),
+        require("none-ls.diagnostics.eslint"),
+      })
+    end,
+  },
 }
