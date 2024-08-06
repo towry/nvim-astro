@@ -38,13 +38,9 @@ return { -- bufferline
     -- define a simple component where the provider is just a folder icon
     status.component.builder({
       -- astronvim.get_icon gets the user interface icon for a closed folder with a space after it
-      { provider = require("astroui").get_icon("FolderClosed") },
-      -- add padding after icon
+      { provider = " " .. require("astroui").get_icon("FolderClosed") },
       padding = { right = 1 },
-      -- set the foreground color to be used for the icon
-      hl = { fg = "bg" },
-      -- use the right separator and define the background color
-      surround = { separator = "right", color = "folder_icon_bg" },
+      hl = { bg = "folder_icon_bg", fg = "bg" },
     }),
     -- add a file information component and only show the current working directory name
     status.component.file_info({
