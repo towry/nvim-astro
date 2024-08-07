@@ -1,3 +1,5 @@
+local V = require('v')
+
 return {
   "willothy/flatten.nvim",
   ft = { "toggleterm", "terminal", "neo-term" },
@@ -21,7 +23,7 @@ return {
         should_block = function(argv)
           local should_block = require("flatten").default_should_block(argv)
           if should_block == true then return true end
-          return vim.tbl_contains(argv, "-b") or vim.tbl_contains(argv, "-d") or vim.cfg.runtime__starts_as_gittool
+          return vim.tbl_contains(argv, "-b") or vim.tbl_contains(argv, "-d") or  V.git_start_nvim()
         end,
         should_nest = require("flatten").default_should_nest,
         pre_open = function()
