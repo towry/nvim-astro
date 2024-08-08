@@ -6,12 +6,22 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     -- overrides `require("mason-lspconfig").setup(...)`
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.automatic_installation = false
+      opts.ensure_installed = {
         "lua_ls",
-        -- add more arguments for adding more language servers
-      },
-    },
+      }
+
+      return opts
+    end,
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.run_on_start = false
+      return opts
+    end,
   },
   -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
   {

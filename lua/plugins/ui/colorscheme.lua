@@ -48,6 +48,9 @@ return {
               --- tabline etc
               lotusWhite4 = "#C5C0AF",
               lotusWhite5 = "#eee8d5",
+
+              -- + dragon more darker
+              dragonBlack3 = "#111111",
             },
             theme = {
               all = {
@@ -67,7 +70,7 @@ return {
             },
           },
           background = {
-            -- dark = 'wave',
+            -- dark = "wave",
             dark = "dragon",
             light = "lotus",
           },
@@ -139,6 +142,33 @@ return {
             -- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
             nordfox = {},
           },
+        },
+      },
+      {
+        "miikanissi/modus-themes.nvim",
+        lazy = (vim.g.colorscheme):match("modus") == nil,
+        opts = {
+          style = "auto",
+          ---@type 'default'|'tinted'|'deuteranopia'|'tritanopia'
+          variant = "default",
+          dim_inactive = false,
+          styles = {
+            -- Style to be applied to different syntax groups
+            -- Value is any valid attr-list value for `:help nvim_set_hl`
+            comments = { italic = true },
+            keywords = { italic = true },
+            functions = {},
+            variables = {},
+          },
+          on_colors = function(colors) end,
+          on_highlights = function(H, C)
+            local dark = vim.o.background == "dark"
+            if dark then H.IblIndent = {
+              fg = "#333333",
+              nocombine = true,
+            } end
+            H.FloatBorder = { link = "NormalFloat" }
+          end,
         },
       },
     },

@@ -1,6 +1,5 @@
 return {
   "folke/flash.nvim",
-  lazy = true,
   dependencies = {
     {
       "AstroNvim/astrocore",
