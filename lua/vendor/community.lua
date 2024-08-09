@@ -9,7 +9,7 @@ return {
   { import = "astrocommunity.pack.ocaml" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   { import = "astrocommunity.lsp.lsplinks-nvim" },
-  { import = "astrocommunity.lsp.lsp-signature-nvim" },
+  -- { import = "astrocommunity.lsp.lsp-signature-nvim" },
   -- { import = "astrocommunity.completion.codeium-nvim" },
   -- edit
   -- { import = "astrocommunity.motion.tabout-nvim" },
