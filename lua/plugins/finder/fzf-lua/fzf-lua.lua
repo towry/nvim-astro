@@ -229,6 +229,23 @@ return {
           maps.n["<Leader>fr"] = { function() require("fzf-lua").registers() end, desc = "Find registers" }
 
           if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
+            maps.n["<Leader>fs"] = {
+              function()
+                require("fzf-lua").grep({
+                  cwd = V.nvim_root(),
+                })
+              end,
+              desc = "Grep words",
+            }
+            maps.v["<Leader>fS"] = {
+              function()
+                require("fzf-lua").grep({
+                  cwd = V.nvim_root(),
+                  query = V.nvim_visual_text(),
+                })
+              end,
+              desc = "Grep words",
+            }
             maps.n["<Leader>fg"] = {
               function()
                 require("fzf-lua").live_grep_native({
