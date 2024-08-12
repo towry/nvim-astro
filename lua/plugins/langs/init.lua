@@ -9,4 +9,5 @@ return {
   { import = "plugins.langs.nim" },
   -- { import = "plugins.langs.nix" },
   { import = "plugins.langs.rust" },
+  { import = "plugins.langs.elixir" }
 }
