@@ -47,7 +47,7 @@ return {
       desc = "Fugitive Git in tab",
     },
     {
-      "<leader>ga",
+      "<leader>gA",
       keymap_cmd([[OverDispatch! git add -- % && git diff --cached --check || echo Conflict founds || exit 1]]),
       desc = "!Git add current",
     },
@@ -55,11 +55,6 @@ return {
       "<leader>gdt",
       keymap_cmd([[tab Gdiffsplit]]),
       desc = "Git diff in tab",
-    },
-    {
-      "<leader>gA",
-      keymap_cmd([[OverDispatch! git add .]]),
-      desc = "!Git add all",
     },
     {
       "<leader>gp",

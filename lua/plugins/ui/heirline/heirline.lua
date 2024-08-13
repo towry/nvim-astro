@@ -49,6 +49,24 @@ return {
   },
   {
     "rebelot/heirline.nvim",
+    specs = {
+      {
+        "AstroNvim/astrocore",
+        ---@param opts AstroCoreOpts
+        opts = function(_, opts)
+          opts.autocmds.heirline_colors = {
+            {
+              event = "User",
+              pattern = "AstroColorScheme",
+              desc = "Refresh heirline colors",
+              callback = function()
+                if package.loaded["heirline"] then require("astroui.status.heirline").refresh_colors() end
+              end,
+            },
+          }
+        end,
+      },
+    },
     opts = function(_, opts)
       local status = require("astroui.status")
       opts.statuscolumn = { -- statuscolumn

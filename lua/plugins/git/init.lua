@@ -100,83 +100,96 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
-    opts = {
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-        ignore_whitespace = false,
-        delay = 300,
-      },
-      current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil, -- Use default
-      max_file_length = 40000,
-      preview_config = {
-        -- Options passed to nvim_open_win
-        border = "single",
-        style = "minimal",
-        relative = "cursor",
-        row = 0,
-        col = 1,
-      },
+    opts = function()
+      local get_icon = require("astroui").get_icon
 
-      on_attach = function(bufnr)
-        local get_icon = require("astroui").get_icon
-        local astrocore = require("astrocore")
-        local prefix, maps = "gh", astrocore.empty_map_table()
-        for _, mode in ipairs({ "n", "v" }) do
-          maps[mode][prefix] = { desc = get_icon("Git", 1, true) .. "Gitsigns" }
-        end
+      return {
+        current_line_blame_opts = {
+          virt_text = true,
+          virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+          ignore_whitespace = false,
+          delay = 300,
+        },
+        signs = {
+          add = { text = get_icon("GitSign") },
+          change = { text = get_icon("GitSign") },
+          delete = { text = get_icon("GitSign") },
+          topdelete = { text = get_icon("GitSign") },
+          changedelete = { text = get_icon("GitSign") },
+          untracked = { text = get_icon("GitSign") },
+        },
+        current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        max_file_length = 40000,
+        preview_config = {
+          -- Options passed to nvim_open_win
+          border = "single",
+          style = "minimal",
+          relative = "cursor",
+          row = 0,
+          col = 1,
+        },
+        worktrees = require("astrocore").config.git_worktrees,
+        on_attach = function(bufnr)
+          local astrocore = require("astrocore")
+          local prefix, maps = "gh", astrocore.empty_map_table()
+          for _, mode in ipairs({ "n", "v" }) do
+            maps[mode][prefix] = { desc = get_icon("Git", 1, true) .. "Gitsigns" }
+          end
 
-        maps.n[prefix .. "."] = { ":Gitsigns", desc = ":Gitsigns" }
-        maps.n[prefix .. "l"] = {
-          "<cmd>Gitsigns setloclist<cr>",
-          desc = "Put hunks in location list",
-        }
-        maps.n[prefix .. "b"] =
-          { function() require("gitsigns").toggle_current_line_blame() end, desc = "View Git blame" }
-        maps.n[prefix .. "B"] =
-          { function() require("gitsigns").blame_line({ full = true }) end, desc = "View full Git blame" }
-        maps.n[prefix .. "p"] = { function() require("gitsigns").preview_hunk_inline() end, desc = "Preview Git hunk" }
-        maps.n[prefix .. "r"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" }
-        maps.v[prefix .. "r"] = {
-          function() require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
-          desc = "Reset Git hunk",
-        }
-        maps.n[prefix .. "R"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" }
-        maps.n[prefix .. "s"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
-        maps.v[prefix .. "s"] = {
-          function() require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
-          desc = "Stage Git hunk",
-        }
-        -- maps.n[prefix .. "a"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
-        maps.n[prefix .. "u"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
-        maps.n[prefix .. "d"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+          maps.n[prefix .. "a"] = { ":Gitsigns stage_hunk<cr>", desc = "Stage hunk", noremap = true }
+          maps.n[prefix .. "A"] = { ":Gitsigns stage_buffer<cr>", desc = "Stage buffer", noremap = true }
+          maps.n[prefix .. "."] = { ":Gitsigns", desc = ":Gitsigns" }
+          maps.n[prefix .. "l"] = {
+            "<cmd>Gitsigns setloclist<cr>",
+            desc = "Put hunks in location list",
+          }
+          maps.n[prefix .. "b"] =
+            { function() require("gitsigns").toggle_current_line_blame() end, desc = "View Git blame" }
+          maps.n[prefix .. "B"] =
+            { function() require("gitsigns").blame_line({ full = true }) end, desc = "View full Git blame" }
+          maps.n[prefix .. "p"] =
+            { function() require("gitsigns").preview_hunk_inline() end, desc = "Preview Git hunk" }
+          maps.n[prefix .. "r"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" }
+          maps.v[prefix .. "r"] = {
+            function() require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
+            desc = "Reset Git hunk",
+          }
+          maps.n[prefix .. "R"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" }
+          maps.n[prefix .. "s"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
+          maps.v[prefix .. "s"] = {
+            function() require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
+            desc = "Stage Git hunk",
+          }
+          maps.n[prefix .. "u"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
+          maps.n[prefix .. "d"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
 
-        maps.n["gh<"] = {
-          function()
-            local gs = require("gitsigns")
-            vim.schedule(function() gs.nav_hunk("first") end)
-          end,
-          desc = "First hunk",
-        }
-        maps.n["gh>"] = {
-          function()
-            local gs = require("gitsigns")
-            vim.schedule(function() gs.nav_hunk("last") end)
-          end,
-          desc = "Last hunk",
-        }
-        maps.n["gh]"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
-        maps.n["gh["] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
-        for _, mode in ipairs({ "o", "x" }) do
-          maps[mode]["ig"] = { ":<C-U>Gitsigns select_hunk<CR>", desc = "inside Git hunk" }
-        end
+          maps.n["gh<"] = {
+            function()
+              local gs = require("gitsigns")
+              vim.schedule(function() gs.nav_hunk("first") end)
+            end,
+            desc = "First hunk",
+          }
+          maps.n["gh>"] = {
+            function()
+              local gs = require("gitsigns")
+              vim.schedule(function() gs.nav_hunk("last") end)
+            end,
+            desc = "Last hunk",
+          }
+          maps.n["gh]"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
+          maps.n["gh["] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
+          for _, mode in ipairs({ "o", "x" }) do
+            maps[mode]["ig"] = { ":<C-U>Gitsigns select_hunk<CR>", desc = "inside Git hunk" }
+          end
 
-        astrocore.set_mappings(maps, { buffer = bufnr })
-      end,
-    },
+          astrocore.set_mappings(maps, { buffer = bufnr })
+        end,
+      }
+    end,
   },
   {
     "akinsho/toggleterm.nvim",
