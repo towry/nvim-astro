@@ -43,8 +43,8 @@ return {
       config.defaults.keymap.fzf["shift-tab"] = "toggle+up"
       config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
-      config.defaults.actions.buffers["default"] = local_actions.buffers_open_default
-      config.defaults.actions.buffers["ctrl-o"] = local_actions.buffers_open_in_window
+      -- config.defaults.actions.buffers["default"] = local_actions.buffers_open_default
+      -- config.defaults.actions.buffers["ctrl-o"] = local_actions.buffers_open_in_window
       config.defaults.actions.files["ctrl-o"] = local_actions.files_open_in_window
 
       return vim.tbl_deep_extend("force", opts, {
