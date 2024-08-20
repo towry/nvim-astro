@@ -149,11 +149,23 @@ return {
           end
         end)
       end,
+      search_string_in_dir = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        local cwd = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
+
+        require("fzf-lua").grep({
+          cwd = cwd,
+          prompt = "Search string in> ",
+        })
+      end,
       -- run action on folder
       action_in_dir = function(state)
         local node = state.tree:get_node()
         local path = node:get_id()
         local cwd = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
+
+        vim.cmd("wincmd p")
 
         require("plugins.utils._folder-action").open(cwd)
       end,
@@ -254,8 +266,8 @@ return {
         mappings = {
           ["V"] = "open_vsplit",
           ["<leader>fo"] = "fuzzy_search_dir",
-          ["/"] = false,
-          ["M"] = "action_in_dir",
+          ["/"] = { "search_string_in_dir", nowait = true, remap = false },
+          ["M"] = { "action_in_dir", nowait = true, remap = false },
         },
       },
     },
@@ -272,7 +284,7 @@ return {
           ["<esc>"] = false,
           ["s"] = "flash_jump",
           ["-"] = "flash_jump_open",
-          ["M"] = "action_in_dir",
+          ["M"] = { "action_in_dir", nowait = true, remap = false },
           ["V"] = "open_vsplit",
           ["e"] = { "reveal_node_in_tree", desc = "Reveal node in tree", nowait = true },
         },

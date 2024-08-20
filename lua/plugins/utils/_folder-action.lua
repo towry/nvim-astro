@@ -40,6 +40,15 @@ M.open = vim.schedule_wrap(function(new_cwd)
       desc = "Search content",
     })
 
+    set("s", function()
+      require('fzf-lua').grep({
+        cwd = new_cwd,
+        prompt = "Search string in> ",
+      })
+    end, {
+        desc = "Search string",
+      })
+
     set("\\", function()
       require("neo-tree.command").execute({
         position = "right",
