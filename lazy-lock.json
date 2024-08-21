@@ -53,6 +53,7 @@
   "neodev.nvim": { "branch": "main", "commit": "1f4ebcc10852518166ce165e57d425a4265a10d4" },
   "neotest": { "branch": "master", "commit": "32ff2ac21135a372a42b38ae131e531e64833bd3" },
   "neotest-jest": { "branch": "main", "commit": "514fd4eae7da15fd409133086bb8e029b65ac43f" },
+  "neotest-python": { "branch": "master", "commit": "72603dfdbaad5695160268cb10531a14cc37236e" },
   "nightfox.nvim": { "branch": "main", "commit": "d3e8b1acc095baf57af81bb5e89fe7c4359eb619" },
   "none-ls-extras.nvim": { "branch": "main", "commit": "dfdc998a8c7bb728abab156942bd43ed2345845a" },
   "none-ls.nvim": { "branch": "main", "commit": "cfa65d86e21eeb60544d5e823f6db43941322a53" },
@@ -61,6 +62,7 @@
   "nvim-cmp": { "branch": "main", "commit": "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "194ec600488f7c7229668d0e80bd197f3a2b84ff" },
   "nvim-dap": { "branch": "master", "commit": "2b428ff2632e73295e9decbcf1c40d8e26213305" },
+  "nvim-dap-python": { "branch": "master", "commit": "7c427e2bbc72d46ea3c9602bede6465ef61b8c19" },
   "nvim-dap-ui": { "branch": "master", "commit": "a5606bc5958db86f8d92803bea7400ee26a8d7e4" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "a0d483f05a98423e8971be15c023c3bc4380cee4" },
   "nvim-lsp-file-operations": { "branch": "master", "commit": "92a673de7ecaa157dd230d0128def10beb56d103" },
@@ -94,6 +96,7 @@
   "trailblazer.nvim": { "branch": "main", "commit": "674bb6254a376a234d0d243366224122fc064eab" },
   "tsc.nvim": { "branch": "main", "commit": "82c37ebfe45d30763db6f45b54e18f1e485bb52c" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
+  "venv-selector.nvim": { "branch": "regexp", "commit": "c43dc6bf8c7e7cf124a991775ed3defe87112d3a" },
   "vim-fugitive": { "branch": "master", "commit": "0444df68cd1cdabc7453d6bd84099458327e5513" },
   "vim-rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
   "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" }
