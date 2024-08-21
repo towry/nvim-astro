@@ -314,6 +314,12 @@ local util_toggle_dark = function(mode)
   end
 end
 
+--- Find python exec in vim.env.PATH if pyenv shims exists
+local util_locate_python_exec_path = function()
+  local python_in_pyenv_shims = vim.env.PYENV_ROOT .. "/shims/python"
+  if vim.fn.executable(python_in_pyenv_shims) == 1 then return python_in_pyenv_shims end
+end
+
 --- @param option_to_toggle string hidden=true or --no-hidden
 --- @param insert_at_end? boolean
 local util_toggle_cmd_option = function(cmd_string_or_table, option_to_toggle, insert_at_end)
@@ -376,7 +382,7 @@ end
 
 local plugin_has_ai_suggestions = function()
   return (vim.b._copilot and vim.b._copilot.suggestions ~= nil)
-    or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil)
+      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil)
 end
 local plugin_has_ai_suggestion_text = function()
   if vim.b._copilot and vim.b._copilot.suggestions ~= nil then
@@ -456,7 +462,7 @@ end
 local function path_is_homedir(path)
   local homeDir = vim.uv.os_homedir() or ""
   homeDir = homeDir:gsub("[\\/]+$", "") -- Remove trailing path separators
-  path = path:gsub("[\\/]+$", "") -- Remove trailing path separators
+  path = path:gsub("[\\/]+$", "")       -- Remove trailing path separators
   return path == homeDir
 end
 
@@ -529,6 +535,7 @@ return {
   util_falsy = util_falsy,
   util_memoize = util_memoize,
   util_toggle_dark = util_toggle_dark,
+  util_locate_python_exec_path = util_locate_python_exec_path,
   path_remove_last_separator = path_remove_last_separator,
   astro_extend_core = astro_extend_core,
   path_iterate_parents = path_iterate_parents,
