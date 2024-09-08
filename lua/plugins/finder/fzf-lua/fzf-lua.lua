@@ -43,8 +43,8 @@ return {
       config.defaults.keymap.fzf["shift-tab"] = "toggle+up"
       config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
-      config.defaults.actions.buffers["default"] = local_actions.buffers_open_default
-      config.defaults.actions.buffers["ctrl-o"] = local_actions.buffers_open_in_window
+      -- config.defaults.actions.buffers["default"] = local_actions.buffers_open_default
+      -- config.defaults.actions.buffers["ctrl-o"] = local_actions.buffers_open_in_window
       config.defaults.actions.files["ctrl-o"] = local_actions.files_open_in_window
 
       return vim.tbl_deep_extend("force", opts, {
@@ -229,6 +229,23 @@ return {
           maps.n["<Leader>fr"] = { function() require("fzf-lua").registers() end, desc = "Find registers" }
 
           if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
+            maps.n["<Leader>fs"] = {
+              function()
+                require("fzf-lua").grep({
+                  cwd = V.nvim_root(),
+                })
+              end,
+              desc = "Grep words",
+            }
+            maps.v["<Leader>fS"] = {
+              function()
+                require("fzf-lua").grep({
+                  cwd = V.nvim_root(),
+                  query = V.nvim_visual_text(),
+                })
+              end,
+              desc = "Grep words",
+            }
             maps.n["<Leader>fg"] = {
               function()
                 require("fzf-lua").live_grep_native({

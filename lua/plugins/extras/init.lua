@@ -7,6 +7,7 @@ return {
   { import = "plugins.extras.window-picker" },
   { import = "plugins.extras.trailblazer" },
   { import = "plugins.extras.codeium" },
+  { import = "plugins.extras.copilot" },
   {
     "echasnovski/mini.move",
     keys = {

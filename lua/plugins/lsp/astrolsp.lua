@@ -3,6 +3,11 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+if vim.env.PYENV_VERSION == nil then
+  -- https://github.com/neovim/nvim-lspconfig/issues/717#issuecomment-1938450468
+  vim.env.PYENV_VERSION = vim.fn.system('pyenv version'):match('(%S+)%s+%(.-%)')
+end
+
 ---- vim.g.{sometable} doesnt update by key
 local vim_g_internal_ft_formatter = {}
 _G.vim_g_internal_ft_formatter = vim_g_internal_ft_formatter
@@ -15,16 +20,16 @@ return {
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = vim.g.vscode and {} or {
-      codelens = true, -- enable/disable codelens refresh on start
-      inlay_hints = true, -- enable/disable inlay hints on start
+      codelens = true,        -- enable/disable codelens refresh on start
+      inlay_hints = true,     -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      signature_help = true,
+      signature_help = false,
     },
     -- customize lsp formatting options
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false, -- enable or disable format on save globally
+        enabled = false,    -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -36,7 +41,7 @@ return {
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         "lua_ls",
       },
-      timeout_ms = 1000, -- default format timeout
+      timeout_ms = 1000,        -- default format timeout
       filter = function(client) -- fully override the default formatting function
         local buf = vim.api.nvim_get_current_buf()
         if not vim.api.nvim_buf_is_valid(buf) then return false end
@@ -69,6 +74,30 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      basedpyright = {
+        before_init = function(_, c)
+          if not c.settings then c.settings = {} end
+          if not c.settings.python then c.settings.python = {} end
+          c.settings.python.pythonPath = vim.g.pythonPath or V.util_locate_python_exec_path() or vim.fn.exepath("python")
+        end,
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "basic",
+              autoImportCompletions = true,
+              diagnosticSeverityOverrides = {
+                reportUnusedImport = "information",
+                reportUnusedFunction = "information",
+                reportUnusedVariable = "information",
+                reportGeneralTypeIssues = "none",
+                reportOptionalMemberAccess = "none",
+                reportOptionalSubscript = "none",
+                reportPrivateImportUsage = "none",
+              },
+            },
+          },
+        },
+      },
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       vtsls = {
         commands = require("plugins.lsp.commands_.init"),
@@ -184,7 +213,7 @@ return {
           max_width = 80,
         })
         vim.lsp.handlers["textDocument/signatureHelp"] =
-          vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
+            vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
       end
     end,
   },

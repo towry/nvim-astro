@@ -110,6 +110,12 @@ return {
         function(params) vim.cmd(([[tab exec "diffsplit" bufname(%s)]]):format(params.args)) end,
         desc = "Git diff with bufnr",
       },
+      ToggleTermUtop = {
+        function()
+          require('astrocore').toggle_term_cmd "utop"
+        end,
+        desc = "Open utop term"
+      }
     },
 
     autocmds = {
