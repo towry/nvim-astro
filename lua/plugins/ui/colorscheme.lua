@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "darcula-solid"
 return {
   {
     "AstroNvim/astroui",
@@ -145,32 +145,14 @@ return {
         },
       },
       {
-        "miikanissi/modus-themes.nvim",
-        lazy = (vim.g.colorscheme):match("modus") == nil,
-        opts = {
-          style = "auto",
-          ---@type 'default'|'tinted'|'deuteranopia'|'tritanopia'
-          variant = "default",
-          dim_inactive = false,
-          styles = {
-            -- Style to be applied to different syntax groups
-            -- Value is any valid attr-list value for `:help nvim_set_hl`
-            comments = { italic = true },
-            keywords = { italic = true },
-            functions = {},
-            variables = {},
-          },
-          on_colors = function(colors) end,
-          on_highlights = function(H, C)
-            local dark = vim.o.background == "dark"
-            if dark then H.IblIndent = {
-              fg = "#333333",
-              nocombine = true,
-            } end
-            H.FloatBorder = { link = "NormalFloat" }
-          end,
+        "ckyrouac/darcula-solid.nvim",
+        dependencies = {
+          'rktjmp/lush.nvim'
         },
-      },
+        lazy = (vim.g.colorscheme):match("darcula") == nil,
+        config = function()
+        end,
+      }
     },
   },
   -- require("plugins.ui.catppucin"),
