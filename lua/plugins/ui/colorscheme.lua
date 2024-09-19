@@ -1,4 +1,4 @@
-vim.g.colorscheme = "darcula-solid"
+vim.g.colorscheme = "dark"
 return {
   {
     "AstroNvim/astroui",
@@ -149,7 +149,7 @@ return {
         dependencies = {
           'rktjmp/lush.nvim'
         },
-        lazy = (vim.g.colorscheme):match("darcula") == nil,
+        lazy = (vim.g.colorscheme):match("dark") == nil,
         config = function()
         end,
       }
