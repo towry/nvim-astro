@@ -34,7 +34,7 @@ return {
       { "soft", "medium", "hard" },
       { "low", "high" },
       -- git rebase -i
-      { "pick", "squash" },
+      { "pick", "squash", "reword" },
     }
   end,
 }
