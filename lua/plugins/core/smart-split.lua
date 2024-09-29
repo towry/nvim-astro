@@ -1,9 +1,12 @@
 local V = require("v")
+local term = vim.trim((vim.env.TERM_PROGRAM or ""):lower())
+local mux = term == "tmux" or term == "wezterm" or vim.env.KITTY_LISTEN_ON
 local cmdstr = V.keymap_cmd
 
 return {
   "mrjones2014/smart-splits.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  event = mux and "VeryLazy" or nil, -- load early if mux detected
   keys = {
     {
       "<C-\\><C-r>h",
