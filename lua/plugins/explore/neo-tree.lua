@@ -266,8 +266,9 @@ return {
         mappings = {
           ["V"] = "open_vsplit",
           ["<leader>fo"] = "fuzzy_search_dir",
-          ["/"] = { "search_string_in_dir", nowait = true, remap = false },
+          ["s"] = { "search_string_in_dir", nowait = true, remap = false },
           ["M"] = { "action_in_dir", nowait = true, remap = false },
+          ["/"] = false
         },
       },
     },
