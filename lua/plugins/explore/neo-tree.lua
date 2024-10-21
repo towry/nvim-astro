@@ -37,18 +37,6 @@ return {
       },
     },
 
-    window = {
-      popup = { -- settings that apply to float position only
-        size = {
-          height = "60%",
-          width = "70%",
-        },
-        position = "50%", -- 50% means center it
-        -- you can also specify border here, if you want a different setting from
-        -- the global popup_border_style.
-      },
-    },
-
     commands = {
       system_open = function(state) (vim.ui.open)(state.tree:get_node():get_id()) end,
       reveal_last_buf = function()
