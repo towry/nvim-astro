@@ -15,14 +15,14 @@ end
 M.files_open_in_window = wrap(function(selected, opts)
   local actions = require("fzf-lua.actions")
   if not after_set_current_win() then return end
-  actions.vimcmd_file("e", selected, opts)
+  actions.file_edit(selected, opts)
 end)
 
 M.buffers_open_in_window = wrap(function(selected, opts)
   local actions = require("fzf-lua.actions")
 
   if not after_set_current_win() then return end
-  actions.vimcmd_buf("b", selected, opts)
+  actions.file_edit(selected, opts)
 end)
 
 M.buffers_open_default = wrap(function(selected, opts)
@@ -31,7 +31,7 @@ M.buffers_open_default = wrap(function(selected, opts)
   local V = require("v")
 
   if #selected > 1 then
-    actions.vimcmd_buf("b", selected, opts)
+    actions.file_edit(selected, opts)
     return
   end
 
