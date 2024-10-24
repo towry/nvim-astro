@@ -147,12 +147,30 @@ return {
       {
         "ckyrouac/darcula-solid.nvim",
         dependencies = {
-          'rktjmp/lush.nvim'
+          "rktjmp/lush.nvim",
         },
         lazy = (vim.g.colorscheme):match("dark") == nil,
+        config = function() end,
+      },
+      {
+        "miikanissi/modus-themes.nvim",
+        lazy = (vim.g.colorscheme):match("modus") == nil,
         config = function()
+          require("modus-themes").setup({
+            style = "auto",
+            variant = "tinted", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
+            transparent = false,
+            dim_inactive = false,
+            hide_inactive_statusline = false,
+            styles = {
+              comments = { italic = true },
+              keywords = { italic = true },
+              functions = {},
+              variables = {},
+            },
+          })
         end,
-      }
+      },
     },
   },
   -- require("plugins.ui.catppucin"),
