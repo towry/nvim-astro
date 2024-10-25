@@ -26,6 +26,7 @@ return {
     },
 
     window = {
+      auto_expand_width = true,
       popup = { -- settings that apply to float position only
         size = {
           height = "60%",
