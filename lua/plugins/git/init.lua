@@ -1,5 +1,9 @@
 local V = require("v")
 
+local refresh_gitsigns = function()
+  vim.cmd("silent! Gitsigns refresh")
+end
+
 return {
   { import = "plugins.git.fugitive" },
   {

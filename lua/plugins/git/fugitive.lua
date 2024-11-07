@@ -5,12 +5,12 @@ return {
   "tpope/vim-fugitive",
   dependencies = {},
   keys = {
-    {
-      "gha",
-      "<cmd>Git add %<cr>",
-      noremap = true,
-      desc = "Git add current buffer",
-    },
+    -- {
+    --   "gha",
+    --   "<cmd>Git add %<cr>",
+    --   noremap = true,
+    --   desc = "Git add current buffer",
+    -- },
     {
       "<leader>g1",
       function()

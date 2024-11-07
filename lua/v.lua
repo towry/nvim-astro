@@ -314,8 +314,27 @@ local util_toggle_dark = function(mode)
   end
 end
 
+local get_vscode_settings_value = function()
+  local vscode_dir = vim.fs.find(".vscode", {
+    upward = true,
+    type = "directory",
+    limit = 1,
+  })
+  if #vscode_dir == 0 then return end
+  local settings_path = vscode_dir[1] .. "/settings.json"
+  if vim.fn.filereadable(settings_path) == 0 then return end
+  local settings = table.concat(vim.fn.readfile(settings_path), "")
+  return vim.json.decode(settings)
+end
+
 --- Find python exec in vim.env.PATH if pyenv shims exists
 local util_locate_python_exec_path = function()
+  local vscode_settings = get_vscode_settings_value()
+  local python_path = nil
+  if vscode_settings then
+    python_path = vscode_settings["python.defaultInterpreterPath"]
+  end
+  if python_path and vim.fn.executable(python_path) == 1 then return python_path end
   local python_in_pyenv_shims = vim.env.PYENV_ROOT .. "/shims/python"
   if vim.fn.executable(python_in_pyenv_shims) == 1 then return python_in_pyenv_shims end
 end
@@ -381,13 +400,13 @@ local util_falsy = function(item)
 end
 
 local plugin_has_ai_suggestions = function()
-  return (vim.b._copilot and vim.b._copilot.suggestions ~= nil)
-      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil)
+  return (vim.b._copilot and vim.b._copilot.suggestions ~= nil and #vim.b._copilot.suggestions > 0)
+      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil and #vim.b._codeium_completions.items > 0)
 end
 local plugin_has_ai_suggestion_text = function()
   if vim.b._copilot and vim.b._copilot.suggestions ~= nil then
     local suggestion = vim.b._copilot.suggestions[1]
-    if suggestion ~= nil then suggestion = suggestion.displayText end
+    if suggestion ~= nil then suggestion = suggestion.insertText end
     return suggestion ~= nil
   end
 
@@ -506,6 +525,7 @@ local function lazy_get_plugin_opts(name)
 end
 
 return {
+  get_vscode_settings_value = get_vscode_settings_value,
   lazy_get_plugin = lazy_get_plugin,
   lazy_get_plugin_opts = lazy_get_plugin_opts,
   register_global = register_global,

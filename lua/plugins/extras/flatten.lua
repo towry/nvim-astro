@@ -33,9 +33,8 @@ return {
             saved_terminal = term.get(termid)
           end
         end,
-        post_open = vim.schedule_wrap(function(opts)
-          local bufnr, winnr, ft, is_blocking, is_diff =
-            opts.bufnr, opts.winnr, opts.filetype, opts.is_blocking, opts.is_diff
+        post_open = vim.schedule_wrap(function(bufnr, winnr, filetype, is_blocking, is_diff)
+          local ft = filetype
           local is_neo_term = vim.bo[bufnr].filetype == "neo-term"
 
           if is_blocking and saved_terminal then
@@ -58,7 +57,7 @@ return {
             })
           end
         end),
-        block_end = vim.schedule_wrap(function(opts)
+        block_end = vim.schedule_wrap(function()
           if saved_terminal then
             saved_terminal:open()
             saved_terminal = nil

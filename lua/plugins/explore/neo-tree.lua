@@ -26,18 +26,7 @@ return {
     },
 
     window = {
-      popup = { -- settings that apply to float position only
-        size = {
-          height = "60%",
-          width = "70%",
-        },
-        position = "50%", -- 50% means center it
-        -- you can also specify border here, if you want a different setting from
-        -- the global popup_border_style.
-      },
-    },
-
-    window = {
+      auto_expand_width = true,
       popup = { -- settings that apply to float position only
         size = {
           height = "60%",
@@ -266,8 +255,9 @@ return {
         mappings = {
           ["V"] = "open_vsplit",
           ["<leader>fo"] = "fuzzy_search_dir",
-          ["/"] = { "search_string_in_dir", nowait = true, remap = false },
+          ["s"] = { "search_string_in_dir", nowait = true, remap = false },
           ["M"] = { "action_in_dir", nowait = true, remap = false },
+          ["/"] = false
         },
       },
     },
