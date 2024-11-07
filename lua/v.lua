@@ -400,8 +400,8 @@ local util_falsy = function(item)
 end
 
 local plugin_has_ai_suggestions = function()
-  return (vim.b._copilot and vim.b._copilot.suggestions ~= nil)
-      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil)
+  return (vim.b._copilot and vim.b._copilot.suggestions ~= nil and #vim.b._copilot.suggestions > 0)
+      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil and #vim.b._codeium_completions.items > 0)
 end
 local plugin_has_ai_suggestion_text = function()
   if vim.b._copilot and vim.b._copilot.suggestions ~= nil then
