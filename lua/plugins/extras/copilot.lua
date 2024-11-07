@@ -15,14 +15,14 @@ return {
         local cmp_utils = require("plugins.utils._cmp")
 
         opts.mapping["<C-E>"] = cmp.mapping(function(fallback)
-          if vim.g.copilot_enabled == 1 and V.plugin_has_ai_suggestion_text() then vim.fn["codeium#Clear"]() end
+          if V.plugin_has_ai_suggestion_text() then vim.fn["copilot#Clear"]() end
           if not require("cmp").abort() then fallback() end
         end, { "i", "c" })
 
         opts.mapping["<C-P>"] = cmp.mapping(function()
-          if vim.g.copilot_enabled == 1 and V.plugin_has_ai_suggestions() then
+          if V.plugin_has_ai_suggestions() then
             if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
-            vim.fn["copilot#CycleCompletions"](-1)
+            vim.fn["copilot#Previous"]()
             return
           end
           if cmp_utils.cmp_is_visible(cmp) then
@@ -32,9 +32,9 @@ return {
           end
         end)
         opts.mapping["<C-N>"] = cmp.mapping(function()
-          if vim.g.copilot_enabled == 1 and V.plugin_has_ai_suggestions() then
+          if V.plugin_has_ai_suggestions() then
             if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
-            vim.fn["copilot#CycleCompletions"](1)
+            vim.fn["copilot#Next"]()
             return
           end
           if cmp_utils.cmp_is_visible(cmp) then
@@ -81,12 +81,15 @@ return {
         vim.g.copilot_filetypes = vim.tbl_extend("keep", {
           ["*"] = false,
         }, vim.g.copilot_filetypes)
+        vim.cmd('Copilot disable')
         vim.notify("Copilot auto mode disabled X")
       else
         vim.g.copilot_auto_mode = true
         vim.g.copilot_filetypes = vim.tbl_extend("keep", {
           ["*"] = true,
         }, vim.g.copilot_filetypes)
+        vim.cmd('Copilot enable')
+        vim.fn['copilot#OnFileType']()
         vim.notify("Copilot auto mode enabled ✔")
       end
       -- vim.api.nvim_exec_autocmds("User", {
@@ -111,12 +114,12 @@ return {
           ["<Leader>u?<cr>"] = {
             function()
               if vim.g.copilot_enabled == 1 then
-                vim.g.copilot_enabled = 0
+                vim.cmd("Copilot disable")
                 vim.notify("🤖 Enable copilot", vim.log.levels.INFO, {
                   key = "copilot",
                 })
               else
-                vim.g.copilot_enabled = 1
+                vim.cmd("Copilot enable")
                 vim.notify("🤖 Disable copilot", vim.log.levels.INFO, {
                   key = "copilot",
                 })
@@ -137,7 +140,7 @@ return {
 
               local trigger_ai = vim.schedule_wrap(function()
                 vim.notify('🤖 AI: "Copilot"', vim.log.levels.INFO, { key = "copilot" })
-                if vim.fn.exists("*codeium#Complete") == 1 then vim.fn["copilot#Complete"]() end
+                if vim.fn.exists("*codeium#Suggest") == 1 then vim.fn["copilot#Suggest"]() end
               end)
 
               if V.plugin_has_ai_suggestions() and V.plugin_has_ai_suggestion_text() then

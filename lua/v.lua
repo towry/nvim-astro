@@ -406,7 +406,7 @@ end
 local plugin_has_ai_suggestion_text = function()
   if vim.b._copilot and vim.b._copilot.suggestions ~= nil then
     local suggestion = vim.b._copilot.suggestions[1]
-    if suggestion ~= nil then suggestion = suggestion.displayText end
+    if suggestion ~= nil then suggestion = suggestion.insertText end
     return suggestion ~= nil
   end
 
