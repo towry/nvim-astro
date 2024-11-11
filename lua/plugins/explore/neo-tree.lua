@@ -257,7 +257,10 @@ return {
           ["<leader>fo"] = "fuzzy_search_dir",
           ["s"] = { "search_string_in_dir", nowait = true, remap = false },
           ["M"] = { "action_in_dir", nowait = true, remap = false },
-          ["/"] = false
+          ["/"] = false,
+          ["zz"] = false,
+          ["zt"] = false,
+          ["zb"] = false,
         },
       },
     },

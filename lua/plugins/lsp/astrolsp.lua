@@ -120,6 +120,26 @@ return {
           },
         },
       },
+      ts_ls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              -- log = 'verbose',
+              maxTsServerMemory = 1800,
+            },
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+          javascript = {
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+        },
+      }
     },
     -- customize how language servers are attached
     handlers = {

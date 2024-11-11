@@ -47,12 +47,18 @@ return {
     },
   },
 
-  event = { "InsertEnter" },
+  event = { "BufEnter" },
   cmd = { "Copilot" },
   config = function() end,
   init = function()
+    local auto_start = true
+
+    if vim.g.copilot_auto_mode == false then
+      auto_start = false
+    end
+
     vim.g.copilot_filetypes = {
-      ["*"] = false, -- start manually
+      ["*"] = auto_start, -- start manually
       ["fzf"] = false,
       ["TelescopePrompt"] = false,
       ["TelescopeResults"] = false,
