@@ -68,11 +68,6 @@ return { -- bufferline
     close_button = false,
     filetype = false,
     filename = {
-      fname = function (nr)
-        local bufname = vim.fn.bufname(nr)
-        if bufname == "" then return "[No Name]" end
-        return vim.fn.fnamemodify(bufname, ":t")
-      end,
       padding = { left = 1, right = 1 },
     },
     -- use no separator for this part but define a background color
