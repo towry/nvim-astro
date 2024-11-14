@@ -14,8 +14,8 @@ return {
 
     -- Only insert new sources, do not replace the existing ones
     -- (If you wish to replace, use `opts.sources = {}` instead of the `list_insert_unique` function)
-    opts.sources = require("astrocore").list_insert_unique(opts.sources, {
-      require("null-ls.builtins.formatting.ocamlformat"),
-    })
+    -- opts.sources = require("astrocore").list_insert_unique(opts.sources, {
+    --   require("null-ls.builtins.formatting.ocamlformat"),
+    -- })
   end,
 }

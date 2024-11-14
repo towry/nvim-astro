@@ -8,7 +8,7 @@ return {
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.python-ruff" },
-  { import = "astrocommunity.pack.ocaml" },
+  -- { import = "astrocommunity.pack.ocaml" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   { import = "astrocommunity.lsp.lsplinks-nvim" },
   -- { import = "astrocommunity.lsp.lsp-signature-nvim" },

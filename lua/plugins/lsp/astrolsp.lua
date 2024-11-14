@@ -68,7 +68,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      "ocamllsp",
+      -- "ocamllsp",
       -- "pyright"
     },
     -- customize language server configuration options passed to `lspconfig`
