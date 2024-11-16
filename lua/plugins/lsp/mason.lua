@@ -7,13 +7,12 @@ return {
     "williamboman/mason-lspconfig.nvim",
     -- overrides `require("mason-lspconfig").setup(...)`
     opts = function(_, opts)
-      opts.automatic_installation = true
+      opts.automatic_installation = false
       opts.ensure_installed = {
         "lua_ls",
         "basedpyright",
         "ruff",
-        "vtsls",
-        "elixirls"
+        "vtsls"
       }
 
       return opts
