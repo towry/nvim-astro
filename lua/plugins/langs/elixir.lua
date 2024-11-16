@@ -23,8 +23,8 @@ return {
           settings = {
             elixirLS = {
               --- https://github.com/elixir-lsp/elixir-ls?tab=readme-ov-file#dialyzer-integration
-              dialyzerEnabled = true,
-              fetchDeps = true,
+              dialyzerEnabled = false,
+              fetchDeps = false,
             },
           },
         },
