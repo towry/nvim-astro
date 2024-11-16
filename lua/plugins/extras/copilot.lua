@@ -9,6 +9,72 @@ return {
     },
 
     {
+      "Saghen/blink.cmp",
+      opts = function(_, opts)
+        opts.keymap["<C-E>"] = {
+          function(cmp)
+            if V.plugin_has_ai_suggestion_text() then 
+              vim.fn["copilot#Clear"]()
+            end
+            return cmp.hide()
+          end,
+          "fallback",
+        }
+        opts.keymap["<C-P>"] = {
+          function(cmp)
+            if V.plugin_has_ai_suggestions() then
+              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              vim.fn["copilot#Previous"]()
+              return
+            end
+            if cmp.windows.autocomplete.win:is_open() then
+              return cmp.select_prev()
+            end
+
+            return cmp.show()
+          end,
+        }
+        opts.keymap["<C-N>"] = {
+          function(cmp)
+            if V.plugin_has_ai_suggestions() then
+              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              vim.fn["copilot#Next"]()
+              return
+            end
+            if cmp.windows.autocomplete.win:is_open() then
+              return cmp.select_next()
+            end
+
+            return cmp.show()
+          end,
+        }
+
+        opts.windows = {
+          autocomplete = {
+            border = "single",
+            selection = "manual",
+            -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          },
+          documentation = {
+            auto_show = true,
+            border = "single",
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          },
+          signature_help = {
+            border = "single",
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+          },
+        }
+
+        opts.highlight = {
+          use_nvim_cmp_as_default = true,
+        }
+
+        return opts
+      end,
+    },
+
+    {
       "hrsh7th/nvim-cmp",
       opts = function(_, opts)
         local cmp = require("cmp")
@@ -47,12 +113,16 @@ return {
     },
   },
 
-  event = { "InsertEnter" },
+  event = { "BufEnter" },
   cmd = { "Copilot" },
   config = function() end,
   init = function()
+    local auto_start = false
+
+    if vim.g.copilot_auto_mode == false then auto_start = false end
+
     vim.g.copilot_filetypes = {
-      ["*"] = false, -- start manually
+      ["*"] = auto_start, -- start manually
       ["fzf"] = false,
       ["TelescopePrompt"] = false,
       ["TelescopeResults"] = false,
@@ -81,15 +151,15 @@ return {
         vim.g.copilot_filetypes = vim.tbl_extend("keep", {
           ["*"] = false,
         }, vim.g.copilot_filetypes)
-        vim.cmd('Copilot disable')
+        vim.cmd("Copilot disable")
         vim.notify("Copilot auto mode disabled X")
       else
         vim.g.copilot_auto_mode = true
         vim.g.copilot_filetypes = vim.tbl_extend("keep", {
           ["*"] = true,
         }, vim.g.copilot_filetypes)
-        vim.cmd('Copilot enable')
-        vim.fn['copilot#OnFileType']()
+        vim.cmd("Copilot enable")
+        vim.fn["copilot#OnFileType"]()
         vim.notify("Copilot auto mode enabled ✔")
       end
       -- vim.api.nvim_exec_autocmds("User", {
@@ -105,9 +175,7 @@ return {
             desc = "Toggle AI",
           },
           ["<Leader>u?a"] = {
-            function()
-              vim.cmd("ToggleCopilotAutoMode")
-            end,
+            function() vim.cmd("ToggleCopilotAutoMode") end,
             desc = "Toggle AI(auto)",
             noremap = true,
           },
@@ -136,6 +204,11 @@ return {
               if core.is_available("nvim-cmp") and package.loaded["cmp"] then
                 local cmp = require("cmp")
                 if cmp.visible() then vim.schedule(cmp.close) end
+              elseif core.is_available("blink.cmp") and package.loaded["blink.cmp"] then
+                local cmp = require("blink.cmp")
+                if cmp.windows.autocomplete.win:is_open() then
+                  cmp.hide()
+                end
               end
 
               local trigger_ai = vim.schedule_wrap(function()
@@ -144,9 +217,7 @@ return {
               end)
 
               if V.plugin_has_ai_suggestions() and V.plugin_has_ai_suggestion_text() then
-                if vim.b._copilot then
-                  vim.schedule(function() vim.fn.feedkeys(vim.fn["copilot#Accept"](), "i") end)
-                end
+                if vim.b._copilot then vim.schedule(function() vim.fn.feedkeys(vim.fn["copilot#Accept"](), "i") end) end
               else
                 trigger_ai()
               end

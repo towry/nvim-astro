@@ -68,7 +68,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      "ocamllsp",
+      -- "ocamllsp",
       -- "pyright"
     },
     -- customize language server configuration options passed to `lspconfig`
@@ -120,6 +120,26 @@ return {
           },
         },
       },
+      ts_ls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              -- log = 'verbose',
+              maxTsServerMemory = 1800,
+            },
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+          javascript = {
+            preferences = {
+              importModuleSpecifierEnding = "index",
+              importModuleSpecifier = "relative",
+            },
+          },
+        },
+      }
     },
     -- customize how language servers are attached
     handlers = {

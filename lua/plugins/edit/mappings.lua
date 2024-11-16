@@ -8,7 +8,6 @@ return {
       mappings = {
         i = {
           ["jj"] = { "<ESC>", nowait = true, noremap = true },
-          ["<C-s>"] = { "<cmd>update!<cr>", desc = "Save File", noremap = true, nowait = true },
         },
 
         -- first key is the mode
@@ -49,7 +48,6 @@ return {
           -- this is useful for naming menus
           ["<Leader>b"] = { name = "Buffers" },
           -- quick save
-          ["<C-s>"] = { ":update!<cr>", desc = "Save File" }, -- change description but the same command
           ["<C-c><C-k>"] = {
             function()
               local tabs_count = vim.fn.tabpagenr("$")

@@ -257,7 +257,10 @@ return {
           ["<leader>fo"] = "fuzzy_search_dir",
           ["s"] = { "search_string_in_dir", nowait = true, remap = false },
           ["M"] = { "action_in_dir", nowait = true, remap = false },
-          ["/"] = false
+          ["/"] = false,
+          ["zz"] = false,
+          ["zt"] = false,
+          ["zb"] = false,
         },
       },
     },
@@ -304,11 +307,7 @@ return {
             },
             ["<Leader>ee"] = {
               function()
-                if vim.bo.filetype == "neo-tree" then
-                  vim.cmd.wincmd("p")
-                else
-                  vim.cmd("Neotree focus position=left reveal=true")
-                end
+                  vim.cmd("Neotree toggle focus position=left reveal=true")
               end,
               desc = "Toggle Explorer Focus",
             },
