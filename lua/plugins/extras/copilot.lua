@@ -52,7 +52,7 @@ return {
         opts.windows = {
           autocomplete = {
             border = "single",
-            selection = "manual",
+            selection = "auto_insert",
             -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
           },
           documentation = {
