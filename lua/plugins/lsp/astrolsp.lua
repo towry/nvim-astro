@@ -174,8 +174,10 @@ return {
       },
       --- need LspReferenceWrite|Read highlights
       lsp_document_highlight = {
-        cond = "textDocument/documentHighlight",
-        -- cond = function(client, bufnr) return client.name == "lua_ls" end,
+        -- cond = "textDocument/documentHighlight",
+        cond = function(client, _bufnr) 
+          return client.name ~= "elixirls" and client.supports_method("textDocument/documentHighlight")
+        end,
         {
           -- events to trigger
           event = { "CursorHold", "CursorHoldI" },
@@ -228,13 +230,14 @@ return {
       -- client.server_capabilities.semanticTokensProvider = nil
       if vim.g.lsp_handler_setup == 0 then
         vim.g.lsp_handler_setup = 1
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        vim.lsp.buf.hover({
           border = "single",
           title = "Symbol Hover",
           max_width = 80,
         })
-        vim.lsp.handlers["textDocument/signatureHelp"] =
-            vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
+        vim.lsp.buf.signature_help({
+          title = "Signature Help"
+        })
       end
     end,
   },
