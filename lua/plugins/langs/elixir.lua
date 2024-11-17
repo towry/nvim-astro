@@ -1,3 +1,4 @@
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -17,13 +18,13 @@ return {
       },
       config = {
         elixirls = {
-          cmd = { "elixir-ls" },
+          cmd = { vim.env.ELS_INSTALL_PREFIX and vim.env.ELS_INSTALL_PREFIX .. "/language_server.sh" or "elixir-ls" },
           -- init_options = {
           -- },
           settings = {
             elixirLS = {
               --- https://github.com/elixir-lsp/elixir-ls?tab=readme-ov-file#dialyzer-integration
-              dialyzerEnabled = false,
+              dialyzerEnabled = true,
               fetchDeps = false,
             },
           },
