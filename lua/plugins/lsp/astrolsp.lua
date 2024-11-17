@@ -174,10 +174,10 @@ return {
       },
       --- need LspReferenceWrite|Read highlights
       lsp_document_highlight = {
-        -- cond = "textDocument/documentHighlight",
-        cond = function(client, _bufnr) 
-          return client.name ~= "elixirls" and client.supports_method("textDocument/documentHighlight")
-        end,
+        cond = "textDocument/documentHighlight",
+        -- cond = function(client, _bufnr) 
+        --   return client.name ~= "elixirls" and client.supports_method("textDocument/documentHighlight")
+        -- end,
         {
           -- events to trigger
           event = { "CursorHold", "CursorHoldI" },
