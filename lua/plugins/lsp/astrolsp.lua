@@ -68,9 +68,8 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      "elixirls"
-      -- "ocamllsp",
-      -- "pyright"
+      "elixirls",
+      "basedpyright"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
