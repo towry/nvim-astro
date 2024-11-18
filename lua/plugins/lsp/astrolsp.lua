@@ -69,7 +69,9 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       "elixirls",
-      "basedpyright"
+      "basedpyright",
+      "vtsls",
+      "ts_ls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
