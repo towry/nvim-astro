@@ -9,10 +9,10 @@ return {
     opts = function(_, opts)
       opts.automatic_installation = false
       opts.ensure_installed = {
-        "lua_ls",
-        "basedpyright",
-        "ruff",
-        "vtsls"
+        -- "lua_ls",
+        -- "basedpyright",
+        -- "ruff",
+        -- "vtsls"
       }
 
       return opts
@@ -24,7 +24,7 @@ return {
     opts = function(_, opts)
       opts.run_on_start = false
       opts.ensure_installed = {
-        "prettier"
+        -- "prettier"
       }
       return opts
     end,
