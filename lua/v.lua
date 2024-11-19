@@ -331,12 +331,18 @@ end
 local util_locate_python_exec_path = function()
   local vscode_settings = get_vscode_settings_value()
   local python_path = nil
-  if vscode_settings then
-    python_path = vscode_settings["python.defaultInterpreterPath"]
-  end
+  if vscode_settings then python_path = vscode_settings["python.defaultInterpreterPath"] end
   if python_path and vim.fn.executable(python_path) == 1 then return python_path end
-  local python_in_pyenv_shims = vim.env.PYENV_ROOT .. "/shims/python"
-  if vim.fn.executable(python_in_pyenv_shims) == 1 then return python_in_pyenv_shims end
+
+  if vim.env.PYENV_ROOT then
+    local python_in_pyenv_shims = vim.env.PYENV_ROOT .. "/shims/python"
+    if vim.fn.executable(python_in_pyenv_shims) == 1 then return python_in_pyenv_shims end
+  end
+
+  -- check project root/.venv/bin/python
+  local venv_python = nvim_root() .. "/.venv/bin/python"
+  print(venv_python)
+  if vim.fn.executable(venv_python) == 1 then return venv_python end
 end
 
 --- @param option_to_toggle string hidden=true or --no-hidden
@@ -401,7 +407,11 @@ end
 
 local plugin_has_ai_suggestions = function()
   return (vim.b._copilot and vim.b._copilot.suggestions ~= nil and #vim.b._copilot.suggestions > 0)
-      or (vim.b._codeium_completions and vim.b._codeium_completions.items ~= nil and #vim.b._codeium_completions.items > 0)
+    or (
+      vim.b._codeium_completions
+      and vim.b._codeium_completions.items ~= nil
+      and #vim.b._codeium_completions.items > 0
+    )
 end
 local plugin_has_ai_suggestion_text = function()
   if vim.b._copilot and vim.b._copilot.suggestions ~= nil then
@@ -481,7 +491,7 @@ end
 local function path_is_homedir(path)
   local homeDir = vim.uv.os_homedir() or ""
   homeDir = homeDir:gsub("[\\/]+$", "") -- Remove trailing path separators
-  path = path:gsub("[\\/]+$", "")       -- Remove trailing path separators
+  path = path:gsub("[\\/]+$", "") -- Remove trailing path separators
   return path == homeDir
 end
 

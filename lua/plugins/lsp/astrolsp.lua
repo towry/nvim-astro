@@ -23,7 +23,7 @@ return {
       codelens = true,        -- enable/disable codelens refresh on start
       inlay_hints = true,     -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      signature_help = false,
+      signature_help = true,
     },
     -- customize lsp formatting options
     formatting = {
@@ -71,7 +71,7 @@ return {
       "elixirls",
       "basedpyright",
       "vtsls",
-      "ts_ls",
+      -- "ts_ls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -231,14 +231,13 @@ return {
       -- client.server_capabilities.semanticTokensProvider = nil
       if vim.g.lsp_handler_setup == 0 then
         vim.g.lsp_handler_setup = 1
-        vim.lsp.buf.hover({
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
           border = "single",
           title = "Symbol Hover",
           max_width = 80,
         })
-        vim.lsp.buf.signature_help({
-          title = "Signature Help"
-        })
+        vim.lsp.handlers["textDocument/signatureHelp"] =
+            vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
       end
     end,
   },
