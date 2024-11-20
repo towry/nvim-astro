@@ -18,6 +18,7 @@ local modules = {
   "gitsigns",
   "heirline",
   "indent-blankline",
+  "guess-indent",
   "lspconfig",
   "mason",
   "mini-bufremove",
