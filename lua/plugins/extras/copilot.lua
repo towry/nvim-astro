@@ -117,7 +117,7 @@ return {
   cmd = { "Copilot" },
   config = function() end,
   init = function()
-    local auto_start = false
+    local auto_start = true
 
     if vim.g.copilot_auto_mode == false then auto_start = false end
 
