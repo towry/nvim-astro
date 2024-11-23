@@ -1,6 +1,6 @@
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.completion.blink-cmp" },
+  -- { import = "astrocommunity.completion.blink-cmp" },
   { import = "astrocommunity.icon.mini-icons" },
   --- langs
   -- { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
