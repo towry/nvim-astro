@@ -3,7 +3,8 @@ require("lazy").setup({
     "AstroNvim/AstroNvim",
     name = "AstroNvim",
     -- dir = vim.fn.stdpath("config") .. "/vendor/astronvim",
-    version = "^4", -- Remove version tracking to elect for nighly AstroNvim
+    -- version = "^4",
+    branch = "v5",
     import = "vendor.astronvim-plugins",
     -- import = "astronvim.plugins",
     opts = { -- AstroNvim options must be set here with the `import` key

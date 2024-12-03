@@ -177,7 +177,7 @@ return {
       lsp_document_highlight = {
         cond = "textDocument/documentHighlight",
         -- cond = function(client, _bufnr) 
-        --   return client.name ~= "elixirls" and client.supports_method("textDocument/documentHighlight")
+        --   return client.name ~= "elixirls" and client:supports_method("textDocument/documentHighlight")
         -- end,
         {
           -- events to trigger
@@ -207,7 +207,7 @@ return {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
-            return client.supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
+            return client:supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
           end,
         },
         ["<Leader>xd"] = {

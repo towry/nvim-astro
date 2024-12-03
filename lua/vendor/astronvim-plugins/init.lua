@@ -11,7 +11,6 @@ local modules = {
   "_astroui_status",
   "autopairs",
   "cmp_luasnip",
-  "colorizer",
   "comment",
   "dap",
   "dressing",
@@ -34,7 +33,6 @@ local modules = {
   "treesitter",
   "ts-autotag",
   "ts-context-commentstring",
-  "web-devicons",
   "which-key",
   "window-picker",
 }
