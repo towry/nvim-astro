@@ -1,3 +1,4 @@
+local V = require("v")
 
 return {
   {
@@ -19,13 +20,13 @@ return {
       config = {
         elixirls = {
           cmd = { vim.env.ELS_INSTALL_PREFIX and vim.env.ELS_INSTALL_PREFIX .. "/language_server.sh" or "elixir-ls" },
-          -- init_options = {
-          -- },
+          -- cmd = { "elixir-ls" },
           settings = {
             elixirLS = {
+              projectDir = V.util_get_elixirls_project_dir(),
               --- https://github.com/elixir-lsp/elixir-ls?tab=readme-ov-file#dialyzer-integration
               dialyzerEnabled = true,
-              fetchDeps = false,
+              fetchDeps = true,
             },
           },
         },

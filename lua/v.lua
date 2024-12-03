@@ -327,6 +327,14 @@ local get_vscode_settings_value = function()
   return vim.json.decode(settings)
 end
 
+local util_get_elixirls_project_dir = function()
+  local vscode_settings = get_vscode_settings_value()
+  if not vscode_settings then return end
+  local elixir_project_dir = vscode_settings["elixirLS.projectDir"]
+  if not elixir_project_dir then return vim.fn.getcwd() end
+  return elixir_project_dir
+end
+
 --- Find python exec in vim.env.PATH if pyenv shims exists
 local util_locate_python_exec_path = function()
   local vscode_settings = get_vscode_settings_value()
@@ -341,7 +349,6 @@ local util_locate_python_exec_path = function()
 
   -- check project root/.venv/bin/python
   local venv_python = nvim_root() .. "/.venv/bin/python"
-  print(venv_python)
   if vim.fn.executable(venv_python) == 1 then return venv_python end
 end
 
@@ -565,6 +572,7 @@ return {
   util_falsy = util_falsy,
   util_memoize = util_memoize,
   util_toggle_dark = util_toggle_dark,
+  util_get_elixirls_project_dir = util_get_elixirls_project_dir,
   util_locate_python_exec_path = util_locate_python_exec_path,
   path_remove_last_separator = path_remove_last_separator,
   astro_extend_core = astro_extend_core,

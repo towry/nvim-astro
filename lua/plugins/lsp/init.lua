@@ -2,8 +2,7 @@ local V = require("v")
 
 return {
   { import = "plugins.lsp.astrolsp" },
-  { import = "plugins.lsp.mason" },
-  { import = "plugins.lsp.none-ls" },
+  { import = "plugins.lsp.conform" },
   {
     "SmiteshP/nvim-navbuddy",
     dependencies = {
