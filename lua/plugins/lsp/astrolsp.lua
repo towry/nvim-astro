@@ -5,7 +5,7 @@
 
 if vim.env.PYENV_VERSION == nil then
   -- https://github.com/neovim/nvim-lspconfig/issues/717#issuecomment-1938450468
-  vim.env.PYENV_VERSION = vim.fn.system('pyenv version'):match('(%S+)%s+%(.-%)')
+  vim.env.PYENV_VERSION = vim.fn.system("pyenv version"):match("(%S+)%s+%(.-%)")
 end
 
 ---- vim.g.{sometable} doesnt update by key
@@ -20,8 +20,8 @@ return {
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = vim.g.vscode and {} or {
-      codelens = true,        -- enable/disable codelens refresh on start
-      inlay_hints = true,     -- enable/disable inlay hints on start
+      codelens = true, -- enable/disable codelens refresh on start
+      inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
       signature_help = false,
     },
@@ -29,7 +29,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false,    -- enable or disable format on save globally
+        enabled = false, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -41,7 +41,7 @@ return {
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         "lua_ls",
       },
-      timeout_ms = 1000,        -- default format timeout
+      timeout_ms = 1000,
       filter = function(client) -- fully override the default formatting function
         local buf = vim.api.nvim_get_current_buf()
         if not vim.api.nvim_buf_is_valid(buf) then return false end
@@ -51,11 +51,12 @@ return {
 
         if vim_g_internal_ft_formatter[filetype] then
           if vim_g_internal_ft_formatter[filetype] == client.name then return true end
-          return false
         end
 
         --- check null-ls formatter
-        if require("plugins.utils._none_ls_utils").is_null_ls_formatter_avalable(filetype) then
+        if
+          package.loaded["null-ls"] and require("plugins.utils._none_ls_utils").is_null_ls_formatter_avalable(filetype)
+        then
           vim_g_internal_ft_formatter[filetype] = "null-ls"
           return client.name == "null-ls"
         end
@@ -69,7 +70,9 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       "elixirls",
-      "basedpyright"
+      "basedpyright",
+      "vtsls",
+      -- "ts_ls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -78,7 +81,9 @@ return {
         before_init = function(_, c)
           if not c.settings then c.settings = {} end
           if not c.settings.python then c.settings.python = {} end
-          c.settings.python.pythonPath = vim.g.pythonPath or V.util_locate_python_exec_path() or vim.fn.exepath("python")
+          c.settings.python.pythonPath = vim.g.pythonPath
+            or V.util_locate_python_exec_path()
+            or vim.fn.exepath("python")
         end,
         settings = {
           basedpyright = {
@@ -139,7 +144,7 @@ return {
             },
           },
         },
-      }
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -174,8 +179,8 @@ return {
       --- need LspReferenceWrite|Read highlights
       lsp_document_highlight = {
         cond = "textDocument/documentHighlight",
-        -- cond = function(client, _bufnr) 
-        --   return client.name ~= "elixirls" and client.supports_method("textDocument/documentHighlight")
+        -- cond = function(client, _bufnr)
+        --   return client.name ~= "elixirls" and client:supports_method("textDocument/documentHighlight")
         -- end,
         {
           -- events to trigger
@@ -205,7 +210,7 @@ return {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
-            return client.supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
+            return client:supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
           end,
         },
         ["<Leader>xd"] = {
@@ -229,14 +234,13 @@ return {
       -- client.server_capabilities.semanticTokensProvider = nil
       if vim.g.lsp_handler_setup == 0 then
         vim.g.lsp_handler_setup = 1
-        vim.lsp.buf.hover({
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
           border = "single",
           title = "Symbol Hover",
           max_width = 80,
         })
-        vim.lsp.buf.signature_help({
-          title = "Signature Help"
-        })
+        vim.lsp.handlers["textDocument/signatureHelp"] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, { title = "Signature Help", border = "single", max_width = 80 })
       end
     end,
   },

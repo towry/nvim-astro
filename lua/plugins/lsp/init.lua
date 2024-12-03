@@ -2,8 +2,7 @@ local V = require("v")
 
 return {
   { import = "plugins.lsp.astrolsp" },
-  { import = "plugins.lsp.mason" },
-  { import = "plugins.lsp.none-ls" },
+  { import = "plugins.lsp.conform" },
   {
     "SmiteshP/nvim-navbuddy",
     dependencies = {
@@ -17,7 +16,7 @@ return {
               desc = "attach navic",
               callback = function(args)
                 local client = V.lsp_get_autocmd_arg_client(args)
-                if client and client.supports_method("textDocument/documentSymbol") then
+                if client and client:supports_method("textDocument/documentSymbol") then
                   require("nvim-navbuddy").attach(client, args.buf)
                 end
               end,

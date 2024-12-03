@@ -27,6 +27,10 @@ return {
               -- flash
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
               WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
+
+              IlluminatedWordText = { fg = "none", bg = colors.ui.bg_p2 },
+              IlluminatedWordRead = { fg = "none", bg = colors.ui.bg_p2 },
+              IlluminatedWordWrite = { fg = "none", bg = colors.ui.bg_p2 },
             }
           end,
           colors = {
@@ -144,35 +148,14 @@ return {
           },
         },
       },
+
       {
-        "ckyrouac/darcula-solid.nvim",
-        dependencies = {
-          "rktjmp/lush.nvim",
-        },
-        lazy = (vim.g.colorscheme):match("dark") == nil,
-        config = function() end,
-      },
-      {
-        "miikanissi/modus-themes.nvim",
-        lazy = (vim.g.colorscheme):match("modus") == nil,
-        config = function()
-          require("modus-themes").setup({
-            style = "auto",
-            variant = "tinted", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
-            transparent = false,
-            dim_inactive = false,
-            hide_inactive_statusline = false,
-            styles = {
-              comments = { italic = true },
-              keywords = { italic = true },
-              functions = {},
-              variables = {},
-            },
-          })
-        end,
+        "nuvic/flexoki-nvim",
+        name = "flexoki",
+        priority = 1000,
+        event = "VeryLazy",
+        cond = (vim.g.colorscheme):match("flexoki") ~= nil,
       },
     },
   },
-  -- require("plugins.ui.catppucin"),
-  -- require("plugins.ui.gruvbox"),
 }

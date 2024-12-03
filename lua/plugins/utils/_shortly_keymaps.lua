@@ -1,6 +1,6 @@
 local M = {}
 
-M.shortly_prefix = "<leader>z+"
+M.shortly_prefix = "<space>z+"
 
 M.maps = {}
 
