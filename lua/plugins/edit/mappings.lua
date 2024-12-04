@@ -12,6 +12,14 @@ return {
 
         -- first key is the mode
         n = {
+          ["\\"] = {
+            ",",
+            desc = "Remap to ,",
+            noremap = true,
+            nowait = true,
+            expr = false,
+            silent = true,
+          },
           ["<Leader>/"] = false,
           ["<Leader>q"] = false,
           ["<Leader>w"] = false,
@@ -28,7 +36,7 @@ return {
             ":new<cr>",
             desc = "New file",
           },
-          [";"] = { ":" },
+          -- [";"] = { ":" },
           -- navigate buffer tabs
           ["<C-n>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
           ["<C-p>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },

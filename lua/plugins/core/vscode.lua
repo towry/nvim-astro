@@ -7,25 +7,14 @@ vim.tbl_map(function(plugin) enabled[plugin] = true end, {
   "AstroNvim",
   "astrocore",
   "astroui",
-  -- "Comment.nvim",
-  -- "nvim-autopairs",
   "nvim-treesitter",
-  -- "nvim-ts-autotag",
   "nvim-treesitter-textobjects",
-  -- "nvim-ts-context-commentstring",
-  -- more known working
   "flash.nvim",
-  -- "mini.ai",
-  -- "mini.comment",
   "mini.move",
   "mini.pairs",
   "mini.surround",
-  -- "ts-comments.nvim",
   "vim-easy-align",
   "vim-repeat",
-  -- "vim-sandwich",
-  -- "yanky.nvim",
-  -- feel free to open PRs to add more support!
 })
 
 local Config = require("lazy.core.config")
