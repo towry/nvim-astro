@@ -28,11 +28,11 @@ return {
         opts.keymap["<C-P>"] = {
           function(cmp)
             if V.plugin_has_ai_suggestions() then
-              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               vim.fn["copilot#Previous"]()
               return
             end
-            if cmp.windows.autocomplete.win:is_open() then return cmp.select_prev() end
+            if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_prev() end
 
             return cmp.show()
           end,
@@ -40,11 +40,11 @@ return {
         opts.keymap["<C-N>"] = {
           function(cmp)
             if V.plugin_has_ai_suggestions() then
-              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               vim.fn["copilot#Next"]()
               return
             end
-            if cmp.windows.autocomplete.win:is_open() then return cmp.select_next() end
+            if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_next() end
 
             return cmp.show()
           end,
@@ -229,7 +229,7 @@ return {
                 if cmp.visible() then vim.schedule(cmp.close) end
               elseif core.is_available("blink.cmp") and package.loaded["blink.cmp"] then
                 local cmp = require("blink.cmp")
-                if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+                if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               end
 
               local trigger_ai = vim.schedule_wrap(function()
