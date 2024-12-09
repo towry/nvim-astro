@@ -32,7 +32,15 @@ return {
               vim.fn["copilot#Previous"]()
               return
             end
+<<<<<<< HEAD
             if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_prev() end
+||||||| parent of 5b0020a (fix: config)
+            if cmp.windows.autocomplete.win:is_open() then
+              return cmp.select_prev()
+            end
+=======
+            if cmp.windows.autocomplete.win:is_open() then return cmp.select_prev() end
+>>>>>>> 5b0020a (fix: config)
 
             return cmp.show()
           end,
@@ -44,7 +52,15 @@ return {
               vim.fn["copilot#Next"]()
               return
             end
+<<<<<<< HEAD
             if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_next() end
+||||||| parent of 5b0020a (fix: config)
+            if cmp.windows.autocomplete.win:is_open() then
+              return cmp.select_next()
+            end
+=======
+            if cmp.windows.autocomplete.win:is_open() then return cmp.select_next() end
+>>>>>>> 5b0020a (fix: config)
 
             return cmp.show()
           end,
@@ -229,7 +245,15 @@ return {
                 if cmp.visible() then vim.schedule(cmp.close) end
               elseif core.is_available("blink.cmp") and package.loaded["blink.cmp"] then
                 local cmp = require("blink.cmp")
+<<<<<<< HEAD
                 if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
+||||||| parent of 5b0020a (fix: config)
+                if cmp.windows.autocomplete.win:is_open() then
+                  cmp.hide()
+                end
+=======
+                if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+>>>>>>> 5b0020a (fix: config)
               end
 
               local trigger_ai = vim.schedule_wrap(function()
