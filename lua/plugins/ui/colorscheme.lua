@@ -28,9 +28,9 @@ return {
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
               WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
 
-              IlluminatedWordText = { fg = "none", bg = colors.ui.bg_p2 },
-              IlluminatedWordRead = { fg = "none", bg = colors.ui.bg_p2 },
-              IlluminatedWordWrite = { fg = "none", bg = colors.ui.bg_p2 },
+              IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
+              IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },
+              IlluminatedWordWrite = { fg = "none", bg = colors.theme.bg_p2 },
             }
           end,
           colors = {
