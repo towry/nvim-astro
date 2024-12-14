@@ -3,10 +3,11 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
-
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
+  branch = "v2",
+  version = false,
   ---@type AstroCoreOpts
   opts = {
     -- Configure core features of AstroNvim
@@ -77,22 +78,6 @@ return {
       g = { -- vim.g.<key>
       },
     },
-    -- Mappings can be configured through AstroCore as well.
-    -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = {
-      -- first key is the mode
-      n = {
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
-          function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
-          end,
-          desc = "Close buffer from tabline",
-        },
-      },
-    },
     commands = {
       PcloseNextEsc = {
         function() vim.g.escape_cmd = "pclose" end,
@@ -109,12 +94,6 @@ return {
         function(params) vim.cmd(([[tab exec "diffsplit" bufname(%s)]]):format(params.args)) end,
         desc = "Git diff with bufnr",
       },
-      ToggleTermUtop = {
-        function()
-          require('astrocore').toggle_term_cmd "utop"
-        end,
-        desc = "Open utop term"
-      }
     },
 
     autocmds = {

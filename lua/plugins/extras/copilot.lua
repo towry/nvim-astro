@@ -5,17 +5,22 @@ return {
   specs = {
     {
       "pze/codeium.vim",
+      optional = true,
       enabled = false,
     },
 
     {
       "Saghen/blink.cmp",
-      opts = function(_, opts)
+      optional = true,
+      version = "v0.*",
+      opts = function(_, pluginOpts)
+        pluginOpts.opts = pluginOpts.opts or {}
+        local opts = pluginOpts.opts
+        opts.keymap = opts.keymap or {}
+
         opts.keymap["<C-E>"] = {
           function(cmp)
-            if V.plugin_has_ai_suggestion_text() then 
-              vim.fn["copilot#Clear"]()
-            end
+            if V.plugin_has_ai_suggestion_text() then vim.fn["copilot#Clear"]() end
             return cmp.hide()
           end,
           "fallback",
@@ -23,13 +28,11 @@ return {
         opts.keymap["<C-P>"] = {
           function(cmp)
             if V.plugin_has_ai_suggestions() then
-              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               vim.fn["copilot#Previous"]()
               return
             end
-            if cmp.windows.autocomplete.win:is_open() then
-              return cmp.select_prev()
-            end
+            if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_prev() end
 
             return cmp.show()
           end,
@@ -37,45 +40,65 @@ return {
         opts.keymap["<C-N>"] = {
           function(cmp)
             if V.plugin_has_ai_suggestions() then
-              if cmp.windows.autocomplete.win:is_open() then cmp.hide() end
+              if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               vim.fn["copilot#Next"]()
               return
             end
-            if cmp.windows.autocomplete.win:is_open() then
-              return cmp.select_next()
-            end
+            if require("blink.cmp.completion.windows.menu").win:is_open() then return cmp.select_next() end
 
             return cmp.show()
           end,
         }
 
-        opts.windows = {
-          autocomplete = {
-            border = "single",
-            selection = "auto_insert",
-            -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          },
-          documentation = {
-            auto_show = true,
-            border = "single",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          },
-          signature_help = {
+        -- appearance
+        -- @see https://github.com/Saghen/blink.cmp/blob/610414963590c33398c4e8b88774709ffe94f468/lua/blink/cmp/config/appearance.lua#L1
+
+        opts.appearance = {
+          use_nvim_cmp_as_default = true,
+        }
+
+        opts.signature = {
+          enabled = true,
+          window = {
             border = "single",
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
           },
         }
-
-        opts.highlight = {
-          use_nvim_cmp_as_default = true,
+        opts.completion = {
+          documentation = {
+            window = {
+              border = "single",
+            },
+          },
+          menu = {
+            border = "single",
+          },
         }
 
-        return opts
+        -- opts.windows = {
+        --   autocomplete = {
+        --     border = "single",
+        --     selection = "auto_insert",
+        --     -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        --   },
+        --   documentation = {
+        --     auto_show = true,
+        --     border = "single",
+        --     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        --   },
+        --   signature_help = {
+        --     border = "single",
+        --     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+        --   },
+        -- }
+        --
+        return pluginOpts
       end,
     },
 
     {
       "hrsh7th/nvim-cmp",
+      optional = true,
       opts = function(_, opts)
         local cmp = require("cmp")
         local cmp_utils = require("plugins.utils._cmp")
@@ -206,9 +229,7 @@ return {
                 if cmp.visible() then vim.schedule(cmp.close) end
               elseif core.is_available("blink.cmp") and package.loaded["blink.cmp"] then
                 local cmp = require("blink.cmp")
-                if cmp.windows.autocomplete.win:is_open() then
-                  cmp.hide()
-                end
+                if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
               end
 
               local trigger_ai = vim.schedule_wrap(function()
