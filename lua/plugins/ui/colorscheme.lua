@@ -12,6 +12,7 @@ return {
         event = "VeryLazy",
         cond = vim.g.colorscheme == "kanagawa",
         opts = {
+          transparent = false,
           compile = true,
           undercurl = true, -- enable undercurls
           commentStyle = { italic = true },
@@ -88,7 +89,7 @@ return {
         cond = (vim.g.colorscheme):match(".*fox") ~= nil,
         opts = {
           options = {
-            transparent = false,
+            transparent = true,
             styles = {
               keywords = "italic",
               types = "italic,bold",
