@@ -2,7 +2,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.editing-support.conform-nvim" },
-  -- { import = "astrocommunity.completion.blink-cmp" },
+  { import = "astrocommunity.completion.blink-cmp" },
   --- langs
   -- { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
   { import = "astrocommunity.pack.rust" },
