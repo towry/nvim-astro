@@ -3,10 +3,12 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
-if vim.env.PYENV_VERSION == nil then
-  -- https://github.com/neovim/nvim-lspconfig/issues/717#issuecomment-1938450468
-  vim.env.PYENV_VERSION = vim.fn.system("pyenv version"):match("(%S+)%s+%(.-%)")
-end
+vim.schedule(function()
+  if vim.env.PYENV_VERSION == nil then
+    -- https://github.com/neovim/nvim-lspconfig/issues/717#issuecomment-1938450468
+    vim.env.PYENV_VERSION = vim.fn.system("pyenv version"):match("(%S+)%s+%(.-%)")
+  end
+end)
 
 ---- vim.g.{sometable} doesnt update by key
 local vim_g_internal_ft_formatter = {}
