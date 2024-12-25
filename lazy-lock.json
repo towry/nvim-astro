@@ -78,6 +78,7 @@
   "overseer.nvim": { "branch": "master", "commit": "10ee48ff96c8d1049efb278ea4c8cf9f3b0e4326" },
   "package-info.nvim": { "branch": "master", "commit": "3de4f3569ce60e248707df042b72769b3ec343b8" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
+  "quicker.nvim": { "branch": "master", "commit": "87dae0f25733b7bd79b600a70ca38040db68ec0b" },
   "resession.nvim": { "branch": "master", "commit": "18f507c42e213918ec28bf6ed9a5ec33990c0e95" },
   "rustaceanvim": { "branch": "master", "commit": "0a618c1d1c05a8059880076feccb15301da6993d" },
   "smart-splits.nvim": { "branch": "master", "commit": "49c397120944ebb89fbb11126b7edce36be8bdad" },
