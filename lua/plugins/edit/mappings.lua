@@ -36,6 +36,10 @@ return {
             ":new<cr>",
             desc = "New file",
           },
+          ["Q"] = {
+            "<cmd>qall<cr>",
+            desc = "Quit all",
+          },
           -- [";"] = { ":" },
           -- navigate buffer tabs
           ["<C-n>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
