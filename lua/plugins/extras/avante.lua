@@ -13,7 +13,7 @@ return {
       deepseek = {
         -- https://api-docs.deepseek.com/api/create-chat-completion
         endpoint = "https://api.deepseek.com/chat/completions",
-        model = "deepseek-chat",
+        model = "deepseek-coder",
         api_key_name = "DEEPSEEK_API_KEY",
         parse_curl_args = function(opts, code_opts)
           return {
