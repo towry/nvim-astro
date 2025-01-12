@@ -1,4 +1,4 @@
-vim.g.colorscheme = "default"
+vim.g.colorscheme = "anyspheredark"
 
 return {
   {
