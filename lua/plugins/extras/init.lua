@@ -7,8 +7,8 @@ return {
   { import = "plugins.extras.window-picker" },
   { import = "plugins.extras.trailblazer" },
   { import = "plugins.extras.codeium" },
-  { import = "plugins.extras.avante" },
-  -- { import = "plugins.extras.codecompanion" },
+  -- { import = "plugins.extras.avante" },
+  { import = "plugins.extras.codecompanion" },
   -- { import = "plugins.extras.copilot" },
   {
     "echasnovski/mini.move",
