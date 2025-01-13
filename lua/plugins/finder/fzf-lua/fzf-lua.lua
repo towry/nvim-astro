@@ -16,9 +16,7 @@ return {
               { function() require("fzf-lua").diagnostics_document() end, desc = "Search diagnostics" }
             if maps.n.gd then maps.n.gd[1] = function() require("fzf-lua").lsp_definitions() end end
             if maps.n.gri then maps.n.gri[1] = function() require("fzf-lua").lsp_implementations() end end
-            if maps.n.grr then
-              maps.n.grr[1] = function() require("fzf-lua").lsp_references() end
-            end
+            if maps.n.grr then maps.n.grr[1] = function() require("fzf-lua").lsp_references() end end
             if maps.n.gy then maps.n.gy[1] = function() require("fzf-lua").lsp_typedefs() end end
             if maps.n["<Leader>lG"] then
               maps.n["<Leader>lG"][1] = function() require("fzf-lua").lsp_workspace_symbols() end
@@ -30,7 +28,6 @@ return {
     opts = function(_, opts)
       local config = require("fzf-lua.config")
       local local_actions = require("plugins.finder.fzf-lua._actions")
-      -- local actions = require("fzf-lua.actions")
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
       config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
@@ -62,10 +59,7 @@ return {
             flip_columns = 240,
             horizontal = "right:45%",
             vertical = "down:40%",
-            -- winopts = {
-            --   cursorlineopt = "line",
-            --   foldcolumn = 0,
-            -- },
+            border = "single",
           },
         },
         fzf_colors = false,

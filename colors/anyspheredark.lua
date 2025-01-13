@@ -62,6 +62,7 @@ local groups = {
   Number = { fg = "#ebc88d" },
   Boolean = { fg = palette.cyan },
   Float = { fg = "#ebc88d" },
+  FloatBorder = { fg = "#494949" },
   Identifier = { fg = palette.light_blue },
   Function = { fg = "#ebc88d" },
   Statement = { fg = palette.cyan },
