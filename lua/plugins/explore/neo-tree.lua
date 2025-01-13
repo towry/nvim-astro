@@ -258,9 +258,8 @@ return {
           ["s"] = { "search_string_in_dir", nowait = true, remap = false },
           ["M"] = { "action_in_dir", nowait = true, remap = false },
           ["/"] = false,
-          ["zz"] = false,
-          ["zt"] = false,
-          ["zb"] = false,
+          ["z"] = false,
+          ["Z"] = "close_all_nodes",
         },
       },
     },
@@ -306,9 +305,7 @@ return {
               desc = "Open file tree",
             },
             ["<Leader>ee"] = {
-              function()
-                  vim.cmd("Neotree toggle focus position=left reveal=true")
-              end,
+              function() vim.cmd("Neotree toggle focus position=left reveal=true") end,
               desc = "Toggle Explorer Focus",
             },
           },
