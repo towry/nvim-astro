@@ -126,6 +126,8 @@ local groups = {
   ["@exception"] = { fg = palette.cyan },
   ["@type"] = { fg = palette.orange },
   ["@type.builtin"] = { fg = palette.orange },
+  -- highlight of danger node
+  ["@text.danger"] = { undercurl = true },
   ["@structure"] = { fg = palette.orange },
   ["@include"] = { fg = palette.cyan },
   ["@variable"] = { fg = palette.light_blue },
