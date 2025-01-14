@@ -7,7 +7,7 @@ return {
   --- langs
   -- { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
   { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.pack.go" },
+  -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.python-ruff" },
