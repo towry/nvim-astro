@@ -1,40 +1,57 @@
+local prefix = "<Leader>A"
+
 return {
   "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
+  event = "User AstroFile",
   version = false, --
+  enabled = vim.env.DEEPSEEK_API_KEY ~= nil,
+  cmd = {
+    "AvanteAsk",
+    "AvanteBuild",
+    "AvanteEdit",
+    "AvanteRefresh",
+    "AvanteSwitchProvider",
+    "AvanteChat",
+    "AvanteToggle",
+    "AvanteClear",
+  },
   opts = {
     provider = "deepseek",
     auto_suggestions_provider = "deepseek",
     behaviour = {
       auto_suggestions = true,
     },
+    mappings = {
+      ask = prefix .. "<CR>",
+      edit = prefix .. "e",
+      refresh = prefix .. "r",
+      focus = prefix .. "f",
+      toggle = {
+        default = prefix .. "t",
+        debug = prefix .. "d",
+        hint = prefix .. "h",
+        suggestion = prefix .. "s",
+        repomap = prefix .. "R",
+      },
+      diff = {
+        next = "]c",
+        prev = "[c",
+      },
+      files = {
+        add_current = prefix .. ".",
+      },
+    },
     vendors = {
       deepseek = {
+        __inherited_from = "openai",
         -- https://api-docs.deepseek.com/api/create-chat-completion
-        endpoint = "https://api.deepseek.com/chat/completions",
+        -- endpoint = "https://api.deepseek.com/chat/completions",
+        endpoint = "https://api.deepseek.com",
         model = "deepseek-coder",
         api_key_name = "DEEPSEEK_API_KEY",
-        parse_curl_args = function(opts, code_opts)
-          return {
-            url = opts.endpoint,
-            headers = {
-              ["Accept"] = "application/json",
-              ["Content-Type"] = "application/json",
-              ["Authorization"] = "Bearer " .. os.getenv(opts.api_key_name),
-            },
-            body = {
-              model = opts.model,
-              messages = require("avante.providers.openai").parse_messages(code_opts),
-              temperature = 0,
-              max_tokens = 4096,
-              stream = true, -- this will be set by default.
-            },
-          }
-        end,
-        parse_response_data = function(data_stream, event_state, opts)
-          require("avante.providers").openai.parse_response(data_stream, event_state, opts)
-        end,
+        temperature = 0,
+        max_tokens = 8000,
+        timeout = 30000, -- Timeout in milliseconds
       },
     },
   },
@@ -43,25 +60,9 @@ return {
     "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
     --- The below dependencies are optional,
     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          -- required for Windows users
-          use_absolute_path = true,
-        },
-      },
-    },
     {
       -- Make sure to set this up properly if you have lazy=true
       "MeanderingProgrammer/render-markdown.nvim",
@@ -70,5 +71,8 @@ return {
       },
       ft = { "markdown", "Avante" },
     },
+  },
+  specs = {
+    { "AstroNvim/astroui", opts = { icons = { Avante = "" } } },
   },
 }
