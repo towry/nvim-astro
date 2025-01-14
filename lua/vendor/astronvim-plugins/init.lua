@@ -10,6 +10,7 @@ local modules = {
   "_astroui",
   "_astroui_status",
   "autopairs",
+  "aerial",
   "cmp_luasnip",
   "comment",
   "dap",
