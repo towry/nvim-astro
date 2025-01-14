@@ -40,26 +40,33 @@ M.open = vim.schedule_wrap(function(new_cwd)
       desc = "Search content",
     })
 
-    set("s", function()
-      require('fzf-lua').grep({
-        cwd = new_cwd,
-        prompt = "Search string in> ",
-      })
-    end, {
+    set(
+      "s",
+      function()
+        require("fzf-lua").grep({
+          cwd = new_cwd,
+          prompt = "Search string in> ",
+        })
+      end,
+      {
         desc = "Search string",
-      })
+      }
+    )
 
-    set("\\", function()
-      require("neo-tree.command").execute({
-        position = "right",
-        -- action = 'set_root',
-        source = "filesystem",
-        dir = new_cwd,
-        reveal_force_cwd = true,
-      })
-    end, {
-      desc = "Open in tree",
-    })
+    set(
+      "\\",
+      function()
+        require("neo-tree.command").execute({
+          position = "left",
+          source = "filesystem",
+          dir = new_cwd,
+          reveal_force_cwd = true,
+        })
+      end,
+      {
+        desc = "Open in tree",
+      }
+    )
 
     set(
       "|",

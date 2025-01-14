@@ -1,4 +1,5 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "anyspheredark"
+
 return {
   {
     "AstroNvim/astroui",
@@ -75,8 +76,8 @@ return {
             },
           },
           background = {
-            -- dark = "wave",
-            dark = "dragon",
+            dark = "wave",
+            -- dark = "dragon",
             light = "lotus",
           },
         },

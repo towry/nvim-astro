@@ -18,7 +18,7 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
---- Order is matters.
+--- Order matters.
 _G.V = require("v")
 pcall(require, "nix-env")
 pcall(require, "settings_env")

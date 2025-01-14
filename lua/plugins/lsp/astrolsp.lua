@@ -10,9 +10,6 @@ vim.schedule(function()
   end
 end)
 
----- vim.g.{sometable} doesnt update by key
-local vim_g_internal_ft_formatter = {}
-_G.vim_g_internal_ft_formatter = vim_g_internal_ft_formatter
 vim.g.lsp_handler_setup = 0
 
 ---@type LazySpec
@@ -49,23 +46,6 @@ return {
       filter = function(client) -- fully override the default formatting function
         local buf = vim.api.nvim_get_current_buf()
         if not vim.api.nvim_buf_is_valid(buf) then return false end
-        local filetype = vim.api.nvim_get_option_value("filetype", {
-          buf = buf,
-        })
-
-        if vim_g_internal_ft_formatter[filetype] then
-          if vim_g_internal_ft_formatter[filetype] == client.name then return true end
-        end
-
-        --- check null-ls formatter
-        if
-          package.loaded["null-ls"] and require("plugins.utils._none_ls_utils").is_null_ls_formatter_avalable(filetype)
-        then
-          vim_g_internal_ft_formatter[filetype] = "null-ls"
-          return client.name == "null-ls"
-        end
-
-        vim_g_internal_ft_formatter[filetype] = client.name
 
         --- others
         return true

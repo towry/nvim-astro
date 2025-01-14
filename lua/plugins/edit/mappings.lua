@@ -40,7 +40,7 @@ return {
             "<cmd>qall<cr>",
             desc = "Quit all",
           },
-          -- [";"] = { ":" },
+          [";"] = { ":" },
           -- navigate buffer tabs
           ["<C-n>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
           ["<C-p>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },

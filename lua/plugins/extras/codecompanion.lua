@@ -4,9 +4,14 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    -- The following are optional:
-    "nvim-telescope/telescope.nvim", -- For using slash commands
-    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+    {
+      -- Make sure to set this up properly if you have lazy=true
+      "MeanderingProgrammer/render-markdown.nvim",
+      opts = {
+        file_types = { "markdown", "codecompanion" },
+      },
+      ft = { "markdown", "codecompanion" },
+    },
   },
   cmd = {
     "CodeCompanion",
@@ -16,13 +21,44 @@ return {
   opts = {
     strategies = {
       chat = {
-        adapter = "copilot",
+        adapter = "deepseek",
       },
       inline = {
-        adapter = "copilot",
+        adapter = "deepseek",
+        keymaps = {
+          accept_change = {
+            modes = { n = "ga" },
+            description = "Accept the suggested change",
+          },
+          reject_change = {
+            modes = { n = "gr" },
+            description = "Reject the suggested change",
+          },
+        },
       },
     },
     adapters = {
+      deepseek = function()
+        return require("codecompanion.adapters").extend("openai_compatible", {
+          env = {
+            url = "https://api.deepseek.com",
+            api_key = vim.env.DEEPSEEK_API_KEY,
+            chat_url = "/chat/completions",
+          },
+          schema = {
+            model = {
+              default = "deepseek-coder",
+            },
+          },
+          headers = {
+            ["Content-Type"] = "application/json",
+            ["Authorization"] = "Bearer " .. vim.env.DEEPSEEK_API_KEY,
+          },
+          parameters = {
+            sync = true,
+          },
+        })
+      end,
       opts = {
         allow_insecure = false, -- Use if required
         proxy = "socks5://127.0.0.1:1080",
