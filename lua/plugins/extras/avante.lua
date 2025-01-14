@@ -4,7 +4,7 @@ return {
   "yetone/avante.nvim",
   event = "User AstroFile",
   version = false, --
-  enabled = vim.env.DEEPSEEK_API_KEY ~= nil,
+  cond = vim.env.DEEPSEEK_API_KEY ~= nil,
   cmd = {
     "AvanteAsk",
     "AvanteBuild",
