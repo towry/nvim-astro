@@ -29,6 +29,7 @@ return {
         vue = { "prettier" },
         css = { "prettier" },
         json = { "prettier" },
+        nix = { "nixfmt" },
       },
     },
     dependencies = {
