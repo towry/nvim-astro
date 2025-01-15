@@ -23,8 +23,8 @@ return {
       auto_apply_diff_after_generation = true,
     },
     mappings = {
-      ask = prefix .. "<CR>",
-      edit = prefix .. "e",
+      ask = "<M-i>",
+      edit = "<M-e>",
       refresh = prefix .. "r",
       focus = prefix .. "f",
       toggle = {
