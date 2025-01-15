@@ -1,4 +1,4 @@
-vim.g.colorscheme = "anyspheredark"
+vim.g.colorscheme = "kanagawa"
 
 return {
   {
@@ -76,8 +76,8 @@ return {
             },
           },
           background = {
-            dark = "wave",
-            -- dark = "dragon",
+            -- dark = "wave",
+            dark = "dragon",
             light = "lotus",
           },
         },
