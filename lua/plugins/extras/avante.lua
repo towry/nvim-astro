@@ -20,6 +20,7 @@ return {
     auto_suggestions_provider = "deepseek",
     behaviour = {
       auto_suggestions = true,
+      auto_apply_diff_after_generation = true,
     },
     mappings = {
       ask = prefix .. "<CR>",
