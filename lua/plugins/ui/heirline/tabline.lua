@@ -64,18 +64,6 @@ return { -- bufferline
     }),
   },
 
-  status.component.file_info({
-    close_button = false,
-    filetype = false,
-    filename = {
-      padding = { left = 1, right = 1 },
-    },
-    -- use no separator for this part but define a background color
-    surround = {
-      separator = "none",
-    },
-  }),
-
   -- add a component for the current git branch if it exists and use no separator for the sections
   status.component.git_branch({
     git_branch = { padding = { left = 1 } },
