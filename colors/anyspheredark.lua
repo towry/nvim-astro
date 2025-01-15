@@ -27,7 +27,7 @@ vim.g.colors_name = "anyspheredark"
 local groups = {
   -- Vim interface
   Normal = { fg = palette.fg, bg = palette.bg },
-  NormalFloat = { fg = palette.fg, bg = palette.bg },
+  NormalFloat = { fg = palette.fg, bg = "#0d0c0c" },
   Cursor = { fg = palette.bg, bg = palette.fg },
   CursorLine = { bg = "#292929" },
   CursorColumn = { bg = "#292929" },
@@ -61,8 +61,8 @@ local groups = {
   Character = { fg = palette.magenta },
   Number = { fg = "#ebc88d" },
   Boolean = { fg = palette.cyan },
-  Float = { fg = "#ebc88d" },
-  FloatBorder = { fg = "#494949" },
+  Float = { fg = "#000000" },
+  FloatBorder = { fg = "#625e5a", bg = "#0d0c0c" },
   Identifier = { fg = palette.light_blue },
   Function = { fg = "#ebc88d" },
   Statement = { fg = palette.cyan },
