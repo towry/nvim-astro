@@ -1,10 +1,22 @@
 local prefix = "<Leader>A"
 
+local Providers = {
+  deepseek = "deepseek",
+  ark = "ark",
+}
+local current = Providers.deepseek
+
 return {
   "yetone/avante.nvim",
   event = "User AstroFile",
   version = false, --
-  cond = vim.env.DEEPSEEK_API_KEY ~= nil,
+  cond = function()
+    if current == Providers.deepseek then
+      return vim.env.DEEPSEEK_API_KEY ~= nil
+    else
+      return vim.env.ARK_API_KEY ~= nil
+    end
+  end,
   cmd = {
     "AvanteAsk",
     "AvanteBuild",
@@ -16,8 +28,8 @@ return {
     "AvanteClear",
   },
   opts = {
-    provider = "deepseek",
-    auto_suggestions_provider = "deepseek",
+    provider = current,
+    auto_suggestions_provider = current,
     behaviour = {
       auto_suggestions = true,
       auto_apply_diff_after_generation = true,
@@ -46,13 +58,19 @@ return {
       deepseek = {
         __inherited_from = "openai",
         -- https://api-docs.deepseek.com/api/create-chat-completion
-        -- endpoint = "https://api.deepseek.com/chat/completions",
         endpoint = "https://api.deepseek.com",
         model = "deepseek-coder",
         api_key_name = "DEEPSEEK_API_KEY",
         temperature = 0,
         max_tokens = 8000,
         timeout = 30000, -- Timeout in milliseconds
+      },
+      ark = {
+        __inherited_from = "openai",
+        endpoint = "https://ark.cn-beijing.volces.com/api",
+        model = "ep-20250116091506-bn9dd",
+        api_key_name = "ARK_API_KEY",
+        temperature = 0,
       },
     },
   },
