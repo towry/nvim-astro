@@ -76,7 +76,7 @@ return {
         status.component.foldcolumn(),
       }
       opts.tabline = require("plugins.ui.heirline.tabline")
-      opts.winbar = nil
+      opts.winbar = require("plugins.ui.heirline.winbar")
       opts.statusline = {
         -- default highlight for the entire statusline
         hl = { fg = "fg", bg = "bg" },
@@ -109,6 +109,7 @@ return {
         }),
         -- add a section for the currently opened file information
         status.component.file_info({
+          condition = function() return vim.bo.buftype ~= "" end,
           unique_path = {},
           -- enable the file_icon and disable the highlighting based on filetype
           filename = { fallback = "Empty", modify = ":p:." },
