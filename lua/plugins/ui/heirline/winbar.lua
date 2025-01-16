@@ -7,53 +7,14 @@ return {
   ---
   --- Inactive winbar
   {
-    condition = function() return not status.condition.is_active() end,
-
-    status.component.separated_path({
-      path_func = status.provider.filename({
-        modify = ":.:h",
-      }),
-    }),
-
     status.component.file_info({
-      file_icon = {
-        hl = status.hl.file_icon("winbar"),
-        padding = { left = 0 },
-      },
-      filename = {},
+      file_icon = { padding = { left = 1, right = 0 } },
+      filename = { modify = ":.", fallback = "Empty", padding = { left = 1 } },
       filetype = false,
-      file_modified = false,
-      file_read_only = false,
-      hl = status.hl.get_attributes("winbarnc", true),
-      surround = false,
-      update = "BufEnter",
-    }),
-  },
-
-  ----
-  ---- Active winbar
-  {
-    -- show the path to the file relative to the working directory
-    status.component.separated_path({
-      path_func = status.provider.filename({ modify = ":.:h" }),
-    }),
-    -- add the file name and icon
-    status.component.file_info({ -- add file_info to breadcrumbs
-      file_icon = { hl = status.hl.filetype_color, padding = { left = 0 } },
-      filename = {},
-      filetype = false,
-      file_modified = false,
-      file_read_only = false,
-      hl = status.hl.get_attributes("winbar", true),
-      surround = false,
-      update = "BufEnter",
-    }),
-    -- show the breadcrumbs
-    status.component.breadcrumbs({
-      icon = { hl = true },
-      hl = status.hl.get_attributes("winbar", true),
-      prefix = true,
-      padding = { left = 0 },
+      file_read_only = {},
+      file_modified = {},
+      -- add padding
+      padding = { right = 1 },
     }),
   },
 }
