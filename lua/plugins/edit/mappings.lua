@@ -173,6 +173,12 @@ return {
             remap = false,
             nowait = true,
           },
+          ["g<C-v>"] = {
+            "`[v`]",
+            desc = "Select pasted text",
+            remap = false,
+            nowait = true,
+          },
         },
         t = {
           -- setting a mapping to false will disable it
