@@ -15,6 +15,9 @@ return {
       file_modified = {},
       -- add padding
       padding = { right = 1 },
+      surround = {
+        separator = "none",
+      },
     }),
   },
 }
