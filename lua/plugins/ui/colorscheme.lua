@@ -1,5 +1,7 @@
 vim.g.colorscheme = "kanagawa"
 
+if vim.g.vscode then return {} end
+
 return {
   {
     "AstroNvim/astroui",
