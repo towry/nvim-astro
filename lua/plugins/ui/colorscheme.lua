@@ -1,4 +1,4 @@
-vim.g.colorscheme = "onedarkpro"
+vim.g.colorscheme = "kanagawa"
 
 if vim.g.vscode then return {} end
 
