@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "onedarkpro"
 
 if vim.g.vscode then return {} end
 
@@ -154,11 +154,8 @@ return {
       },
 
       {
-        "nuvic/flexoki-nvim",
-        name = "flexoki",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = (vim.g.colorscheme):match("flexoki") ~= nil,
+        "olimorris/onedarkpro.nvim",
+        opts = {},
       },
     },
   },
