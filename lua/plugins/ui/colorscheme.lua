@@ -52,7 +52,7 @@ return {
               lotusWhite1 = "#F5DEAC",
               lotusWhite2 = "#F3EEDD",
               --- main bg
-              lotusWhite3 = "#F6EED9",
+              lotusWhite3 = "#fdf6e3",
               --- tabline etc
               lotusWhite4 = "#C5C0AF",
               lotusWhite5 = "#eee8d5",
