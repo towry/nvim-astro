@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "darcula"
 
 if vim.g.vscode then return {} end
 
@@ -156,6 +156,19 @@ return {
       {
         "olimorris/onedarkpro.nvim",
         opts = {},
+      },
+
+      {
+        "doums/darcula",
+        config = function() end,
+      },
+
+      {
+        "santos-gabriel-dario/darcula-solid.nvim",
+        dependencies = {
+          "rktjmp/lush.nvim",
+        },
+        config = function() end,
       },
     },
   },
