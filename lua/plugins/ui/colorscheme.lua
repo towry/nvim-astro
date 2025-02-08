@@ -1,4 +1,4 @@
-vim.g.colorscheme = "darcula"
+vim.g.colorscheme = "darcula-solid"
 
 if vim.g.vscode then return {} end
 
@@ -156,11 +156,6 @@ return {
       {
         "olimorris/onedarkpro.nvim",
         opts = {},
-      },
-
-      {
-        "doums/darcula",
-        config = function() end,
       },
 
       {
