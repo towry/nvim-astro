@@ -12,7 +12,6 @@ return {
     {
       "Saghen/blink.cmp",
       optional = true,
-      version = "v0.*",
       opts = function(_, pluginOpts)
         pluginOpts.opts = pluginOpts.opts or {}
         local opts = pluginOpts.opts

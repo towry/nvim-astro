@@ -3,7 +3,7 @@ return {
   priority = 1000,
   lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  opts = { picker = { ui_select = true } },
+  opts = { picker = { ui_select = false } },
   specs = {
     {
       "AstroNvim/astrocore",
