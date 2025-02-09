@@ -1,5 +1,7 @@
 local V = require("v")
 
+if vim.g.vscode then return {} end
+
 return {
   { import = "plugins.lsp.astrolsp" },
   { import = "plugins.lsp.conform" },

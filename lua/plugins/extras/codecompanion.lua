@@ -21,10 +21,10 @@ return {
   opts = {
     strategies = {
       chat = {
-        adapter = "deepseek",
+        adapter = "copilot",
       },
       inline = {
-        adapter = "deepseek",
+        adapter = "copilot",
         keymaps = {
           accept_change = {
             modes = { n = "ga" },

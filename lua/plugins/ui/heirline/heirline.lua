@@ -1,3 +1,5 @@
+local component_loader = require("plugins.ui.heirline.component_")
+
 return {
   {
     "AstroNvim/astroui",
@@ -17,7 +19,7 @@ return {
         -- define the separators between each section
         separators = {
           left = { "", "" }, -- separator for the left side of the statusline
-          right = { " ", "" }, -- separator for the right side of the statusline
+          right = { "", "" }, -- separator for the right side of the statusline
           tab = { "", "" },
         },
         -- add new colors that can be used by heirline
@@ -75,7 +77,7 @@ return {
         status.component.numbercolumn(),
         status.component.foldcolumn(),
       }
-      opts.tabline = require("plugins.ui.heirline.tabline")
+      opts.tabline = nil
       opts.winbar = require("plugins.ui.heirline.winbar")
       opts.statusline = {
         -- default highlight for the entire statusline
@@ -123,39 +125,31 @@ return {
         }),
         -- add a component for the current diagnostics if it exists and use the right separator for the section
         status.component.diagnostics({ surround = { separator = "right" }, padding = { right = 1 } }),
+        -- add a component for the current git diff if it exists and use no separator for the sections
+        status.component.git_diff({
+          padding = { left = 1 },
+          surround = { separator = "none" },
+        }),
+
+        component_loader.overseer({
+          padding = { left = 1 },
+        }),
         -- fill the rest of the statusline
         -- the elements after this will appear in the middle of the statusline
         status.component.fill(),
-        -- fill the rest of the statusline
-        -- the elements after this will appear on the right of the statusline
-        status.component.fill(),
+
+        status.component.git_branch({
+          git_branch = { padding = { left = 1 }, hl = { fg = "fg" } },
+        }),
+
         -- add a component to display LSP clients, disable showing LSP progress, and use the right separator
         status.component.lsp({
           condition = status.condition.is_active,
           lsp_progress = false,
-          padding = { right = 1 },
           surround = { separator = "right" },
         }),
-        -- NvChad has some nice icons to go along with information, so we can create a parent component to do this
-        -- all of the children of this table will be treated together as a single component
-        -- the final component of the NvChad statusline is the navigation section
-        -- this is very similar to the previous current working directory section with the icon
-        { -- make nav section with icon border
-          -- define a custom component with just a file icon
-          status.component.builder({
-            { provider = require("astroui").get_icon("ScrollText") },
-            -- add padding after icon
-            padding = { right = 1 },
-            -- set the icon foreground
-            hl = { fg = "bg" },
-            -- use the right separator and define the background color
-            -- as well as the color to the left of the separator
-            surround = {
-              separator = "right",
-              color = { main = "nav_icon_bg", left = "file_info_bg" },
-            },
-          }),
-          -- add a navigation component and just display the percentage of progress in the file
+
+        {
           status.component.nav({
             -- add some padding for the percentage provider
             percentage = false,
@@ -163,8 +157,24 @@ return {
             ruler = {},
             scrollbar = false,
             -- use no separator and define the background color
-            surround = { separator = "none", color = "file_info_bg" },
+            surround = { separator = "right" },
           }),
+        },
+
+        { -- tab list
+          condition = function() return #vim.api.nvim_list_tabpages() >= 2 end, -- only show tabs if there are more than one
+          status.heirline.make_tablist({ -- component for each tab
+            provider = status.provider.tabnr(),
+            hl = function(self) return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true) end,
+          }),
+          { -- close button for current tab
+            provider = status.provider.close_button({ kind = "TabClose", padding = { left = 1, right = 1 } }),
+            hl = status.hl.get_attributes("tab_close", true),
+            on_click = {
+              callback = function() require("astrocore.buffer").close_tab() end,
+              name = "heirline_tabline_close_tab_callback",
+            },
+          },
         },
       }
     end,

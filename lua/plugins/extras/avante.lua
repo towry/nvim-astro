@@ -9,8 +9,10 @@ local current = Providers.deepseek
 return {
   "yetone/avante.nvim",
   event = "User AstroFile",
-  version = false, --
+  commit = "0a837a4583d66abaf85c9d31f5efad12af87c736",
   cond = function()
+    if vim.g.vscode then return false end
+
     if current == Providers.deepseek then
       return vim.env.DEEPSEEK_API_KEY ~= nil
     else

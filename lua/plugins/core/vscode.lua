@@ -37,6 +37,12 @@ return {
       maps.n["<Leader>q"] = function() require("vscode-neovim").action("workbench.action.closeWindow") end
       maps.n["<Leader>w"] = function() require("vscode-neovim").action("workbench.action.files.save") end
       maps.n["<Leader>n"] = function() require("vscode-neovim").action("welcome.showNewFileEntries") end
+      maps.n["g<C-v>"] = {
+        "`[v`]",
+        desc = "Select pasted text",
+        remap = false,
+        nowait = true,
+      }
 
       -- splits navigation
       maps.n["|"] = function() require("vscode-neovim").action("workbench.action.splitEditor") end

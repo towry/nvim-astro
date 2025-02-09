@@ -1,11 +1,14 @@
 local V = require("v")
 
-local refresh_gitsigns = function()
-  vim.cmd("silent! Gitsigns refresh")
-end
+local refresh_gitsigns = function() vim.cmd("silent! Gitsigns refresh") end
 
 return {
   { import = "plugins.git.fugitive" },
+  {
+    "julienvincent/hunk.nvim",
+    cmd = { "DiffEditor" },
+    config = function() require("hunk").setup() end,
+  },
   {
     -- TODO: how to start inside nvim automatically
     "whiteinge/diffconflicts",

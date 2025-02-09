@@ -1,5 +1,7 @@
 vim.g.colorscheme = "kanagawa"
 
+if vim.g.vscode then return {} end
+
 return {
   {
     "AstroNvim/astroui",
@@ -50,7 +52,7 @@ return {
               lotusWhite1 = "#F5DEAC",
               lotusWhite2 = "#F3EEDD",
               --- main bg
-              lotusWhite3 = "#F6EED9",
+              lotusWhite3 = "#fdf6e3",
               --- tabline etc
               lotusWhite4 = "#C5C0AF",
               lotusWhite5 = "#eee8d5",
@@ -152,11 +154,16 @@ return {
       },
 
       {
-        "nuvic/flexoki-nvim",
-        name = "flexoki",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = (vim.g.colorscheme):match("flexoki") ~= nil,
+        "olimorris/onedarkpro.nvim",
+        opts = {},
+      },
+
+      {
+        "santos-gabriel-dario/darcula-solid.nvim",
+        dependencies = {
+          "rktjmp/lush.nvim",
+        },
+        config = function() end,
       },
     },
   },
