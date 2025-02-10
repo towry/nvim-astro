@@ -65,4 +65,11 @@ return {
       },
     },
   },
+
+  specs = {
+    {
+      "j-hui/fidget.nvim",
+      opts = function() require("plugins.extras.codecompanion-extras.fidget-spinner"):init() end,
+    },
+  },
 }

@@ -31,6 +31,9 @@ setca("altfind", function()
 end)
 setca("ass", "let @/=")
 
+setca("ccc", "CodeCompanionCmd")
+setca("cc", "CodeCompanion")
+
 setca("amh", "MERGE_HEAD")
 setca("arh", "REBASE_HEAD")
 setca("aoh", "ORIG_HEAD")
