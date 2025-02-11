@@ -29,6 +29,14 @@ return {
     "CodeCompanionActions",
   },
   opts = {
+    display = {
+      diff = {
+        enabled = true,
+        close_chat_at = 240,
+        layout = "vertical",
+        provider = "mini_diff",
+      },
+    },
     strategies = {
       chat = {
         adapter = "copilot",
