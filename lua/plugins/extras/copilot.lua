@@ -143,6 +143,7 @@ return {
 
     if vim.g.copilot_auto_mode == false then auto_start = false end
 
+    vim.g.copilot_workspace_folders = { vim.fn.getcwd() }
     vim.g.copilot_filetypes = {
       ["*"] = auto_start, -- start manually
       ["fzf"] = false,
