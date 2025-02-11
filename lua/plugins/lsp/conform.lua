@@ -15,6 +15,7 @@ return {
         timeout_ms = 1500,
       },
       format_on_save = function(bufnr)
+        if vim.wo[0].diff then return nil end
         if vim.g.autoformat == nil then vim.g.autoformat = true end
         local autoformat = vim.b[bufnr].autoformat
         if autoformat == nil then autoformat = vim.g.autoformat end
