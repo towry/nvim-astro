@@ -90,7 +90,21 @@ return {
       vtsls = {
         commands = require("plugins.lsp.commands_.init"),
         settings = {
+          complete_function_calls = true,
+          vtsls = {
+            enableMoveToFileCodeAction = true,
+            autoUseWorkspaceTsdk = true,
+            experimental = {
+              completion = {
+                enableServerSideFuzzyMatch = true,
+              },
+            },
+          },
           typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              completeFunctionCalls = true,
+            },
             tsserver = {
               -- log = 'verbose',
               maxTsServerMemory = 1800,
@@ -101,6 +115,10 @@ return {
             },
           },
           javascript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              completeFunctionCalls = true,
+            },
             preferences = {
               importModuleSpecifierEnding = "index",
               importModuleSpecifier = "relative",
@@ -109,8 +127,13 @@ return {
         },
       },
       ts_ls = {
+        commands = require("plugins.lsp.commands_.init"),
         settings = {
           typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              completeFunctionCalls = true,
+            },
             tsserver = {
               -- log = 'verbose',
               maxTsServerMemory = 1800,
