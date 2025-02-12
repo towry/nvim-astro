@@ -75,7 +75,7 @@ return {
           ["--no-separator"] = "",
         },
         lsp = {
-          jump_to_single_result = true,
+          jump1 = true,
           code_actions = {
             previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
           },

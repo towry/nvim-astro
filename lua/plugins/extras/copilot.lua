@@ -12,9 +12,7 @@ return {
     {
       "Saghen/blink.cmp",
       optional = true,
-      opts = function(_, pluginOpts)
-        pluginOpts.opts = pluginOpts.opts or {}
-        local opts = pluginOpts.opts
+      opts = function(_, opts)
         opts.keymap = opts.keymap or {}
 
         opts.keymap["<C-E>"] = {
@@ -49,49 +47,7 @@ return {
           end,
         }
 
-        -- appearance
-        -- @see https://github.com/Saghen/blink.cmp/blob/610414963590c33398c4e8b88774709ffe94f468/lua/blink/cmp/config/appearance.lua#L1
-
-        opts.appearance = {
-          use_nvim_cmp_as_default = true,
-        }
-
-        opts.signature = {
-          enabled = true,
-          window = {
-            border = "single",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-          },
-        }
-        opts.completion = {
-          documentation = {
-            window = {
-              border = "single",
-            },
-          },
-          menu = {
-            border = "single",
-          },
-        }
-
-        -- opts.windows = {
-        --   autocomplete = {
-        --     border = "single",
-        --     selection = "auto_insert",
-        --     -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        --   },
-        --   documentation = {
-        --     auto_show = true,
-        --     border = "single",
-        --     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        --   },
-        --   signature_help = {
-        --     border = "single",
-        --     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-        --   },
-        -- }
-        --
-        return pluginOpts
+        return opts
       end,
     },
 
