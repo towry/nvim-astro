@@ -72,43 +72,6 @@ return {
           function() Snacks.scratch.select() end,
           desc = "Select Scratch",
         }
-
-        ----- picker
-        maps.n["<Leader>ff"] = {
-          function()
-            Snacks.picker.files({
-              cwd = V.nvim_root(),
-            })
-          end,
-          desc = "Find files",
-        }
-        maps.n["<Leader>fF"] = {
-          function() Snacks.picker.git_files() end,
-          desc = "Find git files",
-        }
-        maps.n["<leader>f<tab>"] = {
-          function()
-            Snacks.picker.recent({
-              cwd = V.nvim_workspaces_root(),
-            })
-          end,
-          desc = "Find recent",
-        }
-        -- buffers
-        maps.n["<localleader>,"] = {
-          function() Snacks.picker.buffers() end,
-          desc = "Buffers",
-        }
-        -- quickfix
-        maps.n["<Leader>fq"] = {
-          function() Snacks.picker.qflist() end,
-          desc = "Quickfix",
-        }
-        -- jumps
-        maps.n["<Leader>fj"] = {
-          function() Snacks.picker.jumps() end,
-          desc = "Jumps",
-        }
       end,
     },
     {

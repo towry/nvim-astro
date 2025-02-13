@@ -105,21 +105,21 @@ return {
             silent = true,
           }
 
-          -- maps.n["<localleader>,"] = {
-          --   picker_method_call("buffers_or_recent", "false"),
-          --   desc = "Buffers or recent buffers",
-          --   silent = true,
-          -- }
-          --
-          -- maps.n["<Leader>fq"] = {
-          --   "<cmd>FzfLua quickfix<cr>",
-          --   desc = "Quickfix List",
-          -- }
-          --
-          -- maps.n["<Leader>fj"] = {
-          --   "<cmd>FzfLua jumps<cr>",
-          --   desc = "Jumplist",
-          -- }
+          maps.n["<localleader>,"] = {
+            picker_method_call("buffers_or_recent", "false"),
+            desc = "Buffers or recent buffers",
+            silent = true,
+          }
+
+          maps.n["<Leader>fq"] = {
+            "<cmd>FzfLua quickfix<cr>",
+            desc = "Quickfix List",
+          }
+
+          maps.n["<Leader>fj"] = {
+            "<cmd>FzfLua jumps<cr>",
+            desc = "Jumplist",
+          }
 
           maps.n["<leader>fo"] = {
             function()
@@ -195,14 +195,14 @@ return {
             desc = "Find commands history",
           }
           maps.n["<Leader>f:"] = { function() require("fzf-lua").commands() end, desc = "Find commands" }
-          -- maps.n["<Leader>ff"] = {
-          --   function()
-          --     require("fzf-lua").files({
-          --       cwd = V.nvim_root(),
-          --     })
-          --   end,
-          --   desc = "Find files",
-          -- }
+          maps.n["<Leader>ff"] = {
+            function()
+              require("fzf-lua").files({
+                cwd = V.nvim_root(),
+              })
+            end,
+            desc = "Find files",
+          }
           if rooter_is_on then
             maps.n["<Leader>fF"] = {
               function()
@@ -217,8 +217,8 @@ return {
           maps.n["<Leader>fk"] = { function() require("fzf-lua").keymaps() end, desc = "Find keymaps" }
           maps.n["<Leader>fm"] = { function() require("fzf-lua").manpages() end, desc = "Find man" }
 
-          -- maps.n["<leader>f<tab>"] =
-          --   { function() require(PickerMod).buffers_or_recent(true) end, desc = "Find history" }
+          maps.n["<leader>f<tab>"] =
+            { function() require(PickerMod).buffers_or_recent(true) end, desc = "Find history" }
 
           maps.n["<Leader>fr"] = { function() require("fzf-lua").registers() end, desc = "Find registers" }
 
