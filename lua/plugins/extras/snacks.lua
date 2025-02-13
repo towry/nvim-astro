@@ -3,14 +3,30 @@ return {
   priority = 1000,
   lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  opts = { picker = { ui_select = false } },
+  opts = {
+    picker = { ui_select = true },
+    input = {},
+    indent = {},
+    scope = {},
+    scratch = {},
+  },
   specs = {
     {
       "AstroNvim/astrocore",
       opts = function(_, opts)
         ---- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/fuzzy-finder/snacks-picker/init.lua
-        -- local maps = opts.mappings
+        local maps = opts.mappings
         -- local astro = require("astrocore")
+
+        --- scratch keymaps
+        maps.n["<Leader>xs"] = {
+          function() Snacks.scratch() end,
+          desc = "Toggle Scratch",
+        }
+        maps.n["<Leader>xS"] = {
+          function() Snacks.scratch.select() end,
+          desc = "Select Scratch",
+        }
       end,
     },
     {
@@ -53,6 +69,6 @@ return {
       },
     },
     { "nvim-telescope/telescope.nvim", enabled = false },
-    { "stevearc/dressing.nvim", opts = { select = { enabled = false } } },
+    { "stevearc/dressing.nvim", enabled = false, opts = { select = { enabled = false } } },
   },
 }

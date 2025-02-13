@@ -5,7 +5,6 @@ return {
     specs = {
       { "nvim-telescope/telescope.nvim", optional = true, enabled = false },
       { "nvim-telescope/telescope-fzf-native.nvim", optional = true, enabled = false },
-      { "stevearc/dressing.nvim", optional = true, opts = { select = { backend = { "fzf_lua" } } } },
       {
         "AstroNvim/astrolsp",
         optional = true,
