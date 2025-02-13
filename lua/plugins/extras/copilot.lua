@@ -64,7 +64,7 @@ return {
         end, { "i", "c" })
 
         opts.mapping["<C-P>"] = cmp.mapping(function()
-          if V.plugin_has_ai_suggestions() then
+          if V.plugin_has_ai_suggestions() and not cmp_utils.cmp_has_select(cmp) then
             if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
             vim.fn["copilot#Previous"]()
             return
@@ -76,7 +76,7 @@ return {
           end
         end)
         opts.mapping["<C-N>"] = cmp.mapping(function()
-          if V.plugin_has_ai_suggestions() then
+          if V.plugin_has_ai_suggestions() and not cmp_utils.cmp_has_select(cmp) then
             if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
             vim.fn["copilot#Next"]()
             return
