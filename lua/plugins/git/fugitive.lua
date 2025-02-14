@@ -48,7 +48,7 @@ return {
         desc = "Fugitive Git in tab",
       },
       {
-        "<leader>gA",
+        "<leader>ga",
         keymap_cmd([[OverDispatch! git add -- % && git diff --cached --check || echo Conflict founds || exit 1]]),
         desc = "!Git add current",
       },
@@ -161,7 +161,7 @@ return {
           -- use vim.ui.input to write commit message and then commit with the
           -- message.
           vim.ui.input({
-            prompt = "Commit message: ",
+            prompt = "Commit current file: ",
           }, function(input)
             -- if input is trimmed empty
             if vim.trim(input or "") == "" then
@@ -169,10 +169,10 @@ return {
               return
             end
 
-            vim.cmd(string.format('OverDispatch! git commit -m "%s"', input))
+            vim.cmd(string.format('OverDispatch! git commit -m "%s" -- %s', input, vim.fn.expand("%")))
           end)
         end,
-        desc = "Git commit",
+        desc = "Git commit current file",
       },
     },
     event = "User AstroGitFile",
