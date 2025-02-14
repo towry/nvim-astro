@@ -28,6 +28,30 @@ return {
     "CodeCompanionChat",
     "CodeCompanionActions",
   },
+  keys = {
+    {
+      mode = { "n", "v" },
+      "<leader>ai",
+      function()
+        -- use input to get the prompt and run command :CodeCompanion /buffer <prompt>
+        -- if in visual mode, run command :'<,'>CodeCompanion /buffer <prompt>
+        vim.ui.input({
+          prompt = "AI Inline Edit: ",
+        }, function(input)
+          -- return if input is empty
+          if vim.trim(input or "") == "" then return end
+          input = vim.trim(input)
+
+          if vim.fn.mode() == "v" then
+            vim.cmd(":'<,'>CodeCompanion /buffer " .. input)
+          else
+            vim.cmd(":CodeCompanion /buffer " .. input)
+          end
+        end)
+      end,
+      desc = "Code Companion: Inline assistant",
+    },
+  },
   opts = {
     display = {
       diff = {
