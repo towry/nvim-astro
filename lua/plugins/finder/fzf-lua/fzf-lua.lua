@@ -5,7 +5,6 @@ return {
     specs = {
       { "nvim-telescope/telescope.nvim", optional = true, enabled = false },
       { "nvim-telescope/telescope-fzf-native.nvim", optional = true, enabled = false },
-      { "stevearc/dressing.nvim", optional = true, opts = { select = { backend = { "fzf_lua" } } } },
       {
         "AstroNvim/astrolsp",
         optional = true,
@@ -75,6 +74,7 @@ return {
           ["--no-separator"] = "",
         },
         lsp = {
+          jump1 = true,
           code_actions = {
             previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
           },

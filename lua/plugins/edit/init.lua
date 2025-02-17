@@ -3,6 +3,7 @@ return {
   { import = "plugins.edit.surround" },
   { import = "plugins.edit.flash" },
   { import = "plugins.edit.text-case" },
+  { import = "plugins.edit.blink" },
 
   {
     --- Readline keybindings,

@@ -3,9 +3,8 @@ return {
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
-  -- { import = "astrocommunity.completion.blink-cmp" },
+  { import = "astrocommunity.completion.blink-cmp" },
   --- langs
-  -- { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
   { import = "astrocommunity.pack.rust" },
   -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.nix" },
@@ -18,7 +17,8 @@ return {
   -- { import = "astrocommunity.completion.codeium-nvim" },
   -- edit
   -- { import = "astrocommunity.motion.tabout-nvim" },
-  vim.env.TMUX and {
-      import = "astrocommunity.completion.cmp-tmux",
-    } or {},
+  {
+    cond = vim.env.TMUX,
+    import = "astrocommunity.completion.cmp-tmux",
+  },
 }
