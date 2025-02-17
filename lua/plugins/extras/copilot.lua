@@ -103,8 +103,6 @@ return {
     vim.g.copilot_filetypes = {
       ["*"] = auto_start, -- start manually
       ["fzf"] = false,
-      ["TelescopePrompt"] = false,
-      ["TelescopeResults"] = false,
       ["OverseerForm"] = false,
     }
     vim.g.copilot_no_tab_map = true
