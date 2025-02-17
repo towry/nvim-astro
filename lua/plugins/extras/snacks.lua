@@ -6,6 +6,12 @@ return {
   lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   opts = {
+    notifier = {
+      enabled = false,
+    },
+    dashboard = {
+      enabled = false,
+    },
     picker = {
       ui_select = true,
       layout = {
