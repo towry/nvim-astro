@@ -31,6 +31,7 @@
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "heirline.nvim": { "branch": "master", "commit": "af3f441ea10f96105e1af14cd37bf213533812d2" },
   "hunk.nvim": { "branch": "master", "commit": "b475ba0011e4b8ef7d7ddecd9764ee1a5f41366d" },
+  "jj-diffconflicts": { "branch": "main", "commit": "738029ec5b72571d507ceaa6dca296c4fad06b76" },
   "kanagawa.nvim": { "branch": "master", "commit": "2de175482f215c69a1d12ab10a8bf2a7a2e44ff2" },
   "lazy.nvim": { "branch": "main", "commit": "e5e9bf48211a13d9ee6c1077c88327c49c1ab4a0" },
   "lazydev.nvim": { "branch": "main", "commit": "a1b78b2ac6f978c72e76ea90ae92a94edf380cfc" },
