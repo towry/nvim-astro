@@ -63,7 +63,7 @@ return {
   },
   specs = {
     {
-      "AstroNvim/astrocore",
+      "AstroNvim/astrolsp",
       opts = function(_, opts)
         ---- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/fuzzy-finder/snacks-picker/init.lua
         local maps = opts.mappings
@@ -81,6 +81,11 @@ return {
         maps.n["<leader>le"] = {
           function() Snacks.picker.lsp_symbols() end,
           desc = "LSP Symbols",
+        }
+
+        maps.n.gd = {
+          function() Snacks.picker.lsp_definitions() end,
+          desc = "LSP Definitions",
         }
       end,
     },
