@@ -78,6 +78,10 @@ return {
           function() Snacks.scratch.select() end,
           desc = "Select Scratch",
         }
+        maps.n["<leader>le"] = {
+          function() Snacks.picker.lsp_symbols() end,
+          desc = "LSP Symbols",
+        }
       end,
     },
     {
