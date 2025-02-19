@@ -79,8 +79,8 @@ return {
             },
           },
           background = {
-            -- dark = "wave",
-            dark = "dragon",
+            dark = "wave",
+            -- dark = "dragon",
             light = "lotus",
           },
         },
