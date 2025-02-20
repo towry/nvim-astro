@@ -116,10 +116,10 @@ return {
             desc = "Quickfix List",
           }
 
-          maps.n["<Leader>fj"] = {
-            "<cmd>FzfLua jumps<cr>",
-            desc = "Jumplist",
-          }
+          -- maps.n["<Leader>fj"] = {
+          --   "<cmd>FzfLua jumps<cr>",
+          --   desc = "Jumplist",
+          -- }
 
           maps.n["<leader>fo"] = {
             function()

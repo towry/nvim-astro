@@ -69,6 +69,12 @@ return {
         local maps = opts.mappings
         -- local astro = require("astrocore")
 
+        --- pickers
+        maps.n["<leader>fj"] = {
+          function() Snacks.picker.jumps() end,
+          desc = "Jumps",
+        }
+
         --- scratch keymaps
         maps.n["<Leader>xs"] = {
           function() Snacks.scratch() end,
@@ -83,6 +89,7 @@ return {
           desc = "LSP Symbols",
         }
 
+        --- Lsp keymaps
         maps.n.gd = {
           function() Snacks.picker.lsp_definitions() end,
           desc = "LSP Definitions",
