@@ -159,8 +159,9 @@ return {
         max_width = 80,
       },
       signature_help = {
-        border = "single",
-        title = "Signature Help",
+        border = "none",
+        title = "Signature",
+        winblend = 40,
         max_width = 80,
       },
     },
