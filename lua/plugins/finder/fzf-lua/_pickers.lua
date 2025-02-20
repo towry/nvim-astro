@@ -106,7 +106,7 @@ function M.folders(opts)
   opts.winopts = {
     fullscreen = false,
     width = 0.7,
-    height = 0.5,
+    height = 0.6,
   }
   opts.fzf_opts = {
     ["--preview-window"] = "nohidden,down,50%",
@@ -158,7 +158,7 @@ function M.buffers_or_recent(no_buffers)
     sort_lastused = true,
     show_unloaded = false,
     winopts = {
-      height = 0.3,
+      height = 0.6,
       fullscreen = false,
       preview = {
         hidden = "hidden",
@@ -171,7 +171,7 @@ function M.buffers_or_recent(no_buffers)
     cwd_only = true,
     include_current_session = true,
     winopts = {
-      height = 0.3,
+      height = 0.6,
       fullscreen = false,
       preview = {
         hidden = "hidden",
@@ -226,7 +226,7 @@ function M.git_branches()
   local winopts = {
     fullscreen = false,
     width = 0.8,
-    height = 0.4,
+    height = 0.6,
   }
 
   fzflua.fzf_exec({
@@ -313,7 +313,7 @@ function M.zoxide_folders(opts)
   opts.winopts = {
     fullscreen = false,
     width = 0.7,
-    height = 0.5,
+    height = 0.6,
   }
   opts.fzf_opts = {
     ["--tiebreak"] = "index",
