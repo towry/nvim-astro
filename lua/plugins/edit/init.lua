@@ -4,6 +4,17 @@ return {
   { import = "plugins.edit.flash" },
   { import = "plugins.edit.text-case" },
   { import = "plugins.edit.blink" },
+  {
+    "luiscassih/AniKakoune",
+    event = "VeryLazy",
+    config = function()
+      require("AniMotion").setup({
+        mode = "animotion",
+        clear_keys = { "<C-c>" },
+        color = "Visual",
+      })
+    end,
+  },
 
   {
     --- Readline keybindings,
