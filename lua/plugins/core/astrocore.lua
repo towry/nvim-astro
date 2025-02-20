@@ -60,7 +60,7 @@ return {
       },
       underline = true,
       float = {
-        border = "single",
+        border = "none",
       },
     },
     -- vim options can be configured here

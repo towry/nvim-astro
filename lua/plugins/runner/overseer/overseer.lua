@@ -148,13 +148,13 @@ return {
         },
       },
       form = {
-        border = "single",
+        border = "none",
       },
       confirm = {
-        border = "single",
+        border = "none",
       },
       task_win = {
-        border = "single",
+        border = "none",
       },
       help_win = {
         border = "single",

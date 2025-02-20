@@ -154,7 +154,7 @@ return {
     },
     defaults = {
       hover = {
-        border = "single",
+        border = "none",
         title = "Symbol Hover",
         max_width = 80,
       },

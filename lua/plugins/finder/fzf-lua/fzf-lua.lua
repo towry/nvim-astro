@@ -51,14 +51,14 @@ return {
         },
         winopts = {
           backdrop = 100,
-          border = "single",
+          border = "none",
           preview = {
             delay = 150,
             layout = "flex",
             flip_columns = 240,
             horizontal = "right:45%",
             vertical = "down:40%",
-            border = "single",
+            border = "none",
           },
         },
         fzf_colors = false,

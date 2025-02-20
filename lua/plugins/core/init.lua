@@ -17,7 +17,7 @@ return {
       opts.preset = "helix"
       opts.win = {
         no_overlap = false,
-        border = "single",
+        border = "none",
         title_pos = "left",
         wo = {
           winblend = 20,
