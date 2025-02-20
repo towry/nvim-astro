@@ -32,13 +32,13 @@ return {
       local cmp = require("cmp")
       opts.window = {
         completion = cmp.config.window.bordered({
-          border = "single",
-          winhighlight = "CursorLine:PmenuSel,NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          winblend = 0,
+          border = "none",
+          winhighlight = "CursorLine:PmenuSel,Normal:NormalFloat,FloatBorder:WinSeparator",
+          winblend = 50,
         }),
         documentation = cmp.config.window.bordered({
           winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          border = "single",
+          border = "none",
         }),
       }
       return opts
