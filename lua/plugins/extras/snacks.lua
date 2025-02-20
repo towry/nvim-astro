@@ -4,7 +4,35 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    {
+      "AstroNvim/astrocore",
+      opts = function(_, opts)
+        local maps = opts.mappings
+
+        --- pickers
+        maps.n["<leader>fj"] = {
+          function() Snacks.picker.jumps() end,
+          desc = "Jumps",
+        }
+
+        --- scratch keymaps
+        maps.n["<Leader>xs"] = {
+          function() Snacks.scratch() end,
+          desc = "Toggle Scratch",
+        }
+        maps.n["<Leader>xS"] = {
+          function() Snacks.scratch.select() end,
+          desc = "Select Scratch",
+        }
+        maps.n["<leader>le"] = {
+          function() Snacks.picker.lsp_symbols() end,
+          desc = "LSP Symbols",
+        }
+      end,
+    },
+  },
   opts = {
     notifier = {
       enabled = false,
@@ -68,27 +96,6 @@ return {
         ---- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/fuzzy-finder/snacks-picker/init.lua
         local maps = opts.mappings
         -- local astro = require("astrocore")
-
-        --- pickers
-        maps.n["<leader>fj"] = {
-          function() Snacks.picker.jumps() end,
-          desc = "Jumps",
-        }
-
-        --- scratch keymaps
-        maps.n["<Leader>xs"] = {
-          function() Snacks.scratch() end,
-          desc = "Toggle Scratch",
-        }
-        maps.n["<Leader>xS"] = {
-          function() Snacks.scratch.select() end,
-          desc = "Select Scratch",
-        }
-        maps.n["<leader>le"] = {
-          function() Snacks.picker.lsp_symbols() end,
-          desc = "LSP Symbols",
-        }
-
         --- Lsp keymaps
         maps.n.gd = {
           function() Snacks.picker.lsp_definitions() end,
