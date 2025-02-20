@@ -3,6 +3,18 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+---- experimental: disable hit-enter-prompt
+---- require https://github.com/neovim/neovim/pull/27855
+pcall(function()
+  vim.opt.cmdheight = 1
+  require("vim._extui").enable({
+    enable = true,
+    messages = {
+      pos = "box",
+    },
+  })
+end)
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
