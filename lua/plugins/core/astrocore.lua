@@ -5,15 +5,15 @@
 
 ---- experimental: disable hit-enter-prompt
 ---- require https://github.com/neovim/neovim/pull/27855
-pcall(function()
-  vim.opt.cmdheight = 1
-  require("vim._extui").enable({
-    enable = true,
-    messages = {
-      pos = "box",
-    },
-  })
-end)
+-- pcall(function()
+-- vim.opt.cmdheight = 1
+-- require("vim._extui").enable({
+--   enable = true,
+--   messages = {
+--     pos = "box",
+--   },
+-- })
+-- end)
 
 ---@type LazySpec
 return {
