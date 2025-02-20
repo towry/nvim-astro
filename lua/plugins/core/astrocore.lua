@@ -6,6 +6,7 @@
 ---- experimental: disable hit-enter-prompt
 ---- require https://github.com/neovim/neovim/pull/27855
 pcall(function()
+  if vim.g.vscode then return end
   vim.opt.cmdheight = 1
   require("vim._extui").enable({
     enable = true,
