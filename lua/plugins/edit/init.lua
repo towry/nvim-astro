@@ -7,6 +7,7 @@ return {
   {
     "luiscassih/AniKakoune",
     event = "VeryLazy",
+    enabled = false,
     config = function()
       require("AniMotion").setup({
         mode = "animotion",
