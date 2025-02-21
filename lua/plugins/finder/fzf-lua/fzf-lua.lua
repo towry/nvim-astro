@@ -14,9 +14,9 @@ return {
             maps.n["<Leader>lD"] =
               { function() require("fzf-lua").diagnostics_document() end, desc = "Search diagnostics" }
             -- if maps.n.gd then maps.n.gd[1] = function() require("fzf-lua").lsp_definitions() end end
-            if maps.n.gri then maps.n.gri[1] = function() require("fzf-lua").lsp_implementations() end end
-            if maps.n.grr then maps.n.grr[1] = function() require("fzf-lua").lsp_references() end end
-            if maps.n.gy then maps.n.gy[1] = function() require("fzf-lua").lsp_typedefs() end end
+            -- if maps.n.gri then maps.n.gri[1] = function() require("fzf-lua").lsp_implementations() end end
+            -- if maps.n.grr then maps.n.grr[1] = function() require("fzf-lua").lsp_references() end end
+            -- if maps.n.gy then maps.n.gy[1] = function() require("fzf-lua").lsp_typedefs() end end
             if maps.n["<Leader>lG"] then
               maps.n["<Leader>lG"][1] = function() require("fzf-lua").lsp_workspace_symbols() end
             end
@@ -158,27 +158,27 @@ return {
             maps.n["<Leader>gfs"] = { function() require("fzf-lua").git_status() end, desc = "Git status" }
           end
 
-          maps.n["<Leader>f<CR>"] = {
-            function() require("fzf-lua").resume() end,
-            desc = "Resume previous search",
-          }
-          maps.n["<Leader>f'"] = { function() require("fzf-lua").marks() end, desc = "Find marks" }
-          maps.n["<Leader>f/"] =
-            { function() require("fzf-lua").lgrep_curbuf() end, desc = "Find words in current buffer" }
+          -- maps.n["<Leader>f<CR>"] = {
+          --   function() require("fzf-lua").resume() end,
+          --   desc = "Resume previous search",
+          -- }
+          -- maps.n["<Leader>f'"] = { function() require("fzf-lua").marks() end, desc = "Find marks" }
+          -- maps.n["<Leader>f/"] =
+          --   { function() require("fzf-lua").lgrep_curbuf() end, desc = "Find words in current buffer" }
           maps.n["<Leader>fXa"] = {
             function() require("fzf-lua").files({ prompt = "Config> ", cwd = vim.fn.stdpath("config") }) end,
             desc = "Find nvim config files",
           }
 
           do
-            maps.n["<Leader>fc"] = {
-              function()
-                require("fzf-lua").grep_cword({
-                  cwd = V.nvim_root(),
-                })
-              end,
-              desc = "Find word under cursor",
-            }
+            -- maps.n["<Leader>fc"] = {
+            --   function()
+            --     require("fzf-lua").grep_cword({
+            --       cwd = V.nvim_root(),
+            --     })
+            --   end,
+            --   desc = "Find word under cursor",
+            -- }
             if rooter_is_on then
               maps.n["<Leader>fC"] = {
                 function()
@@ -220,17 +220,17 @@ return {
           maps.n["<leader>f<tab>"] =
             { function() require(PickerMod).buffers_or_recent(true) end, desc = "Find history" }
 
-          maps.n["<Leader>fr"] = { function() require("fzf-lua").registers() end, desc = "Find registers" }
+          -- maps.n["<Leader>fr"] = { function() require("fzf-lua").registers() end, desc = "Find registers" }
 
           if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
-            maps.n["<Leader>fs"] = {
-              function()
-                require("fzf-lua").grep({
-                  cwd = V.nvim_root(),
-                })
-              end,
-              desc = "Grep words",
-            }
+            -- maps.n["<Leader>fs"] = {
+            --   function()
+            --     require("fzf-lua").grep({
+            --       cwd = V.nvim_root(),
+            --     })
+            --   end,
+            --   desc = "Grep words",
+            -- }
             maps.v["<Leader>fS"] = {
               function()
                 require("fzf-lua").grep({
@@ -278,15 +278,6 @@ return {
               }
             end
           end
-
-          maps.n["<Leader>ls"] = {
-            function()
-              require("fzf-lua").lsp_document_symbols({
-                regex_filter = require("plugins.finder.fzf-lua._utils").symbols_filter,
-              })
-            end,
-            desc = "Search symbols",
-          }
         end,
       },
     },

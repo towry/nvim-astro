@@ -12,10 +12,46 @@ return {
         local maps = opts.mappings
 
         --- pickers
+        maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
+        maps.v["<Leader>f"] = {
+          desc = "🔎 Find",
+        }
+
+        maps.n["<Leader>f<CR>"] = {
+          function() Snacks.picker.resume() end,
+          desc = "Resume previous search",
+        }
+
+        maps.n["<Leader>f'"] = { function() Snacks.picker.marks() end, desc = "Find marks" }
+        maps.n["<Leader>f/"] = { function() Snacks.picker.lines() end, desc = "Find words in current buffer" }
+        maps.n["<Leader>fr"] = { function() Snacks.picker.registers() end, desc = "Find registers" }
+        maps.n["<Leader>fs"] = {
+          function()
+            Snacks.picker.grep_word({
+              layout = "vertical",
+            })
+          end,
+          desc = "Grep words",
+        }
+        maps.n["<Leader>fc"] = {
+          function()
+            Snacks.picker.grep_word({
+              layout = "vertical",
+              search = vim.fn.expand("<cword>"),
+            })
+          end,
+          desc = "Find word under cursor",
+        }
+
         maps.n["<leader>fj"] = {
           function() Snacks.picker.jumps() end,
           desc = "Jumps",
         }
+
+        -- maps.n["<localleader>,"] = {
+        --   function() Snacks.picker.buffers() end,
+        --   desc = "Buffers",
+        -- }
 
         --- scratch keymaps
         maps.n["<Leader>xs"] = {
@@ -26,9 +62,11 @@ return {
           function() Snacks.scratch.select() end,
           desc = "Select Scratch",
         }
-        maps.n["<leader>le"] = {
-          function() Snacks.picker.lsp_symbols() end,
-          desc = "LSP Symbols",
+
+        ---- explores
+        maps.n["<leader>ee"] = {
+          function() Snacks.explorer.reveal() end,
+          desc = "Explorer reveal",
         }
       end,
     },
@@ -55,7 +93,7 @@ return {
             height = 0.8,
             min_height = 30,
             box = "vertical",
-            border = "none",
+            border = "single",
             title = "{title} {live} {flags}",
             title_pos = "center",
             { win = "input", height = 1, border = "bottom" },
@@ -71,12 +109,12 @@ return {
             height = 0.8,
             {
               box = "vertical",
-              border = "none",
+              border = "single",
               title = "{title} {live} {flags}",
               { win = "input", height = 1, border = "bottom" },
               { win = "list", border = "none" },
             },
-            { win = "preview", title = "{preview}", border = "none", width = 0.5 },
+            { win = "preview", title = "{preview}", border = "single", width = 0.5 },
           },
         },
       },
@@ -101,6 +139,14 @@ return {
           function() Snacks.picker.lsp_definitions() end,
           desc = "LSP Definitions",
         }
+
+        maps.n["<leader>le"] = {
+          function() Snacks.picker.lsp_symbols() end,
+          desc = "LSP Symbols",
+        }
+        if maps.n.gri then maps.n.gri[1] = function() Snacks.picker.lsp_implementations() end end
+        if maps.n.grr then maps.n.grr[1] = function() Snacks.picker.lsp_references() end end
+        if maps.n.gy then maps.n.gy[1] = function() Snacks.picker.lsp_type_definitions() end end
       end,
     },
     {

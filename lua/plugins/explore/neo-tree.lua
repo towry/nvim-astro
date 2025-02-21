@@ -304,10 +304,6 @@ return {
               end,
               desc = "Open file tree",
             },
-            ["<Leader>ee"] = {
-              function() vim.cmd("Neotree toggle focus position=left reveal=true") end,
-              desc = "Toggle Explorer Focus",
-            },
           },
         },
       },
