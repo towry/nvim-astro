@@ -30,6 +30,11 @@ return {
     optional = true,
     opts = function(_, opts)
       local cmp = require("cmp")
+      opts.preselect = cmp.PreselectMode.Item
+      opts.completion = vim.tbl_deep_extend("keep", {
+        completeopt = "menu,menuone",
+      }, opts.completion or {})
+
       opts.window = {
         completion = cmp.config.window.bordered({
           border = "none",
