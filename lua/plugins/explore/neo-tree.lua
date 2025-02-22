@@ -27,10 +27,11 @@ return {
 
     window = {
       auto_expand_width = true,
+      width = 50,
       popup = { -- settings that apply to float position only
         size = {
-          height = "60%",
-          width = "70%",
+          height = "90%",
+          width = "80%",
         },
         position = "50%", -- 50% means center it
         -- you can also specify border here, if you want a different setting from
@@ -245,6 +246,7 @@ return {
     },
 
     filesystem = {
+      use_libuv_file_watcher = true,
       hijack_netrw_behavior = "disabled",
       follow_current_file = {
         enabled = false, -- This will find and focus the file in the active buffer every time
@@ -265,11 +267,11 @@ return {
     },
     buffers = {
       follow_current_file = {
-        enabled = true, -- This will find and focus the file in the active buffer every time
+        enabled = false, -- This will find and focus the file in the active buffer every time
         --              -- the current file is changed while the tree is open.
         leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
-      group_empty_dirs = true, -- when true, empty directories will be grouped together
+      group_empty_dirs = false, -- when true, empty directories will be grouped together
 
       window = {
         mappings = {
@@ -292,6 +294,7 @@ return {
           n = {
             ["-"] = {
               function()
+                vim.cmd("echo 'Fix msg ui issue!'")
                 vim.cmd("Neotree close")
                 vim.defer_fn(function() vim.cmd([[Neotree source=buffers float reveal action=focus]]) end, 1)
               end,
@@ -299,10 +302,15 @@ return {
             },
             ["_"] = {
               function()
+                vim.cmd("echo 'Fix msg ui issue'")
                 vim.cmd("Neotree close")
                 vim.defer_fn(function() vim.cmd([[Neotree source=filesystem float reveal action=focus]]) end, 1)
               end,
               desc = "Open file tree",
+            },
+            ["<Leader>ee"] = {
+              function() vim.cmd("Neotree toggle focus position=left reveal=true") end,
+              desc = "Toggle Explorer Focus",
             },
           },
         },

@@ -11,7 +11,7 @@ pcall(function()
   require("vim._extui").enable({
     enable = true,
     messages = {
-      pos = "box",
+      pos = "cmd",
     },
   })
 end)
