@@ -24,6 +24,10 @@ return {
         end,
       },
     },
+    config = function(_, options)
+      require("fzf-lua").setup(options)
+      require("fzf-lua").register_ui_select()
+    end,
     opts = function(_, opts)
       local config = require("fzf-lua.config")
       local local_actions = require("plugins.finder.fzf-lua._actions")
@@ -46,14 +50,16 @@ return {
       return vim.tbl_deep_extend("force", opts, {
         "default",
         defaults = {
-          formatter = "path.filename_first",
+          formatter = "path.dirname_first",
           file_icons = true,
         },
         winopts = {
-          backdrop = 100,
+          height = 0.95,
+          width = 0.85,
+          backdrop = 60,
           border = "single",
           preview = {
-            delay = 150,
+            delay = 50,
             layout = "flex",
             flip_columns = 240,
             horizontal = "right:45%",
@@ -64,8 +70,9 @@ return {
         fzf_colors = false,
         fzf_opts = {
           ["--ansi"] = "",
-          ["--info"] = "inline",
+          ["--info"] = "inline-right",
           ["--height"] = "100%",
+          ["--highlight-line"] = true,
           ["--layout"] = "reverse",
           ["--margin"] = "0%",
           ["--padding"] = "0%",
@@ -278,15 +285,6 @@ return {
               }
             end
           end
-
-          maps.n["<Leader>ls"] = {
-            function()
-              require("fzf-lua").lsp_document_symbols({
-                regex_filter = require("plugins.finder.fzf-lua._utils").symbols_filter,
-              })
-            end,
-            desc = "Search symbols",
-          }
         end,
       },
     },

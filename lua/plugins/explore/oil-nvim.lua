@@ -86,7 +86,7 @@ return {
       },
       float = {
         padding = 4,
-        border = "single",
+        border = "none",
         win_options = {
           winblend = 0,
           -- statuscolumn = '',

@@ -10,9 +10,13 @@ return {
     config = function() require("hunk").setup() end,
   },
   {
-    -- TODO: how to start inside nvim automatically
+    "rafikdraoui/jj-diffconflicts",
+    cmd = { "JJDiffConflicts" },
+  },
+  {
     "whiteinge/diffconflicts",
     cmd = { "DiffConflicts", "DiffConflictsWithHistory" },
+    cond = function() return not vim.g.jj_diffconflicts_marker_length end,
     event = "User AstroGitFile",
     lazy = not V.git_start_nvim(),
     config = function() end,
@@ -132,7 +136,7 @@ return {
         max_file_length = 40000,
         preview_config = {
           -- Options passed to nvim_open_win
-          border = "single",
+          border = "none",
           style = "minimal",
           relative = "cursor",
           row = 0,

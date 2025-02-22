@@ -35,6 +35,14 @@ return {
       { "low", "high" },
       -- git rebase -i
       { "pick", "squash", "reword" },
+      { "close", "open" },
+      { "enabled", "disabled" },
+      { "on", "off" },
+      { "up", "down" },
+      { "in", "out" },
+      { "first", "last" },
+      { "old", "new" },
+      { "add", "remove" },
     }
   end,
 }

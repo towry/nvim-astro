@@ -31,6 +31,7 @@ return {
               -- flash
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
               WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
+              MsgArea = { link = "NormalFloat" },
 
               IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
               IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },
@@ -79,8 +80,8 @@ return {
             },
           },
           background = {
-            -- dark = "wave",
-            dark = "dragon",
+            dark = "wave",
+            -- dark = "dragon",
             light = "lotus",
           },
         },

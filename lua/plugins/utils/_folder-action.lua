@@ -54,48 +54,19 @@ M.open = vim.schedule_wrap(function(new_cwd)
     )
 
     set(
-      "\\",
+      "e",
       function()
         require("neo-tree.command").execute({
           position = "left",
           source = "filesystem",
           dir = new_cwd,
-          reveal_force_cwd = true,
+          reveal_force_cwd = false,
         })
       end,
       {
         desc = "Open in tree",
       }
     )
-
-    set(
-      "|",
-      function()
-        require("neo-tree.command").execute({
-          position = "left",
-          reveal_file = new_cwd,
-          reveal_force_cwd = true,
-          source = "buffers",
-        })
-      end,
-      {
-        desc = "Open in tree and reveal buffers",
-      }
-    )
-
-    set("r", function()
-      require("fzf-lua").oldfiles({
-        cwd_header = true,
-        cwd = new_cwd,
-        cwd_only = true,
-        winopts = {
-          fullscreen = false,
-        },
-      })
-      unset()
-    end, {
-      desc = "Open recent",
-    })
 
     set("#", function()
       vim.cmd.cd(new_cwd)
@@ -110,6 +81,7 @@ M.open = vim.schedule_wrap(function(new_cwd)
     end, {
       desc = "Open in oil",
     })
+
     set("t", function()
       vim.cmd("tabfind " .. new_cwd)
       unset()

@@ -27,7 +27,7 @@ return {
       },
       window = {
         -- winblend = 35,
-        -- normal_hl = "NormalFloat",
+        normal_hl = "NormalFloat",
         max_width = 50,
         border = "none",
         -- align = 'top',

@@ -11,14 +11,14 @@ return {
       opts.triggers = opts.triggers or {
         { "<auto>", mode = "nixsotc" },
       }
-      opts.delay = function(ctx) return ctx.plugin and 0 or 200 end
+      opts.delay = function(ctx) return ctx.plugin and 0 or 150 end
       opts.defer = function(ctx) return ctx.mode == "V" or ctx.mode == "<C-V>" end
 
-      opts.preset = "helix"
+      opts.preset = "modern"
       opts.win = {
-        no_overlap = false,
-        border = "single",
-        title_pos = "left",
+        no_overlap = true,
+        border = "none",
+        title_pos = "center",
         wo = {
           winblend = 20,
         },
@@ -30,15 +30,20 @@ return {
     optional = true,
     opts = function(_, opts)
       local cmp = require("cmp")
+      opts.preselect = cmp.PreselectMode.Item
+      opts.completion = vim.tbl_deep_extend("keep", {
+        completeopt = "menu,menuone",
+      }, opts.completion or {})
+
       opts.window = {
         completion = cmp.config.window.bordered({
-          border = "single",
-          winhighlight = "CursorLine:PmenuSel,NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          winblend = 0,
+          border = "none",
+          winhighlight = "CursorLine:PmenuSel,Normal:NormalFloat,FloatBorder:WinSeparator",
+          winblend = 50,
         }),
         documentation = cmp.config.window.bordered({
           winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          border = "single",
+          border = "none",
         }),
       }
       return opts

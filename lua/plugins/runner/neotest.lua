@@ -43,7 +43,7 @@ return {
   specs = {},
   opts = {
     floating = {
-      border = "single",
+      border = "none",
       max_height = 0.9,
       max_width = 0.9,
     },

@@ -56,7 +56,7 @@ M.toggle_tig_file_history = function()
       close_on_exit = true,
       hidden = true,
       float_opts = {
-        border = "single",
+        border = "none",
       },
       size = vim.o.lines * 0.7,
       -- function to run on opening the terminal
