@@ -12,7 +12,7 @@ local modules = {
   "autopairs",
   "aerial",
   "cmp_luasnip",
-  "snacks",
+  -- "snacks",
   "comment",
   "dap",
   "gitsigns",
