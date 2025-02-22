@@ -1,6 +1,7 @@
 return {
   "olimorris/codecompanion.nvim",
   event = { "VeryLazy" },
+  commit = "317737145a221c62320cf47019075aa0a65d1695",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -30,6 +31,18 @@ return {
   },
   keys = {
     {
+      mode = { "v" },
+      "<localleader>aa",
+      function() vim.cmd("CodeCompanionActions") end,
+      desc = "Code Companion: Inline assistant",
+    },
+    {
+      mode = "n",
+      "<leader>aa",
+      function() vim.cmd("CodeCompanionActions") end,
+      desc = "Code Companion: Actions",
+    },
+    {
       mode = { "n", "v" },
       "<leader>ai",
       function()
@@ -54,43 +67,9 @@ return {
   },
   opts = {
     prompt_library = {
-      ["Next edit suggestion"] = {
-        strategy = "inline",
-        description = "Get the next edit suggestion that user can directly apply to the code without user editing",
-        prompts = {
-          {
-            role = "system",
-            content = function(context)
-              return "I want you to act as a senior "
-                .. context.filetype
-                .. " developer. I will ask you to suggest some edits to the code, you should suggest the best and only one edit at a time, so user can apply your suggestion without further modification."
-            end,
-          },
-          {
-            role = "user",
-            content = function(_context)
-              local prompts = {
-                "I have the following edit changes in vim editor for current buffer, please suggest the next best edit and only one at a time.",
-                "Make sure only code changes are suggested, so the user can apply the changes directly.",
-                "Here are the edit changes to current buffer:",
-                "",
-                vim.fn.execute("changes"),
-                "",
-              }
-
-              return table.concat(prompts, "\n")
-            end,
-          },
-        },
-        opts = {
-          placement = "replace",
-          short_name = "next",
-          contains_code = true,
-          auto_submit = true,
-          stop_context_insertion = true,
-          user_prompt = false,
-        },
-      },
+      ["elixir-with-condition-label"] = require(
+        "plugins.extras.codecompanion-extras.prompts.elixir-with-condition-label"
+      ),
     },
     display = {
       diff = {
