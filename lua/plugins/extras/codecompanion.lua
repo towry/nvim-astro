@@ -43,9 +43,9 @@ return {
           input = vim.trim(input)
 
           if vim.fn.mode() == "v" then
-            vim.cmd(":'<,'>CodeCompanion /buffer " .. input)
+            vim.cmd(":'<,'>CodeCompanion #buffer " .. input)
           else
-            vim.cmd(":CodeCompanion /buffer " .. input)
+            vim.cmd(":CodeCompanion #buffer " .. input)
           end
         end)
       end,
@@ -53,6 +53,45 @@ return {
     },
   },
   opts = {
+    prompt_library = {
+      ["Next edit suggestion"] = {
+        strategy = "inline",
+        description = "Get the next edit suggestion that user can directly apply to the code without user editing",
+        prompts = {
+          {
+            role = "system",
+            content = function(context)
+              return "I want you to act as a senior "
+                .. context.filetype
+                .. " developer. I will ask you to suggest some edits to the code, you should suggest the best and only one edit at a time, so user can apply your suggestion without further modification."
+            end,
+          },
+          {
+            role = "user",
+            content = function(_context)
+              local prompts = {
+                "I have the following edit changes in vim editor for current buffer, please suggest the next best edit and only one at a time.",
+                "Make sure only code changes are suggested, so the user can apply the changes directly.",
+                "Here are the edit changes to current buffer:",
+                "",
+                vim.fn.execute("changes"),
+                "",
+              }
+
+              return table.concat(prompts, "\n")
+            end,
+          },
+        },
+        opts = {
+          placement = "replace",
+          short_name = "next",
+          contains_code = true,
+          auto_submit = true,
+          stop_context_insertion = true,
+          user_prompt = false,
+        },
+      },
+    },
     display = {
       diff = {
         enabled = true,
