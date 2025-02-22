@@ -12,41 +12,41 @@ return {
         local maps = opts.mappings
 
         --- pickers
-        maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
-        maps.v["<Leader>f"] = {
-          desc = "🔎 Find",
-        }
+        -- maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
+        -- maps.v["<Leader>f"] = {
+        --   desc = "🔎 Find",
+        -- }
+        --
+        -- maps.n["<Leader>f<CR>"] = {
+        --   function() Snacks.picker.resume() end,
+        --   desc = "Resume previous search",
+        -- }
+        --
+        -- maps.n["<Leader>f'"] = { function() Snacks.picker.marks() end, desc = "Find marks" }
+        -- maps.n["<Leader>f/"] = { function() Snacks.picker.lines() end, desc = "Find words in current buffer" }
+        -- maps.n["<Leader>fr"] = { function() Snacks.picker.registers() end, desc = "Find registers" }
+        -- maps.n["<Leader>fs"] = {
+        --   function()
+        --     Snacks.picker.grep_word({
+        --       layout = "vertical",
+        --     })
+        --   end,
+        --   desc = "Grep words",
+        -- }
+        -- maps.n["<Leader>fc"] = {
+        --   function()
+        --     Snacks.picker.grep_word({
+        --       layout = "vertical",
+        --       search = vim.fn.expand("<cword>"),
+        --     })
+        --   end,
+        --   desc = "Find word under cursor",
+        -- }
 
-        maps.n["<Leader>f<CR>"] = {
-          function() Snacks.picker.resume() end,
-          desc = "Resume previous search",
-        }
-
-        maps.n["<Leader>f'"] = { function() Snacks.picker.marks() end, desc = "Find marks" }
-        maps.n["<Leader>f/"] = { function() Snacks.picker.lines() end, desc = "Find words in current buffer" }
-        maps.n["<Leader>fr"] = { function() Snacks.picker.registers() end, desc = "Find registers" }
-        maps.n["<Leader>fs"] = {
-          function()
-            Snacks.picker.grep_word({
-              layout = "vertical",
-            })
-          end,
-          desc = "Grep words",
-        }
-        maps.n["<Leader>fc"] = {
-          function()
-            Snacks.picker.grep_word({
-              layout = "vertical",
-              search = vim.fn.expand("<cword>"),
-            })
-          end,
-          desc = "Find word under cursor",
-        }
-
-        maps.n["<leader>fj"] = {
-          function() Snacks.picker.jumps() end,
-          desc = "Jumps",
-        }
+        -- maps.n["<leader>fj"] = {
+        --   function() Snacks.picker.jumps() end,
+        --   desc = "Jumps",
+        -- }
 
         -- maps.n["<localleader>,"] = {
         --   function() Snacks.picker.buffers() end,
@@ -64,10 +64,10 @@ return {
         }
 
         ---- explores
-        maps.n["<leader>ee"] = {
-          function() Snacks.explorer.reveal() end,
-          desc = "Explorer reveal",
-        }
+        -- maps.n["<leader>ee"] = {
+        --   function() Snacks.explorer.reveal() end,
+        --   desc = "Explorer reveal",
+        -- }
       end,
     },
   },
@@ -79,7 +79,8 @@ return {
       enabled = false,
     },
     picker = {
-      ui_select = true,
+      enabled = false,
+      ui_select = false,
       layout = {
         cycle = true,
         preset = function() return vim.o.columns >= 120 and "default" or "vertical" end,
@@ -124,6 +125,7 @@ return {
     scope = {},
     scratch = {},
     explorer = {
+      enabled = false,
       replace_netrw = true,
     },
   },
@@ -132,21 +134,21 @@ return {
       "AstroNvim/astrolsp",
       opts = function(_, opts)
         ---- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/fuzzy-finder/snacks-picker/init.lua
-        local maps = opts.mappings
+        -- local maps = opts.mappings
         -- local astro = require("astrocore")
         --- Lsp keymaps
-        maps.n.gd = {
-          function() Snacks.picker.lsp_definitions() end,
-          desc = "LSP Definitions",
-        }
+        -- maps.n.gd = {
+        --   function() Snacks.picker.lsp_definitions() end,
+        --   desc = "LSP Definitions",
+        -- }
 
-        maps.n["<leader>le"] = {
-          function() Snacks.picker.lsp_symbols() end,
-          desc = "LSP Symbols",
-        }
-        if maps.n.gri then maps.n.gri[1] = function() Snacks.picker.lsp_implementations() end end
-        if maps.n.grr then maps.n.grr[1] = function() Snacks.picker.lsp_references() end end
-        if maps.n.gy then maps.n.gy[1] = function() Snacks.picker.lsp_type_definitions() end end
+        -- maps.n["<leader>le"] = {
+        --   function() Snacks.picker.lsp_symbols() end,
+        --   desc = "LSP Symbols",
+        -- }
+        -- if maps.n.gri then maps.n.gri[1] = function() Snacks.picker.lsp_implementations() end end
+        -- if maps.n.grr then maps.n.grr[1] = function() Snacks.picker.lsp_references() end end
+        -- if maps.n.gy then maps.n.gy[1] = function() Snacks.picker.lsp_type_definitions() end end
       end,
     },
     {

@@ -11,14 +11,14 @@ return {
       opts.triggers = opts.triggers or {
         { "<auto>", mode = "nixsotc" },
       }
-      opts.delay = function(ctx) return ctx.plugin and 0 or 200 end
+      opts.delay = function(ctx) return ctx.plugin and 0 or 150 end
       opts.defer = function(ctx) return ctx.mode == "V" or ctx.mode == "<C-V>" end
 
-      opts.preset = "helix"
+      opts.preset = "modern"
       opts.win = {
-        no_overlap = false,
+        no_overlap = true,
         border = "none",
-        title_pos = "left",
+        title_pos = "center",
         wo = {
           winblend = 20,
         },
