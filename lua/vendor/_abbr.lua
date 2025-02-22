@@ -34,7 +34,7 @@ setca("ass", "let @/=")
 setca("ccc", "CodeCompanionCmd")
 setca("cc", "CodeCompanion")
 -- inline edit
-setca("cci", "CodeCompanion /buffer")
+setca("cci", "CodeCompanion #buffer")
 
 setca("amh", "MERGE_HEAD")
 setca("arh", "REBASE_HEAD")
