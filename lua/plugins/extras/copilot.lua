@@ -185,11 +185,11 @@ return {
                 if cmp.visible() then vim.schedule(cmp.close) end
               elseif core.is_available("blink.cmp") and package.loaded["blink.cmp"] then
                 local cmp = require("blink.cmp")
-                if require("blink.cmp.completion.windows.menu").win:is_open() then cmp.hide() end
+                if cmp.is_menu_visible() then cmp.hide() end
               end
 
               local trigger_ai = vim.schedule_wrap(function()
-                vim.notify('🤖 AI: "Copilot"', vim.log.levels.INFO, { key = "copilot" })
+                vim.notify('🤖 AI: "Copilot is thinking.."', vim.log.levels.INFO, { key = "copilot" })
                 if vim.fn.exists("*codeium#Suggest") == 1 then vim.fn["copilot#Suggest"]() end
               end)
 
