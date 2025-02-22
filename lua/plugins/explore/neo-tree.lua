@@ -294,7 +294,6 @@ return {
           n = {
             ["-"] = {
               function()
-                vim.cmd("echo 'Fix msg ui issue!'")
                 vim.cmd("Neotree close")
                 vim.defer_fn(function() vim.cmd([[Neotree source=buffers float reveal action=focus]]) end, 1)
               end,
@@ -302,7 +301,6 @@ return {
             },
             ["_"] = {
               function()
-                vim.cmd("echo 'Fix msg ui issue'")
                 vim.cmd("Neotree close")
                 vim.defer_fn(function() vim.cmd([[Neotree source=filesystem float reveal action=focus]]) end, 1)
               end,

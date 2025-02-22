@@ -14,6 +14,10 @@ pcall(function()
       pos = "cmd",
     },
   })
+  vim.schedule(function()
+    --- temp fix strange issue with this new api.
+    vim.cmd('echo "Hi towry"')
+  end)
 end)
 
 ---@type LazySpec
