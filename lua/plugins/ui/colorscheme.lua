@@ -26,7 +26,7 @@ return {
           variablebuiltinStyle = { italic = true },
           globalStatus = true,
           overrides = function(colors) -- add/modify highlights
-            -- do not foget to run ':KanagawaCompile'
+            -- do not forget to run ':KanagawaCompile'
             return {
               -- flash
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
