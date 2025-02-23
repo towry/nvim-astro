@@ -1,7 +1,7 @@
 return {
   "olimorris/codecompanion.nvim",
   event = { "VeryLazy" },
-  commit = "317737145a221c62320cf47019075aa0a65d1695",
+  -- commit = "317737145a221c62320cf47019075aa0a65d1695",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
