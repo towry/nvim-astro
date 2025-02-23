@@ -33,7 +33,7 @@ return {
           "be sure to keep the same indentation level",
           "be sure do not change the expr, just add or remove the label",
           "please change all branches under the with statement",
-          "be sure to replace code inline, not to add new lines",
+          "be sure to replace code inplace, not to add new lines",
           "#buffer",
           "the code to change is as follows:",
           selected,
