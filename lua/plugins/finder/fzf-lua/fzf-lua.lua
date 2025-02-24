@@ -238,18 +238,19 @@ return {
               end,
               desc = "Grep words",
             }
-            maps.v["<Leader>fS"] = {
-              function()
-                require("fzf-lua").grep({
-                  cwd = V.nvim_root(),
-                  query = V.nvim_visual_text(),
-                })
-              end,
-              desc = "Grep words",
-            }
+            if rooter_is_on then
+              maps.n["<Leader>fS"] = {
+                function()
+                  require("fzf-lua").grep({
+                    cwd = V.nvim_workspaces_root(),
+                  })
+                end,
+                desc = "Grep words (Workspace root)",
+              }
+            end
             maps.n["<Leader>fg"] = {
               function()
-                require("fzf-lua").live_grep_native({
+                require("fzf-lua").live_grep({
                   cwd = V.nvim_root(),
                 })
               end,
@@ -257,7 +258,7 @@ return {
             }
             maps.v["<Leader>fg"] = {
               function()
-                require("fzf-lua").live_grep_native({
+                require("fzf-lua").live_grep({
                   cwd = V.nvim_root(),
                   query = V.nvim_visual_text(),
                 })
@@ -268,7 +269,7 @@ return {
             if rooter_is_on then
               maps.n["<Leader>fG"] = {
                 function()
-                  require("fzf-lua").live_grep_native({
+                  require("fzf-lua").live_grep({
                     cwd = V.nvim_workspaces_root(),
                   })
                 end,
@@ -276,7 +277,7 @@ return {
               }
               maps.v["<Leader>fG"] = {
                 function()
-                  require("fzf-lua").live_grep_native({
+                  require("fzf-lua").live_grep({
                     cwd = V.nvim_workspaces_root(),
                     query = V.nvim_visual_text(),
                   })
