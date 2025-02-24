@@ -26,10 +26,10 @@ return {
         end,
       },
       window = {
-        -- winblend = 35,
+        winblend = 35,
         normal_hl = "NormalFloat",
         max_width = 50,
-        border = "none",
+        border = "single",
         -- align = 'top',
       },
     },
