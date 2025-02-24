@@ -3,7 +3,7 @@ return {
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.editing-support.conform-nvim" },
   -- { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
-  { import = "astrocommunity.completion.blink-cmp" },
+  -- { import = "astrocommunity.completion.blink-cmp" },
   --- langs
   { import = "astrocommunity.pack.rust" },
   -- { import = "astrocommunity.pack.go" },
