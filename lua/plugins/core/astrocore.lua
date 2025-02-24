@@ -6,15 +6,15 @@
 ---- experimental: disable hit-enter-prompt
 ---- require https://github.com/neovim/neovim/pull/27855
 pcall(function()
-  if not vim.g.vscode then return end
-  vim.opt.cmdheight = 1
-  require("vim._extui").enable({
-    enable = true,
-    messages = {
-      pos = "cmd",
-    },
-  })
+  if vim.g.vscode then return end
   vim.schedule(function()
+    require("vim._extui").enable({
+      enable = true,
+      messages = {
+        pos = "box",
+      },
+    })
+
     --- temp fix strange issue with this new api.
     vim.cmd('echo "Hi towry"')
   end)
