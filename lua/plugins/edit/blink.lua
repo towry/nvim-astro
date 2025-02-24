@@ -9,6 +9,11 @@ return {
     }
     opts.completion = vim.tbl_deep_extend("force", opts.completion or {}, {
       ghost_text = { enabled = false },
+      accept = {
+        auto_brackets = {
+          enabled = false,
+        },
+      },
 
       trigger = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "trigger") or {}, {
         prefetch_on_insert = false,
