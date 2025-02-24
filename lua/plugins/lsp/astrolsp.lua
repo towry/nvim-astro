@@ -123,7 +123,7 @@ return {
               },
               preferences = {
                 importModuleSpecifierEnding = "index",
-                importModuleSpecifier = "relative",
+                importModuleSpecifier = "shortest",
               },
             },
             javascript = {
@@ -133,7 +133,7 @@ return {
               },
               preferences = {
                 importModuleSpecifierEnding = "index",
-                importModuleSpecifier = "relative",
+                importModuleSpecifier = "shortest",
               },
             },
           },
@@ -152,13 +152,13 @@ return {
               },
               preferences = {
                 importModuleSpecifierEnding = "index",
-                importModuleSpecifier = "relative",
+                importModuleSpecifier = "shortest",
               },
             },
             javascript = {
               preferences = {
                 importModuleSpecifierEnding = "index",
-                importModuleSpecifier = "relative",
+                importModuleSpecifier = "shortest",
               },
             },
           },
