@@ -126,7 +126,7 @@ return {
             desc = "Jumplist",
           }
 
-          maps.n["<leader>fo"] = {
+          maps.n["<leader>fO"] = {
             function()
               require(PickerMod).folders({
                 cwd = V.nvim_root(),
@@ -136,7 +136,7 @@ return {
             desc = "Find all folders",
           }
           if rooter_is_on then
-            maps.n["<leader>fO"] = {
+            maps.n["<leader>fo"] = {
               function()
                 require(PickerMod).folders({
                   cwd = V.nvim_workspaces_root(),
