@@ -4,6 +4,7 @@ local refresh_gitsigns = function() vim.cmd("silent! Gitsigns refresh") end
 
 return {
   { import = "plugins.git.fugitive" },
+  { "avm99963/vim-jjdescription", lazy = false },
   {
     "julienvincent/hunk.nvim",
     cmd = { "DiffEditor" },
