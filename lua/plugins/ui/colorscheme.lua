@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "minifox"
 
 if vim.g.vscode then return {} end
 
@@ -80,8 +80,8 @@ return {
             },
           },
           background = {
-            dark = "wave",
-            -- dark = "dragon",
+            -- dark = "wave",
+            dark = "dragon",
             light = "lotus",
           },
         },
@@ -94,7 +94,7 @@ return {
         cond = (vim.g.colorscheme):match(".*fox") ~= nil,
         opts = {
           options = {
-            transparent = true,
+            transparent = false,
             styles = {
               keywords = "italic",
               types = "italic,bold",
@@ -142,10 +142,14 @@ return {
                 fg = "palette.blue",
                 bg = "palette.bg0",
               },
-              WinSeparator = {
-                fg = "palette.blue",
-              },
-              FloatBorder = { link = "NormalFloat" },
+              -- WinSeparator = {
+              --   fg = "palette.blue",
+              -- },
+              -- SnacksIndent = { fg = "palette.bg1" },
+              -- SnacksPickerDir = { link = "Text" },
+              -- SnacksPickerBufFlags = { link = "SnacksPickerDir" },
+              -- SnacksIndentScope = { fg = "palette.bg0" },
+              -- FloatBorder = { link = "NormalFloat" },
               FzfLuaNormal = { link = "NormalFloat" },
               FzfLuaBorder = { link = "FloatBorder" },
             },
@@ -153,19 +157,6 @@ return {
             nordfox = {},
           },
         },
-      },
-
-      {
-        "olimorris/onedarkpro.nvim",
-        opts = {},
-      },
-
-      {
-        "santos-gabriel-dario/darcula-solid.nvim",
-        dependencies = {
-          "rktjmp/lush.nvim",
-        },
-        config = function() end,
       },
     },
   },

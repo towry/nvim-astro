@@ -20,7 +20,7 @@ return {
         border = "none",
         title_pos = "center",
         wo = {
-          winblend = 20,
+          winblend = 0,
         },
       }
     end,
