@@ -1,3 +1,3 @@
 return {
-    { import = "plugins.finder.fzf-lua.fzf-lua" },
+    -- { import = "plugins.finder.fzf-lua.fzf-lua" },
 }
