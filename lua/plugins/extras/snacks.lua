@@ -65,7 +65,7 @@ return {
         maps.n["<leader><space>"] = {
           function()
             Snacks.picker.smart({
-              cwd = V.nvim_workspaces_root(),
+              dirs = { V.nvim_workspaces_root() },
             })
           end,
           desc = "Smart Find Files",
@@ -77,7 +77,11 @@ return {
         }
 
         maps.n["<localleader>,"] = {
-          function() Snacks.picker.buffers() end,
+          function()
+            Snacks.picker.buffers({
+              show_empty = false,
+            })
+          end,
           desc = "Buffers",
         }
 
@@ -122,13 +126,17 @@ return {
         }
 
         maps.n["<Leader>ff"] = {
-          function() Snacks.picker.files() end,
-          desc = "Find files",
-        }
-        maps.n["<Leader>ff"] = {
           function()
             Snacks.picker.files({
-              cwd = V.nvim_workspaces_root(),
+              dirs = { V.nvim_root() },
+            })
+          end,
+          desc = "Find files",
+        }
+        maps.n["<Leader>fF"] = {
+          function()
+            Snacks.picker.files({
+              dirs = { V.nvim_workspaces_root() },
             })
           end,
           desc = "Find files (Workspace)",
@@ -175,16 +183,16 @@ return {
 
           if rooter_is_on then
             maps.n["<Leader>fS"] = {
-              function() Snacks.picker.grep({ cwd = V.nvim_workspaces_root() }) end,
+              function() Snacks.picker.grep({ dirs = { V.nvim_workspaces_root() } }) end,
               desc = "Grep words (Workspace root)",
             }
             maps.n["<Leader>fG"] = {
-              function() Snacks.picker.grep({ live = true, cwd = V.nvim_workspaces_root() }) end,
+              function() Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() } }) end,
               desc = "Live grep (Workspace root)",
             }
             maps.v["<Leader>fG"] = {
               function()
-                Snacks.picker.grep({ live = true, cwd = V.nvim_workspaces_root(), search = V.nvim_visual_text() })
+                Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() }, search = V.nvim_visual_text() })
               end,
               desc = "Live grep (Workspace root)",
             }
