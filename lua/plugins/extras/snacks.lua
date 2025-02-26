@@ -1,6 +1,42 @@
 local buf_utils = require("astrocore.buffer")
 local rooter_is_on = vim.g.internal_rooter_scope == "tab"
 
+local kind_filter = {
+  default = {
+    "Class",
+    "Constructor",
+    "Enum",
+    "Field",
+    "Function",
+    "Interface",
+    "Method",
+    "Module",
+    "Namespace",
+    "Package",
+    "Property",
+    "Struct",
+    "Trait",
+  },
+  markdown = false,
+  help = false,
+  -- you can specify a different filter for each filetype
+  lua = {
+    "Class",
+    "Constructor",
+    "Enum",
+    "Field",
+    "Function",
+    "Interface",
+    "Method",
+    "Module",
+    "Namespace",
+    -- "Package", -- remove package since luals uses it for control flow structures
+    "Property",
+    "Struct",
+    "Trait",
+  },
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -26,9 +62,18 @@ return {
         maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
         maps.v["<Leader>f"] = { desc = "🔎 Find" }
 
-        maps.n["<localleader><tab>"] = {
-          function() Snacks.picker.smart() end,
+        maps.n["<leader><space>"] = {
+          function()
+            Snacks.picker.smart({
+              cwd = V.nvim_workspaces_root(),
+            })
+          end,
           desc = "Smart Find Files",
+        }
+
+        maps.n["<Leader>fL"] = {
+          function() Snacks.picker.lazy() end,
+          desc = "Find lazy spec",
         }
 
         maps.n["<localleader>,"] = {
@@ -77,16 +122,16 @@ return {
         }
 
         maps.n["<Leader>ff"] = {
-          function() Snacks.picker.smart() end,
+          function() Snacks.picker.files() end,
           desc = "Find files",
         }
         maps.n["<Leader>ff"] = {
           function()
-            Snacks.picker.smart({
+            Snacks.picker.files({
               cwd = V.nvim_workspaces_root(),
             })
           end,
-          desc = "Find files (WOrkspace)",
+          desc = "Find files (Workspace)",
         }
 
         maps.n["<Leader>fh"] = {
@@ -168,18 +213,70 @@ return {
           }
         end
 
+        --- Notifiers
+        maps.n["<Leader>xH"] = {
+          function() Snacks.notifier.show_history() end,
+          desc = "Notifier History",
+        }
+
+        --- Words
+        maps.n["]]"] = {
+          function() Snacks.words.jump(vim.v.count1) end,
+          desc = "Next Reference",
+        }
+        maps.t["]]"] = maps.n["]]"]
+        maps.n["[["] = {
+          function() Snacks.words.jump(-vim.v.count1) end,
+          desc = "Previous Reference",
+        }
+      end,
+    },
+    {
+      "AstroNvim/astrolsp",
+      optional = true,
+      opts = function(_, opts)
+        local maps = opts.mappings
         -- LSP keymaps
+        maps.n["<Leader>lD"] = {
+          function() Snacks.picker.diagnostics() end,
+          desc = "LSP Diagnostics",
+        }
         if maps.n.gd then maps.n.gd[1] = function() Snacks.picker.lsp_definitions() end end
         if maps.n.gri then maps.n.gri[1] = function() Snacks.picker.lsp_implementations() end end
         if maps.n.grr then maps.n.grr[1] = function() Snacks.picker.lsp_references() end end
         if maps.n.gy then maps.n.gy[1] = function() Snacks.picker.lsp_type_definitions() end end
         if maps.n["<Leader>lG"] then maps.n["<Leader>lG"][1] = function() Snacks.picker.lsp_workspace_symbols() end end
+        maps.n["<Leader>le"] = {
+          function()
+            Snacks.picker.lsp_symbols({
+              layout = {
+                preset = "vertical",
+              },
+              filter = kind_filter,
+            })
+          end,
+          desc = "Document symbols",
+        }
       end,
     },
   },
   opts = {
     notifier = {
-      enabled = false,
+      enabled = true,
+      style = "minimal",
+      timeout = 4500,
+      width = { min = 20, max = 0.3 },
+      height = { min = 2, max = 0.2 },
+      padding = false,
+      level = vim.log.levels.WARN,
+      icons = {
+        error = "[E] ",
+        warn = "[W]",
+        info = "[I]",
+        debug = "[D]",
+        trace = "[T]",
+      },
+      top_down = false,
     },
     dashboard = {
       enabled = false,
@@ -190,6 +287,47 @@ return {
       layout = {
         cycle = true,
         preset = function() return vim.o.columns >= 120 and "default" or "vertical" end,
+      },
+      previewers = {
+        git = {
+          native = true, -- use native (terminal) or Neovim for previewing git diffs and commits
+          cmd = { "delta " },
+        },
+      },
+      ----@class snacks.picker.formatters.Config
+      formatters = {
+        file = {
+          filename_first = true, -- display filename before the file path
+        },
+      },
+      win = {
+        input = {
+          keys = {
+            ["<Esc>"] = { "close", mode = { "n", "i" } },
+            ["<a-.>"] = { "toggle_hidden", mode = { "i", "n" } },
+            ["<a-h>"] = false, -- disable builtin keymap for toggle hidden
+            ["<a-s>"] = { "flash", mode = { "n", "i" } },
+            ["s"] = { "flash" },
+          },
+        },
+      },
+      actions = {
+        flash = function(picker)
+          require("flash").jump({
+            pattern = "^",
+            label = { after = { 0, 0 } },
+            search = {
+              mode = "search",
+              exclude = {
+                function(win) return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list" end,
+              },
+            },
+            action = function(match)
+              local idx = picker.list:row2idx(match.pos[1])
+              picker.list:_move(idx, true, true)
+            end,
+          })
+        end,
       },
       layouts = {
         vertical = {
@@ -237,6 +375,14 @@ return {
     },
     scope = {
       filter = function(bufnr) return buf_utils.is_valid(bufnr) and not buf_utils.is_large(bufnr) end,
+    },
+    words = {
+      enabled = true,
+    },
+    styles = {
+      notification = {
+        wo = { wrap = true, winblend = 30 }, -- Wrap notifications
+      },
     },
     scratch = {},
     explorer = {
