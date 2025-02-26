@@ -106,7 +106,7 @@ return {
         n = {
           ["<leader>v"] = "⨓ Trailblazer",
           ["<localleader>v"] = "⨓ Trailblazer",
-          ["<leader><space>"] = { "<cmd>TrailBlazerNewTrailMark<cr>", desc = "New trail mark" },
+          ["<leader>vm"] = { "<cmd>TrailBlazerNewTrailMark<cr>", desc = "New trail mark" },
           ["<leader>vn"] = { "<cmd>TrailBlazerMoveToNearest<cr>", desc = "Trail nearest" },
           ["<leader>vx"] = { "<cmd>TrailBlazerDeleteAllTrailMarks<cr>", desc = "clear all marks" },
           ["<localleader>vx"] = { "<cmd>TrailBlazerDeleteAllTrailMarks 0<cr>", desc = "clear all marks in buffer" },
