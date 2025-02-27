@@ -35,7 +35,7 @@ return {
         },
       }),
       menu = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "menu") or {}, {
-        border = "none",
+        border = "single",
         draw = {
           treesitter = {},
         },
@@ -43,7 +43,7 @@ return {
       documentation = vim.tbl_deep_extend("force", vim.tbl_get(opts, "documentation") or {}, {
         treesitter_highlighting = false,
         window = {
-          border = "none",
+          border = "single",
         },
       }),
     })

@@ -17,7 +17,7 @@ return {
       opts.preset = "modern"
       opts.win = {
         no_overlap = true,
-        border = "none",
+        border = "single",
         title_pos = "center",
         wo = {
           winblend = 0,
