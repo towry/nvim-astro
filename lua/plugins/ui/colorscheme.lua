@@ -1,163 +1,198 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "rose-pine"
 
 if vim.g.vscode then return {} end
 
 return {
-  {
-    "AstroNvim/astroui",
-    opts = {
-      colorscheme = vim.g.colorscheme,
-    },
-    dependencies = {
-      {
-        "rebelot/kanagawa.nvim",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = vim.g.colorscheme == "kanagawa",
+    {
+        "AstroNvim/astroui",
         opts = {
-          transparent = false,
-          compile = true,
-          undercurl = true, -- enable undercurls
-          commentStyle = { italic = true },
-          functionStyle = { bold = true },
-          keywordStyle = { italic = true },
-          statementStyle = { bold = true },
-          typeStyle = { bold = true },
-          variablebuiltinStyle = { italic = true },
-          globalStatus = true,
-          overrides = function(colors) -- add/modify highlights
-            -- do not forget to run ':KanagawaCompile'
-            return {
-              -- flash
-              FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
-              WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
-              MsgArea = { link = "NormalFloat" },
+            colorscheme = vim.g.colorscheme,
+        },
+        dependencies = {
+            {
+                "rebelot/kanagawa.nvim",
+                priority = 1000,
+                event = "VeryLazy",
+                cond = vim.g.colorscheme == "kanagawa",
+                opts = {
+                    transparent = false,
+                    compile = true,
+                    undercurl = true, -- enable undercurls
+                    commentStyle = { italic = true },
+                    functionStyle = { bold = true },
+                    keywordStyle = { italic = true },
+                    statementStyle = { bold = true },
+                    typeStyle = { bold = true },
+                    variablebuiltinStyle = { italic = true },
+                    globalStatus = true,
+                    overrides = function(colors) -- add/modify highlights
+                        -- do not forget to run ':KanagawaCompile'
+                        return {
+                            -- flash
+                            FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
+                            WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
+                            MsgArea = { link = "NormalFloat" },
 
-              IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
-              IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },
-              IlluminatedWordWrite = { fg = "none", bg = colors.theme.bg_p2 },
+                            IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
+                            IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },
+                            IlluminatedWordWrite = { fg = "none", bg = colors.theme.bg_p2 },
+                        }
+                    end,
+                    colors = {
+                        palette = {
+                            -- + green
+                            -- lotusWhite0 = '#B9C8B7',
+                            -- lotusWhite1 = '#C2CDBE',
+                            -- lotusWhite2 = '#CAD2C5',
+                            -- lotusWhite3 = '#E9EDE6',
+                            -- lotusWhite4 = '#F3F5F1',
+                            -- lotusWhite5 = '#ffffff',
+
+                            --- + solarized
+                            lotusWhite0 = "#ECE8D8",
+                            lotusWhite1 = "#F5DEAC",
+                            lotusWhite2 = "#F3EEDD",
+                            --- main bg
+                            lotusWhite3 = "#fdf6e3",
+                            --- tabline etc
+                            lotusWhite4 = "#C5C0AF",
+                            lotusWhite5 = "#eee8d5",
+
+                            -- + dragon more darker
+                            dragonBlack3 = "#000000",
+                            dragonYellow = "#978e9b",
+                        },
+                        theme = {
+                            all = {
+                                ui = {
+                                    bg_gutter = "none",
+                                },
+                            },
+                            lotus = {
+                                ui = {
+                                    bg_p1 = "#DCD7BA",
+                                    -- bg_m3 = '#586e75',
+                                },
+                            },
+                            dragon = {
+                                ui = {},
+                            },
+                        },
+                    },
+                    background = {
+                        -- dark = "wave",
+                        dark = "dragon",
+                        light = "lotus",
+                    },
+                },
+            },
+
+            {
+                "EdenEast/nightfox.nvim",
+                priority = 1000,
+                event = "VeryLazy",
+                cond = (vim.g.colorscheme):match(".*fox") ~= nil,
+                opts = {
+                    options = {
+                        transparent = false,
+                        styles = {
+                            keywords = "italic",
+                            types = "italic,bold",
+                        },
+                    },
+                    palettes = {
+                        -- adapt to solarized light palette
+                        dayfox = {
+                            black = "#002b36",
+                            red = "#dc322f",
+                            green = "#859900",
+                            yellow = "#b58900",
+                            blue = "#268bd2",
+                            magenta = "#d33682",
+                            cyan = "#2aa198",
+                            white = "#eee8d5",
+                            orange = "#cb4b16",
+                            pink = "#6c71c4",
+
+                            comment = "#909995",
+
+                            bg0 = "#eee8d5", -- Dark bg (status line and float)
+                            bg1 = "#F6EED9", -- Default bg
+                            bg2 = "#ECE8D8", -- Lighter bg (colorcolm folds)
+                            -- bg3 = "#ece3cc", -- Lighter bg (cursor line)
+                            -- bg4 = "#909995", -- Conceal, border fg
+                            --
+                            fg0 = "#93a1a1", -- Lighter fg
+                            fg1 = "#53676d", -- Default fg
+                            -- fg2 = "#3a4d53", -- Darker fg (status line)
+                            -- fg3 = "#53676d", -- Darker fg (line numbers, fold colums)
+                            --
+                            sel0 = "#ece3cc", -- Popup bg, visual selection bg
+                            sel1 = "#c6c9c5", -- Popup sel bg, search bg
+                        },
+                    },
+                    groups = {
+                        dayfox = {
+                            CursorLine = {
+                                bg = "#ece3cc",
+                            },
+                        },
+                        all = {
+                            WidgetTextHighlight = {
+                                fg = "palette.blue",
+                                bg = "palette.bg0",
+                            },
+                            -- WinSeparator = {
+                            --   fg = "palette.blue",
+                            -- },
+                            -- SnacksIndent = { fg = "palette.bg1" },
+                            -- SnacksPickerDir = { link = "Text" },
+                            -- SnacksPickerBufFlags = { link = "SnacksPickerDir" },
+                            -- SnacksIndentScope = { fg = "palette.bg0" },
+                            -- FloatBorder = { link = "NormalFloat" },
+                            FzfLuaNormal = { link = "NormalFloat" },
+                            FzfLuaBorder = { link = "FloatBorder" },
+                        },
+                        -- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
+                        nordfox = {},
+                    },
+                },
+            },
+
+            --- rose-pine
+            {
+                "rose-pine/neovim",
+                name = "rose-pine",
+                priority = 1000,
+                event = "VeryLazy",
+                cond = vim.g.colorscheme == "rose-pine",
+                opts = {
+                    variant = "auto",
+                    dim_inactive_windows = false,
+                    extend_background_behind_borders = true,
+                    enable = {
+                        terminal = true,
+                        legacy_highlights = false, -- Improve compatibility for previous versions of Neovim
+                        migrations = false,        -- Handle deprecated options automatically
+                    },
+                    styles = {
+                        bold = true,
+                        italic = true,
+                        transparency = false,
+                    },
+                    -- NOTE: Highlight groups are extended (merged) by default. Disable this
+                    -- per group via `inherit = false`
+                    highlight_groups = {
+                        -- Comment = { fg = "foam" },
+                        -- StatusLine = { fg = "love", bg = "love", blend = 15 },
+                        -- VertSplit = { fg = "muted", bg = "muted" },
+                        -- Visual = { fg = "base", bg = "text", inherit = false },
+                    },
+                },
+                config = function()
+                    vim.cmd("colorscheme rose-pine")
+                end
             }
-          end,
-          colors = {
-            palette = {
-              -- + green
-              -- lotusWhite0 = '#B9C8B7',
-              -- lotusWhite1 = '#C2CDBE',
-              -- lotusWhite2 = '#CAD2C5',
-              -- lotusWhite3 = '#E9EDE6',
-              -- lotusWhite4 = '#F3F5F1',
-              -- lotusWhite5 = '#ffffff',
-
-              --- + solarized
-              lotusWhite0 = "#ECE8D8",
-              lotusWhite1 = "#F5DEAC",
-              lotusWhite2 = "#F3EEDD",
-              --- main bg
-              lotusWhite3 = "#fdf6e3",
-              --- tabline etc
-              lotusWhite4 = "#C5C0AF",
-              lotusWhite5 = "#eee8d5",
-
-              -- + dragon more darker
-              dragonBlack3 = "#000000",
-              dragonYellow = "#978e9b",
-            },
-            theme = {
-              all = {
-                ui = {
-                  bg_gutter = "none",
-                },
-              },
-              lotus = {
-                ui = {
-                  bg_p1 = "#DCD7BA",
-                  -- bg_m3 = '#586e75',
-                },
-              },
-              dragon = {
-                ui = {},
-              },
-            },
-          },
-          background = {
-            -- dark = "wave",
-            dark = "dragon",
-            light = "lotus",
-          },
         },
-      },
-
-      {
-        "EdenEast/nightfox.nvim",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = (vim.g.colorscheme):match(".*fox") ~= nil,
-        opts = {
-          options = {
-            transparent = false,
-            styles = {
-              keywords = "italic",
-              types = "italic,bold",
-            },
-          },
-          palettes = {
-            -- adapt to solarized light palette
-            dayfox = {
-              black = "#002b36",
-              red = "#dc322f",
-              green = "#859900",
-              yellow = "#b58900",
-              blue = "#268bd2",
-              magenta = "#d33682",
-              cyan = "#2aa198",
-              white = "#eee8d5",
-              orange = "#cb4b16",
-              pink = "#6c71c4",
-
-              comment = "#909995",
-
-              bg0 = "#eee8d5", -- Dark bg (status line and float)
-              bg1 = "#F6EED9", -- Default bg
-              bg2 = "#ECE8D8", -- Lighter bg (colorcolm folds)
-              -- bg3 = "#ece3cc", -- Lighter bg (cursor line)
-              -- bg4 = "#909995", -- Conceal, border fg
-              --
-              fg0 = "#93a1a1", -- Lighter fg
-              fg1 = "#53676d", -- Default fg
-              -- fg2 = "#3a4d53", -- Darker fg (status line)
-              -- fg3 = "#53676d", -- Darker fg (line numbers, fold colums)
-              --
-              sel0 = "#ece3cc", -- Popup bg, visual selection bg
-              sel1 = "#c6c9c5", -- Popup sel bg, search bg
-            },
-          },
-          groups = {
-            dayfox = {
-              CursorLine = {
-                bg = "#ece3cc",
-              },
-            },
-            all = {
-              WidgetTextHighlight = {
-                fg = "palette.blue",
-                bg = "palette.bg0",
-              },
-              -- WinSeparator = {
-              --   fg = "palette.blue",
-              -- },
-              -- SnacksIndent = { fg = "palette.bg1" },
-              -- SnacksPickerDir = { link = "Text" },
-              -- SnacksPickerBufFlags = { link = "SnacksPickerDir" },
-              -- SnacksIndentScope = { fg = "palette.bg0" },
-              -- FloatBorder = { link = "NormalFloat" },
-              FzfLuaNormal = { link = "NormalFloat" },
-              FzfLuaBorder = { link = "FloatBorder" },
-            },
-            -- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
-            nordfox = {},
-          },
-        },
-      },
     },
-  },
 }
