@@ -306,6 +306,12 @@ return {
               end,
               desc = "Open file tree",
             },
+            ["<Leader>e."] = {
+              function()
+                vim.defer_fn(function() vim.cmd([[Neotree source=filesystem reveal action=focus]]) end, 1)
+              end,
+              desc = "Reveal current file in tree",
+            },
             ["<Leader>ee"] = {
               function() vim.cmd("Neotree toggle focus position=left reveal=true") end,
               desc = "Toggle Explorer Focus",
