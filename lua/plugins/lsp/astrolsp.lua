@@ -166,12 +166,12 @@ return {
       },
       defaults = {
         hover = {
-          border = "none",
+          border = "single",
           title = "Symbol Hover",
           max_width = 80,
         },
         signature_help = {
-          border = "none",
+          border = "single",
           title = "Signature",
           winblend = 40,
           max_width = 80,
