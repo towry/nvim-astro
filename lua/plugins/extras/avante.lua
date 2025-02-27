@@ -3,21 +3,24 @@ local prefix = "<Leader>A"
 local Providers = {
   deepseek = "deepseek",
   ark = "ark",
+  copilot = "copilot",
 }
-local current = Providers.deepseek
+local current = Providers.copilot
 
 return {
   "yetone/avante.nvim",
   event = "User AstroFile",
-  commit = "0a837a4583d66abaf85c9d31f5efad12af87c736",
+  -- commit = "0a837a4583d66abaf85c9d31f5efad12af87c736",
   cond = function()
     if vim.g.vscode then return false end
 
     if current == Providers.deepseek then
       return vim.env.DEEPSEEK_API_KEY ~= nil
-    else
+    elseif current == Providers.ark then
       return vim.env.ARK_API_KEY ~= nil
     end
+
+    return true
   end,
   cmd = {
     "AvanteAsk",
@@ -33,8 +36,8 @@ return {
     provider = current,
     auto_suggestions_provider = current,
     behaviour = {
-      auto_suggestions = true,
-      auto_apply_diff_after_generation = true,
+      auto_suggestions = false,
+      auto_apply_diff_after_generation = false,
     },
     mappings = {
       ask = "<M-i>",
@@ -75,6 +78,20 @@ return {
         temperature = 0,
       },
     },
+
+    copilot = {
+      -- endpoint = "https://api.githubcopilot.com",
+      -- model = "gpt-4o-2024-08-06",
+      proxy = "http://localhost:1080", -- [protocol://]host[:port] Use this proxy
+      allow_insecure = false, -- Allow insecure server connections
+      timeout = 30000, -- Timeout in milliseconds
+      temperature = 0,
+      max_tokens = 4096,
+    },
+    suggestion = {
+      debounce = 2000,
+      throttle = 600,
+    },
   },
   build = "make",
   dependencies = {
@@ -83,7 +100,6 @@ return {
     "MunifTanjim/nui.nvim",
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
     --- The below dependencies are optional,
-    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
     {
       -- Make sure to set this up properly if you have lazy=true
       "MeanderingProgrammer/render-markdown.nvim",
