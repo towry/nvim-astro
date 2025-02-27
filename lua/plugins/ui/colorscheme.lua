@@ -177,19 +177,22 @@ return {
           },
           styles = {
             bold = true,
-            italic = true,
+            italic = false,
             transparency = false,
           },
           -- NOTE: Highlight groups are extended (merged) by default. Disable this
           -- per group via `inherit = false`
           highlight_groups = {
             -- Comment = { fg = "foam" },
-            StatusLine = { fg = "love", bg = "love", blend = 15 },
-            VertSplit = { fg = "muted", bg = "muted" },
-            Visual = { fg = "base", bg = "text", inherit = false },
+            -- StatusLine = { fg = "love", bg = "love", blend = 15 },
+            -- VertSplit = { fg = "muted", bg = "muted" },
+            -- Visual = { fg = "base", bg = "text", inherit = false },
           },
         },
-        config = function() vim.cmd("colorscheme rose-pine") end,
+        config = function(_, opts)
+          require("rose-pine").setup(opts)
+          vim.cmd("colorscheme rose-pine")
+        end,
       },
     },
   },
