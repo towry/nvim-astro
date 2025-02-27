@@ -1,4 +1,4 @@
-vim.g.colorscheme = "minifox"
+vim.g.colorscheme = "kanagawa"
 
 if vim.g.vscode then return {} end
 
@@ -32,6 +32,8 @@ return {
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
               WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
               MsgArea = { link = "NormalFloat" },
+              FloatBorder = { fg = colors.theme.ui.bg_p2, bg = colors.theme.ui.bg_m1 },
+              NormalFloat = { bg = colors.theme.ui.bg_m1 },
 
               IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
               IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },
