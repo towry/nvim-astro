@@ -356,6 +356,7 @@ return {
         },
         default = {
           layout = {
+            backdrop = false,
             box = "horizontal",
             width = 0.8,
             min_width = 120,
