@@ -1,4 +1,4 @@
-vim.g.colorscheme = "rose-pine"
+vim.g.colorscheme = "minifox"
 
 if vim.g.vscode then return {} end
 
@@ -117,7 +117,7 @@ return {
               comment = "#909995",
 
               bg0 = "#eee8d5", -- Dark bg (status line and float)
-              bg1 = "#F6EED9", -- Default bg
+              bg1 = "#fafafa", -- Default bg
               bg2 = "#ECE8D8", -- Lighter bg (colorcolm folds)
               -- bg3 = "#ece3cc", -- Lighter bg (cursor line)
               -- bg4 = "#909995", -- Conceal, border fg
@@ -152,6 +152,10 @@ return {
               -- FloatBorder = { link = "NormalFloat" },
               FzfLuaNormal = { link = "NormalFloat" },
               FzfLuaBorder = { link = "FloatBorder" },
+              FloatBorder = {
+                fg = "palette.bg2",
+                bg = "palette.bg0",
+              },
             },
             -- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
             nordfox = {},
