@@ -5,6 +5,13 @@ return {
   { import = "plugins.core.disabled" },
   { import = "plugins.core.smart-split" },
   {
+    "windwp/nvim-autopairs",
+    optional = true,
+    opts = {
+      ignored_next_char = "[%w%.]",
+    },
+  },
+  {
     "folke/which-key.nvim",
     opts = function(_, opts)
       opts.notify = true
