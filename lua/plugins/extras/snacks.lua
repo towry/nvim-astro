@@ -1,5 +1,6 @@
 local buf_utils = require("astrocore.buffer")
 local rooter_is_on = vim.g.internal_rooter_scope == "tab"
+local enable_snacks_picker = false
 
 local kind_filter = {
   default = {
@@ -58,167 +59,169 @@ return {
           desc = "Select Scratch",
         }
 
-        -- Finder keymaps
-        maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
-        maps.v["<Leader>f"] = { desc = "🔎 Find" }
+        if enable_snacks_picker then
+          -- Finder keymaps
+          maps.n["<Leader>f"] = vim.tbl_get(opts, "_map_sections", "f")
+          maps.v["<Leader>f"] = { desc = "🔎 Find" }
 
-        maps.n["<leader><space>"] = {
-          function()
-            Snacks.picker.smart({
-              dirs = { V.nvim_workspaces_root() },
-            })
-          end,
-          desc = "Smart Find Files",
-        }
-
-        maps.n["<Leader>fL"] = {
-          function() Snacks.picker.lazy() end,
-          desc = "Find lazy spec",
-        }
-
-        maps.n["<localleader>,"] = {
-          function()
-            Snacks.picker.buffers({
-              show_empty = false,
-            })
-          end,
-          desc = "Buffers",
-        }
-
-        maps.n["<Leader>fq"] = {
-          function() Snacks.picker.qflist() end,
-          desc = "Quickfix List",
-        }
-
-        maps.n["<Leader>fj"] = {
-          function() Snacks.picker.jumps() end,
-          desc = "Jumplist",
-        }
-
-        maps.n["<Leader>f<CR>"] = {
-          function() Snacks.picker.resume() end,
-          desc = "Resume previous search",
-        }
-
-        maps.n["<Leader>f'"] = {
-          function() Snacks.picker.marks() end,
-          desc = "Find marks",
-        }
-
-        maps.n["<Leader>f/"] = {
-          function() Snacks.picker.lines() end,
-          desc = "Find words in current buffer",
-        }
-
-        maps.n["<Leader>fc"] = {
-          function() Snacks.picker.grep_word() end,
-          desc = "Find word under cursor",
-        }
-
-        maps.n["<Leader>f;"] = {
-          function() Snacks.picker.command_history() end,
-          desc = "Find commands history",
-        }
-
-        maps.n["<Leader>f:"] = {
-          function() Snacks.picker.commands() end,
-          desc = "Find commands",
-        }
-
-        maps.n["<Leader>ff"] = {
-          function()
-            Snacks.picker.files({
-              dirs = { V.nvim_root() },
-            })
-          end,
-          desc = "Find files",
-        }
-        maps.n["<Leader>fF"] = {
-          function()
-            Snacks.picker.files({
-              dirs = { V.nvim_workspaces_root() },
-            })
-          end,
-          desc = "Find files (Workspace)",
-        }
-
-        maps.n["<Leader>fh"] = {
-          function() Snacks.picker.help() end,
-          desc = "Find help",
-        }
-
-        maps.n["<Leader>fk"] = {
-          function() Snacks.picker.keymaps() end,
-          desc = "Find keymaps",
-        }
-
-        maps.n["<Leader>fm"] = {
-          function() Snacks.picker.man() end,
-          desc = "Find man",
-        }
-
-        maps.n["<Leader>fr"] = {
-          function() Snacks.picker.registers() end,
-          desc = "Find registers",
-        }
-
-        if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
-          maps.n["<Leader>fs"] = {
-            function() Snacks.picker.grep() end,
-            desc = "Grep words",
-          }
-          maps.n["<Leader>fg"] = {
-            function() Snacks.picker.grep({ live = true }) end,
-            desc = "Live grep",
-          }
-          maps.v["<Leader>fg"] = {
+          maps.n["<leader><space>"] = {
             function()
-              Snacks.picker.grep({
-                live = true,
-                search = V.nvim_visual_text(),
+              Snacks.picker.smart({
+                dirs = { V.nvim_workspaces_root() },
               })
             end,
-            desc = "Live grep selection",
+            desc = "Smart Find Files",
           }
 
-          if rooter_is_on then
-            maps.n["<Leader>fS"] = {
-              function() Snacks.picker.grep({ dirs = { V.nvim_workspaces_root() } }) end,
-              desc = "Grep words (Workspace root)",
+          maps.n["<Leader>fL"] = {
+            function() Snacks.picker.lazy() end,
+            desc = "Find lazy spec",
+          }
+
+          maps.n["<localleader>,"] = {
+            function()
+              Snacks.picker.buffers({
+                show_empty = false,
+              })
+            end,
+            desc = "Buffers",
+          }
+
+          maps.n["<Leader>fq"] = {
+            function() Snacks.picker.qflist() end,
+            desc = "Quickfix List",
+          }
+
+          maps.n["<Leader>fj"] = {
+            function() Snacks.picker.jumps() end,
+            desc = "Jumplist",
+          }
+
+          maps.n["<Leader>f<CR>"] = {
+            function() Snacks.picker.resume() end,
+            desc = "Resume previous search",
+          }
+
+          maps.n["<Leader>f'"] = {
+            function() Snacks.picker.marks() end,
+            desc = "Find marks",
+          }
+
+          maps.n["<Leader>f/"] = {
+            function() Snacks.picker.lines() end,
+            desc = "Find words in current buffer",
+          }
+
+          maps.n["<Leader>fc"] = {
+            function() Snacks.picker.grep_word() end,
+            desc = "Find word under cursor",
+          }
+
+          maps.n["<Leader>f;"] = {
+            function() Snacks.picker.command_history() end,
+            desc = "Find commands history",
+          }
+
+          maps.n["<Leader>f:"] = {
+            function() Snacks.picker.commands() end,
+            desc = "Find commands",
+          }
+
+          maps.n["<Leader>ff"] = {
+            function()
+              Snacks.picker.files({
+                dirs = { V.nvim_root() },
+              })
+            end,
+            desc = "Find files",
+          }
+          maps.n["<Leader>fF"] = {
+            function()
+              Snacks.picker.files({
+                dirs = { V.nvim_workspaces_root() },
+              })
+            end,
+            desc = "Find files (Workspace)",
+          }
+
+          maps.n["<Leader>fh"] = {
+            function() Snacks.picker.help() end,
+            desc = "Find help",
+          }
+
+          maps.n["<Leader>fk"] = {
+            function() Snacks.picker.keymaps() end,
+            desc = "Find keymaps",
+          }
+
+          maps.n["<Leader>fm"] = {
+            function() Snacks.picker.man() end,
+            desc = "Find man",
+          }
+
+          maps.n["<Leader>fr"] = {
+            function() Snacks.picker.registers() end,
+            desc = "Find registers",
+          }
+
+          if vim.fn.executable("rg") == 1 or vim.fn.executable("grep") == 1 then
+            maps.n["<Leader>fs"] = {
+              function() Snacks.picker.grep() end,
+              desc = "Grep words",
             }
-            maps.n["<Leader>fG"] = {
-              function() Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() } }) end,
-              desc = "Live grep (Workspace root)",
+            maps.n["<Leader>fg"] = {
+              function() Snacks.picker.grep({ live = true }) end,
+              desc = "Live grep",
             }
-            maps.v["<Leader>fG"] = {
+            maps.v["<Leader>fg"] = {
               function()
-                Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() }, search = V.nvim_visual_text() })
+                Snacks.picker.grep({
+                  live = true,
+                  search = V.nvim_visual_text(),
+                })
               end,
-              desc = "Live grep (Workspace root)",
+              desc = "Live grep selection",
+            }
+
+            if rooter_is_on then
+              maps.n["<Leader>fS"] = {
+                function() Snacks.picker.grep({ dirs = { V.nvim_workspaces_root() } }) end,
+                desc = "Grep words (Workspace root)",
+              }
+              maps.n["<Leader>fG"] = {
+                function() Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() } }) end,
+                desc = "Live grep (Workspace root)",
+              }
+              maps.v["<Leader>fG"] = {
+                function()
+                  Snacks.picker.grep({ live = true, dirs = { V.nvim_workspaces_root() }, search = V.nvim_visual_text() })
+                end,
+                desc = "Live grep (Workspace root)",
+              }
+            end
+          end
+
+          -- Git keymaps
+          if vim.fn.executable("git") == 1 then
+            maps.n["<Leader>g"] = vim.tbl_get(opts, "_map_sections", "g")
+            maps.n["<Leader>gf"] = "[+] Git fuzzy"
+            maps.n["<Leader>gfb"] = {
+              function() Snacks.picker.git_branches() end,
+              desc = "Git branches",
+            }
+            maps.n["<Leader>gfc"] = {
+              function() Snacks.picker.git_log() end,
+              desc = "Git commits (repository)",
+            }
+            maps.n["<Leader>gfC"] = {
+              function() Snacks.picker.git_log_file() end,
+              desc = "Git commits (current file)",
+            }
+            maps.n["<Leader>gfs"] = {
+              function() Snacks.picker.git_status() end,
+              desc = "Git status",
             }
           end
-        end
-
-        -- Git keymaps
-        if vim.fn.executable("git") == 1 then
-          maps.n["<Leader>g"] = vim.tbl_get(opts, "_map_sections", "g")
-          maps.n["<Leader>gf"] = "[+] Git fuzzy"
-          maps.n["<Leader>gfb"] = {
-            function() Snacks.picker.git_branches() end,
-            desc = "Git branches",
-          }
-          maps.n["<Leader>gfc"] = {
-            function() Snacks.picker.git_log() end,
-            desc = "Git commits (repository)",
-          }
-          maps.n["<Leader>gfC"] = {
-            function() Snacks.picker.git_log_file() end,
-            desc = "Git commits (current file)",
-          }
-          maps.n["<Leader>gfs"] = {
-            function() Snacks.picker.git_status() end,
-            desc = "Git status",
-          }
         end
 
         --- Notifiers
@@ -243,6 +246,8 @@ return {
       "AstroNvim/astrolsp",
       optional = true,
       opts = function(_, opts)
+        if not enable_snacks_picker then return end
+
         local maps = opts.mappings
         -- LSP keymaps
         maps.n["<Leader>lD"] = {
@@ -290,7 +295,7 @@ return {
       enabled = false,
     },
     picker = {
-      enabled = true,
+      enabled = enable_snacks_picker,
       ui_select = true,
       layout = {
         cycle = true,
