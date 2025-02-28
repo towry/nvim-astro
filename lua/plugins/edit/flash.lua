@@ -51,5 +51,14 @@ return {
       },
     },
   },
-  opts = {},
+  opts = {
+    modes = {
+      char = {
+        enabled = true,
+        multi_line = false,
+        jump_labels = true,
+        keys = { "f", "F", "t", "T", ";", "," },
+      },
+    },
+  },
 }
