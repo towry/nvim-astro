@@ -305,7 +305,7 @@ return {
       ----@class snacks.picker.formatters.Config
       formatters = {
         file = {
-          filename_first = true, -- display filename before the file path
+          filename_first = false, -- display filename before the file path
         },
       },
       win = {

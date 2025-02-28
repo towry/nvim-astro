@@ -168,13 +168,12 @@ return {
         hover = {
           border = "single",
           title = "Symbol Hover",
-          max_width = 80,
+          max_width = 60,
         },
         signature_help = {
           border = "single",
           title = "Signature",
-          winblend = 40,
-          max_width = 80,
+          max_width = 60,
         },
       },
       flags = {},
