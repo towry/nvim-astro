@@ -30,7 +30,7 @@ M.open = function(fn)
       mode = "n",
     }
   end
-  --- actually this is not neccessary
+  --- actually this is not necessary
   local unset = function() M.maps = {} end
 
   fn(set, unset)

@@ -28,10 +28,11 @@ return {
   dependencies = {
     {
       "AstroNvim/astrocore",
+      optional = true,
       opts = {
         mappings = {
           n = {
-            ["<leader>wi"] = {
+            ["<c-w>i"] = {
               function()
                 local win = require("window-picker").pick_window({
                   selection_chars = "123456789ABCDEFGHIJKLMN",
@@ -56,7 +57,7 @@ return {
               end,
               desc = "Focus a window",
             },
-            ["<leader>wq"] = {
+            ["<c-w>q"] = {
               function()
                 local win = require("window-picker").pick_window({
                   selection_chars = "123456789ABCDEFGHIJKLMN",
