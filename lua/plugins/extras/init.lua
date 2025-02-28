@@ -8,7 +8,7 @@ return {
   { import = "plugins.extras.trailblazer" },
   -- { import = "plugins.extras.codeium" },
   { import = "plugins.extras.avante" },
-  -- { import = "plugins.extras.codecompanion" },
+  { import = "plugins.extras.codecompanion" },
   { import = "plugins.extras.copilot" },
   { import = "plugins.extras.snacks" },
   {
