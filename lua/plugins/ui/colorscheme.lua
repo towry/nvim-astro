@@ -32,8 +32,8 @@ return {
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
               WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
               -- MsgArea = { link = "NormalFloat" },
-              FloatBorder = { fg = colors.theme.ui.bg_p2, bg = colors.theme.ui.bg_m2 },
-              NormalFloat = { bg = colors.theme.ui.bg_m2 },
+              FloatBorder = { fg = colors.theme.ui.bg_p2, bg = colors.theme.ui.bg_m1 },
+              NormalFloat = { bg = colors.theme.ui.bg_m1 },
 
               IlluminatedWordText = { fg = "none", bg = colors.theme.bg_p2 },
               IlluminatedWordRead = { fg = "none", bg = colors.theme.bg_p2 },

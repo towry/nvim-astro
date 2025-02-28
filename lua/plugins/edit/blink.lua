@@ -25,7 +25,7 @@ return {
       }),
       list = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "list") or {}, {
         selection = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "list", "selection") or {}, {
-          preselect = true,
+          preselect = false,
           auto_insert = true,
           -- auto_insert = function(ctx) return ctx.mode == "cmdline" end,
         }),
