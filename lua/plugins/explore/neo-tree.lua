@@ -26,7 +26,7 @@ return {
     },
 
     window = {
-      auto_expand_width = true,
+      auto_expand_width = false,
       width = 50,
       popup = { -- settings that apply to float position only
         size = {
