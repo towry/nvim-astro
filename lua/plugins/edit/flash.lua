@@ -1,5 +1,6 @@
 return {
   "folke/flash.nvim",
+  event = "User AstroFile",
   dependencies = {
     {
       "AstroNvim/astrocore",
