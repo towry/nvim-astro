@@ -20,6 +20,7 @@ return {
             if maps.n["<Leader>lG"] then
               maps.n["<Leader>lG"][1] = function() require("fzf-lua").lsp_workspace_symbols() end
             end
+            maps.n["<Leader>ls"] = { function() require("fzf-lua").lsp_document_symbols() end, desc = "Search symbols" }
           end
         end,
       },
