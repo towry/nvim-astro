@@ -112,6 +112,11 @@ return {
         function(params) vim.cmd(([[tab exec "diffsplit" bufname(%s)]]):format(params.args)) end,
         desc = "Git diff with bufnr",
       },
+      CopyFilepath = {
+        -- copy relative file path
+        function() vim.fn.setreg("+", vim.fn.expand("%:p:.")) end,
+        desc = "Copy current file path to clipboard",
+      },
     },
 
     autocmds = {
