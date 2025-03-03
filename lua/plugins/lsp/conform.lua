@@ -1,3 +1,5 @@
+local Prettier = "prettierd"
+
 return {
   {
     "stevearc/conform.nvim",
@@ -22,14 +24,14 @@ return {
         if autoformat then return { timeout_ms = 500 } end
       end,
       formatters_by_ft = {
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        html = { "prettier" },
-        vue = { "prettier" },
-        css = { "prettier" },
-        json = { "prettier" },
+        javascript = { Prettier },
+        javascriptreact = { Prettier },
+        typescript = { Prettier },
+        typescriptreact = { Prettier },
+        html = { Prettier },
+        vue = { Prettier },
+        css = { Prettier },
+        json = { Prettier },
         nix = { "nixfmt" },
       },
     },
