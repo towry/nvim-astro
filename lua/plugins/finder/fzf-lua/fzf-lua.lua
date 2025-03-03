@@ -284,6 +284,18 @@ return {
                 desc = "Grep words (global cwd)",
               }
             end
+
+            maps.n["<Leader>fxf"] = {
+              function()
+                require("fzf-lua").grep({
+                  prompt = "Find by buf name > ",
+                  multiline = 2,
+                  search = vim.fn.expand("%:p:t:r"),
+                  cwd = V.nvim_root(),
+                })
+              end,
+              desc = "Find current buffer name in workspace",
+            }
           end
         end,
       },
