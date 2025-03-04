@@ -11,6 +11,7 @@ return {
   { import = "plugins.extras.codecompanion" },
   { import = "plugins.extras.copilot" },
   { import = "plugins.extras.snacks" },
+  { import = "plugins.extras.focus" },
   {
     "echasnovski/mini.move",
     keys = {

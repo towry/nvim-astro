@@ -30,7 +30,7 @@ return {
             return {
               -- flash
               FlashCursor = { fg = colors.theme.ui.fg, bg = colors.palette.waveBlue1 },
-              -- WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
+              WinSeparator = { fg = colors.palette.dragonPink, bg = "NONE" },
               -- MsgArea = { link = "NormalFloat" },
               -- FloatBorder = { fg = colors.theme.ui.bg_p2, bg = colors.theme.ui.bg_m1 },
               -- NormalFloat = { bg = colors.theme.ui.bg_m1 },
