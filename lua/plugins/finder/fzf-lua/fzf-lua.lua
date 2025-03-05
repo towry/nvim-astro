@@ -81,8 +81,12 @@ return {
         },
         lsp = {
           jump1 = true,
+          cwd_only = true,
           code_actions = {
             previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
+          },
+          symbols = {
+            symbol_style = 2,
           },
         },
       })

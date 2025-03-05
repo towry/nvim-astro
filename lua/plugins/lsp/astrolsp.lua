@@ -180,7 +180,7 @@ return {
       -- customize how language servers are attached
       handlers = {
         ts_ls = false,
-        volar = false,
+        -- volar = false,
         eslint = false,
         emmet_ls = false,
         -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
