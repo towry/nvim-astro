@@ -49,14 +49,18 @@ return {
       local base = lint.linters[name]
       lint.linters[name] = (type(linter) == "table" and type(base) == "table")
           and vim.tbl_deep_extend("force", base, linter)
-        or linter
+          or linter
     end
 
     local valid_linters = function(ctx, linters)
       if not linters then return {} end
       return vim.tbl_filter(function(name)
         local linter = lint.linters[name]
-        return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+        local executable = true
+        if linter and type(linter.cmd) == 'string' then
+          executable = vim.fn.executable(linter.cmd) == 1
+        end
+        return linter and executable and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
       end, linters)
     end
 
@@ -65,7 +69,7 @@ return {
       ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
 
       local linters = valid_linters(ctx, orig(...))
-      if not linters[1] then linters = valid_linters(ctx, lint.linters_by_ft["_"]) end -- fallback
+      if not linters[1] then linters = valid_linters(ctx, lint.linters_by_ft["_"]) end   -- fallback
       astrocore.list_insert_unique(linters, valid_linters(ctx, lint.linters_by_ft["*"])) -- global
 
       return linters
