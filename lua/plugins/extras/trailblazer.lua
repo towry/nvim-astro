@@ -80,7 +80,7 @@ local function delete_trail_mark_stack()
 end
 
 --- This enables you to quickly "bookmark" where you are right now,
---- naviagte to wherever you need to and come back by simply popping
+--- navigate to wherever you need to and come back by simply popping
 --- the last mark off the stack using the "track back" feature. This is especially
 --- useful when you need to quickly jump to a specific location in a different file or
 --- window and return afterwards without the need for a permanent mark.
@@ -104,8 +104,8 @@ return {
     V.astro_extend_core({
       mappings = {
         n = {
-          ["<leader>v"] = "⨓ Trailblazer",
-          ["<localleader>v"] = "⨓ Trailblazer",
+          ["<leader>v"] = " Trailblazer",
+          ["<localleader>v"] = " Trailblazer",
           ["<leader>vm"] = { "<cmd>TrailBlazerNewTrailMark<cr>", desc = "New trail mark" },
           ["<leader>vn"] = { "<cmd>TrailBlazerMoveToNearest<cr>", desc = "Trail nearest" },
           ["<leader>vx"] = { "<cmd>TrailBlazerDeleteAllTrailMarks<cr>", desc = "clear all marks" },

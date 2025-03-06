@@ -1,7 +1,7 @@
 return {
   "olimorris/codecompanion.nvim",
   event = { "VeryLazy" },
-  commit = "c0a820e01",
+  -- commit = "c0a820e01",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -129,6 +129,7 @@ return {
   specs = {
     {
       "j-hui/fidget.nvim",
+      optional = true,
       opts = function() require("plugins.extras.codecompanion-extras.fidget-spinner"):init() end,
     },
   },

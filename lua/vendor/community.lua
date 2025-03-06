@@ -1,6 +1,5 @@
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.editing-support.conform-nvim" },
   -- { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.completion.blink-cmp" },

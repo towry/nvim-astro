@@ -21,13 +21,13 @@ return {
       opts.delay = function(ctx) return ctx.plugin and 0 or 150 end
       opts.defer = function(ctx) return ctx.mode == "V" or ctx.mode == "<C-V>" end
 
-      opts.preset = "modern"
+      opts.preset = "helix"
       opts.win = {
         no_overlap = true,
         border = "single",
         title_pos = "center",
         wo = {
-          winblend = 0,
+          winblend = 20,
         },
       }
     end,

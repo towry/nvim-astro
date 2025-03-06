@@ -133,6 +133,24 @@ return {
           },
         },
         i = {
+          ["<M-j>"] = {
+            function()
+              if V.plugin_has_ai_suggestions() then
+                vim.fn["copilot#Next"]()
+                return
+              end
+            end,
+            desc = "Copilot next suggestion",
+          },
+          ["<M-k>"] = {
+            function()
+              if V.plugin_has_ai_suggestions() then
+                vim.fn["copilot#Previous"]()
+                return
+              end
+            end,
+            desc = "Copilot previous suggestion",
+          },
           ["<C-g>"] = {
             function()
               local core = require("astrocore")

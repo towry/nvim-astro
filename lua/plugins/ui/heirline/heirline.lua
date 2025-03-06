@@ -1,3 +1,4 @@
+-- doc: https://docs.astronvim.com/recipes/status/
 local component_loader = require("plugins.ui.heirline.component_")
 
 return {
@@ -161,9 +162,9 @@ return {
           }),
         },
 
-        { -- tab list
+        {                                                                       -- tab list
           condition = function() return #vim.api.nvim_list_tabpages() >= 2 end, -- only show tabs if there are more than one
-          status.heirline.make_tablist({ -- component for each tab
+          status.heirline.make_tablist({                                        -- component for each tab
             provider = status.provider.tabnr(),
             hl = function(self) return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true) end,
           }),

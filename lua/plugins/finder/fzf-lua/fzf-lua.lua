@@ -20,6 +20,7 @@ return {
             if maps.n["<Leader>lG"] then
               maps.n["<Leader>lG"][1] = function() require("fzf-lua").lsp_workspace_symbols() end
             end
+            maps.n["<Leader>ls"] = { function() require("fzf-lua").lsp_document_symbols() end, desc = "Search symbols" }
           end
         end,
       },
@@ -80,8 +81,12 @@ return {
         },
         lsp = {
           jump1 = true,
+          cwd_only = true,
           code_actions = {
             previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
+          },
+          symbols = {
+            symbol_style = 2,
           },
         },
       })
@@ -283,6 +288,18 @@ return {
                 desc = "Grep words (global cwd)",
               }
             end
+
+            maps.n["<Leader>fxf"] = {
+              function()
+                require("fzf-lua").grep({
+                  prompt = "Find by buf name > ",
+                  multiline = 2,
+                  search = vim.fn.expand("%:p:t:r"),
+                  cwd = V.nvim_root(),
+                })
+              end,
+              desc = "Find current buffer name in workspace",
+            }
           end
         end,
       },
