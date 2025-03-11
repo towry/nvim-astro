@@ -20,6 +20,15 @@ return {
         diff.setup({
           -- Disabled by default
           source = diff.gen_source.git(),
+          mappings = {
+            goto_first = "",
+            goto_prev = "",
+            goto_next = "",
+            goto_last = "",
+            textobject = "",
+            reset = "",
+            apply = "",
+          },
         })
       end,
     },

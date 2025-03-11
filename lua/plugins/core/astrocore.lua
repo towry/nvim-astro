@@ -52,7 +52,9 @@ return {
       },
       underline = false,
       float = {
-        border = "none",
+        scope = "line",
+        header = "Diagnostics: ",
+        border = "single",
       },
     },
     -- vim options can be configured here
