@@ -328,7 +328,12 @@ local get_vscode_settings_value = function()
 end
 
 local util_get_elixirls_project_dir = function()
-  local vscode_settings = get_vscode_settings_value()
+  local is_ok, vscode_settings = pcall(get_vscode_settings_value)
+  if not is_ok then
+    vim.notify("Failed to get vscode settings", vim.log.levels.ERROR)
+    return
+  end
+
   if not vscode_settings then return end
   local elixir_project_dir = vscode_settings["elixirLS.projectDir"]
   if not elixir_project_dir then return vim.fn.getcwd() end
@@ -337,7 +342,13 @@ end
 
 --- Find python exec in vim.env.PATH if pyenv shims exists
 local util_locate_python_exec_path = function()
-  local vscode_settings = get_vscode_settings_value()
+  local is_ok, vscode_settings = pcall(get_vscode_settings_value)
+
+  if not is_ok then
+    vim.notify("Failed to get vscode settings", vim.log.levels.ERROR)
+    return
+  end
+
   local python_path = nil
   if vscode_settings then python_path = vscode_settings["python.defaultInterpreterPath"] end
   if python_path and vim.fn.executable(python_path) == 1 then return python_path end

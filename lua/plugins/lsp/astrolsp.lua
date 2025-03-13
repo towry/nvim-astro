@@ -23,7 +23,6 @@ return {
         codelens = true, -- enable/disable codelens refresh on start
         inlay_hints = true, -- enable/disable inlay hints on start
         semantic_tokens = true, -- enable/disable semantic token highlighting
-        signature_help = true,
       },
       -- customize lsp formatting options
       formatting = {
@@ -266,19 +265,5 @@ return {
       -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
       on_attach = function(client, bufnr) end,
     },
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "typos_lsp" })
-    end,
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "typos-lsp" })
-    end,
   },
 }
