@@ -61,6 +61,7 @@ return {
     options = {
       opt = { -- vim.opt.<key>
         laststatus = 3,
+        winborder = "none",
         showtabline = 0,
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number

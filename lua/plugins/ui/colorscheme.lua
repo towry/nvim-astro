@@ -61,7 +61,7 @@ return {
               lotusWhite5 = "#eee8d5",
 
               -- + dragon more darker
-              dragonBlack3 = "#181818",
+              dragonBlack3 = "#1e1e1f",
               dragonYellow = "#978e9b",
             },
             theme = {
