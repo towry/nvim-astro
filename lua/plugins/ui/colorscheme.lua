@@ -8,6 +8,7 @@ return {
     opts = {
       colorscheme = vim.g.colorscheme,
     },
+    build = ":KanagawaCompile",
     dependencies = {
       {
         "rebelot/kanagawa.nvim",
@@ -82,8 +83,8 @@ return {
             },
           },
           background = {
-            -- dark = "wave",
-            dark = "dragon",
+            dark = "wave",
+            -- dark = "dragon",
             light = "lotus",
           },
         },
