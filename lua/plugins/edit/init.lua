@@ -4,6 +4,7 @@ return {
   { import = "plugins.edit.flash" },
   { import = "plugins.edit.text-case" },
   { import = "plugins.edit.blink" },
+  { "HawkinsT/pathfinder.nvim", event = "User AstroFile" },
   {
     "luiscassih/AniKakoune",
     event = "VeryLazy",
