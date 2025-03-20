@@ -8,6 +8,7 @@ return {
     opts = {
       colorscheme = vim.g.colorscheme,
     },
+    build = ":KanagawaCompile",
     dependencies = {
       {
         "rebelot/kanagawa.nvim",
@@ -61,7 +62,7 @@ return {
               lotusWhite5 = "#eee8d5",
 
               -- + dragon more darker
-              dragonBlack3 = "#181818",
+              dragonBlack3 = "#1e1e1f",
               dragonYellow = "#978e9b",
             },
             theme = {
@@ -82,8 +83,8 @@ return {
             },
           },
           background = {
-            -- dark = "wave",
-            dark = "dragon",
+            dark = "wave",
+            -- dark = "dragon",
             light = "lotus",
           },
         },

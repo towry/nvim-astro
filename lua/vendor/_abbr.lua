@@ -17,7 +17,7 @@ setca("asb", "ScratchBuffer")
 -- setca("als", "LoadSession")
 --- name without ext
 setca("aname", function() return vim.fn.expand("%:t:r") end)
--- reeturn alt buf nr
+-- return alt buf nr
 setca("altbuf", function() return tostring(vim.fn.bufnr("#")) end)
 setca("afile", function() return vim.fn.expand("%:t") end)
 setca("apath", function() return vim.fn.expand("%") end)
@@ -35,6 +35,7 @@ setca("ccc", "CodeCompanionCmd")
 setca("cc", "CodeCompanion")
 -- inline edit
 setca("cci", "CodeCompanion #buffer")
+setca("cca", "CodeCompanionActions")
 
 setca("amh", "MERGE_HEAD")
 setca("arh", "REBASE_HEAD")
