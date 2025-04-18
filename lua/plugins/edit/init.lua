@@ -26,6 +26,7 @@ return {
       "InsertEnter",
       "CmdlineEnter",
     },
+    init = function() vim.g.rsi_no_meta = true end,
   },
 
   { import = "plugins.edit.mappings" },
