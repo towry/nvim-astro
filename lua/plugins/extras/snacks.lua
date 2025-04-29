@@ -42,6 +42,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  commit = "bc0630e43be5699bb94dadc302c0d21615421d93",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     {
