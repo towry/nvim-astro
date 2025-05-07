@@ -55,7 +55,7 @@ return {
         winopts = {
           height = 0.95,
           width = 0.85,
-          backdrop = 60,
+          backdrop = 100,
           border = "single",
           preview = {
             delay = 50,
@@ -68,15 +68,16 @@ return {
         },
         fzf_colors = false,
         fzf_opts = {
-          ["--ansi"] = "",
+          ["--tmux"] = "center,90%,80%,border-native",
+          ["--ansi"] = true,
           ["--info"] = "inline-right",
           ["--height"] = "100%",
           ["--highlight-line"] = true,
-          ["--layout"] = "reverse",
-          ["--margin"] = "0%",
-          ["--padding"] = "0%",
-          ["--border"] = "none",
-          ["--cycle"] = "",
+          -- ["--layout"] = "reverse",
+          -- ["--margin"] = "0%",
+          -- ["--padding"] = "0%",
+          -- ["--border"] = "none",
+          ["--cycle"] = true,
           ["--no-separator"] = "",
         },
         lsp = {
