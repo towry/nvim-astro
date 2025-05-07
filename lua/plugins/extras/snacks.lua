@@ -276,7 +276,7 @@ return {
   },
   opts = {
     notifier = {
-      enabled = true,
+      enabled = false,
       style = "minimal",
       timeout = 4500,
       width = { min = 20, max = 0.3 },
