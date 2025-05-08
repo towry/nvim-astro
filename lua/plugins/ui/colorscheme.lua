@@ -8,13 +8,44 @@ return {
     opts = {
       colorscheme = vim.g.colorscheme,
     },
-    build = ":KanagawaCompile",
     dependencies = {
+      {
+        "webhooked/kanso.nvim",
+        event = "VeryLazy",
+        cond = vim.g.colorscheme == "kanso",
+        priority = 1000,
+        opts = {
+          compile = false, -- enable compiling the colorscheme
+          undercurl = true, -- enable undercurls
+          commentStyle = { italic = true },
+          functionStyle = {},
+          keywordStyle = { italic = true },
+          statementStyle = {},
+          typeStyle = {},
+          disableItalics = false,
+          transparent = false, -- do not set background color
+          dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+          terminalColors = true, -- define vim.g.terminal_color_{0,17}
+          colors = { -- add/modify theme and palette colors
+            palette = {},
+            theme = { zen = {}, pearl = {}, ink = {}, all = {} },
+          },
+          overrides = function(_colors) -- add/modify highlights
+            return {}
+          end,
+          theme = "ink", -- Load "zen" theme
+          background = { -- map the value of 'background' option to a theme
+            dark = "ink", -- try "ink" !
+            light = "pearl",
+          },
+        },
+      },
       {
         "rebelot/kanagawa.nvim",
         priority = 1000,
         event = "VeryLazy",
         cond = vim.g.colorscheme == "kanagawa",
+        build = ":KanagawaCompile",
         opts = {
           transparent = false,
           compile = true,
