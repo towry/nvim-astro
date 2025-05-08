@@ -100,10 +100,16 @@ return {
         layout = "vertical",
         provider = "mini_diff",
       },
+      chat = {
+        show_header_separator = true, -- Show header separators in the chat buffer? Set this to false if you're using an external markdown formatting plugin
+      },
     },
     strategies = {
       chat = {
         adapter = "copilot",
+        roles = {
+          user = "Towry",
+        },
       },
       inline = {
         adapter = "copilot",
@@ -142,7 +148,7 @@ return {
         })
       end,
       opts = {
-        allow_insecure = false, -- Use if required
+        allow_insecure = true, -- Use if required
         proxy = "socks5://127.0.0.1:1080",
       },
     },
