@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "jb"
 
 if vim.g.vscode then return {} end
 
@@ -10,34 +10,12 @@ return {
     },
     dependencies = {
       {
-        "webhooked/kanso.nvim",
+        "nickkadutskyi/jb.nvim",
         event = "VeryLazy",
-        cond = vim.g.colorscheme == "kanso",
+        cond = vim.g.colorscheme == "jb",
         priority = 1000,
         opts = {
-          compile = false, -- enable compiling the colorscheme
-          undercurl = true, -- enable undercurls
-          commentStyle = { italic = true },
-          functionStyle = {},
-          keywordStyle = { italic = true },
-          statementStyle = {},
-          typeStyle = {},
-          disableItalics = false,
-          transparent = false, -- do not set background color
-          dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-          terminalColors = true, -- define vim.g.terminal_color_{0,17}
-          colors = { -- add/modify theme and palette colors
-            palette = {},
-            theme = { zen = {}, pearl = {}, ink = {}, all = {} },
-          },
-          overrides = function(_colors) -- add/modify highlights
-            return {}
-          end,
-          theme = "ink", -- Load "zen" theme
-          background = { -- map the value of 'background' option to a theme
-            dark = "ink", -- try "ink" !
-            light = "pearl",
-          },
+          transparent = false,
         },
       },
       {
@@ -93,7 +71,7 @@ return {
               lotusWhite5 = "#eee8d5",
 
               -- + dragon more darker
-              dragonBlack3 = "#1e1e1f",
+              dragonBlack3 = "#111111",
               dragonYellow = "#978e9b",
             },
             theme = {
@@ -195,42 +173,6 @@ return {
             nordfox = {},
           },
         },
-      },
-
-      --- rose-pine
-      {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = vim.g.colorscheme == "rose-pine",
-        opts = {
-          variant = "auto",
-          dim_inactive_windows = false,
-          extend_background_behind_borders = true,
-          enable = {
-            terminal = true,
-            legacy_highlights = false, -- Improve compatibility for previous versions of Neovim
-            migrations = false, -- Handle deprecated options automatically
-          },
-          styles = {
-            bold = true,
-            italic = false,
-            transparency = false,
-          },
-          -- NOTE: Highlight groups are extended (merged) by default. Disable this
-          -- per group via `inherit = false`
-          highlight_groups = {
-            -- Comment = { fg = "foam" },
-            -- StatusLine = { fg = "love", bg = "love", blend = 15 },
-            -- VertSplit = { fg = "muted", bg = "muted" },
-            -- Visual = { fg = "base", bg = "text", inherit = false },
-          },
-        },
-        config = function(_, opts)
-          require("rose-pine").setup(opts)
-          vim.cmd("colorscheme rose-pine")
-        end,
       },
     },
   },
