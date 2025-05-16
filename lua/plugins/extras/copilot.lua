@@ -21,31 +21,6 @@ return {
             if V.plugin_has_ai_suggestion_text() then vim.fn["copilot#Clear"]() end
             if not require("cmp").abort() then fallback() end
           end, { "i", "c" })
-
-          opts.mapping["<C-P>"] = cmp.mapping(function()
-            if V.plugin_has_ai_suggestions() and not cmp_utils.cmp_has_select(cmp) then
-              if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
-              vim.fn["copilot#Previous"]()
-              return
-            end
-            if cmp_utils.cmp_is_visible(cmp) then
-              cmp.select_prev_item()
-            else
-              cmp.complete()
-            end
-          end)
-          opts.mapping["<C-N>"] = cmp.mapping(function()
-            if V.plugin_has_ai_suggestions() and not cmp_utils.cmp_has_select(cmp) then
-              if cmp_utils.cmp_is_visible(cmp) then cmp.close() end
-              vim.fn["copilot#Next"]()
-              return
-            end
-            if cmp_utils.cmp_is_visible(cmp) then
-              cmp.select_next_item()
-            else
-              cmp.complete()
-            end
-          end)
         end,
       },
     },

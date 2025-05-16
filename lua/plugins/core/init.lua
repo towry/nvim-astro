@@ -1,6 +1,5 @@
 return {
   { import = "plugins.core.astrocore" },
-  -- { import = "plugins.core.astrolsp" },
   { import = "plugins.core.astroui" },
   { import = "plugins.core.disabled" },
   { import = "plugins.core.smart-split" },
@@ -35,12 +34,18 @@ return {
   {
     "hrsh7th/nvim-cmp",
     optional = true,
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+    },
     opts = function(_, opts)
       local cmp = require("cmp")
       opts.preselect = cmp.PreselectMode.Item
       opts.completion = vim.tbl_deep_extend("keep", {
         completeopt = "menu,menuone",
       }, opts.completion or {})
+      opts.sources = vim.tbl_deep_extend("force", {
+        { name = "nvim_lsp_signature_help" },
+      }, opts.sources or {})
 
       opts.window = {
         completion = cmp.config.window.bordered({
