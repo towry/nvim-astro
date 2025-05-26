@@ -21,7 +21,7 @@ return {
       },
 
       trigger = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "trigger") or {}, {
-        prefetch_on_insert = false,
+        prefetch_on_insert = true,
       }),
       list = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "list") or {}, {
         selection = vim.tbl_deep_extend("force", vim.tbl_get(opts, "completion", "list", "selection") or {}, {
@@ -57,17 +57,17 @@ return {
       end,
       "fallback",
     }
-    -- opts.keymap["<C-P>"] = {
-    --   function(cmp)
-    --     if cmp.is_menu_visible() then return cmp.select_prev() end
-    --     return cmp.show()
-    --   end,
-    -- }
-    -- opts.keymap["<C-N>"] = {
-    --   function(cmp)
-    --     if cmp.is_menu_visible() then return cmp.select_next() end
-    --     return cmp.show()
-    --   end,
-    -- }
+    opts.keymap["<C-P>"] = {
+      function(cmp)
+        if cmp.is_menu_visible() then return cmp.select_prev() end
+        return cmp.show()
+      end,
+    }
+    opts.keymap["<C-N>"] = {
+      function(cmp)
+        if cmp.is_menu_visible() then return cmp.select_next() end
+        return cmp.show()
+      end,
+    }
   end,
 }

@@ -31,7 +31,8 @@ setca("altfind", function()
 end)
 setca("ass", "let @/=")
 
-setca("ccc", "CodeCompanionCmd")
+setca("ccr", "CodeCompanionCmd")
+setca("ccc", "CodeCompanionChat")
 setca("cc", "CodeCompanion")
 -- inline edit
 setca("cci", "CodeCompanion #buffer")

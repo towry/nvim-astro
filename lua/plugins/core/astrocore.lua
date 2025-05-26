@@ -3,28 +3,10 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
----- experimental: disable hit-enter-prompt
----- require https://github.com/neovim/neovim/pull/27855
-pcall(function()
-  -- if vim.g.vscode then return end
-  -- vim.schedule(function()
-  --   require("vim._extui").enable({
-  --     enable = true,
-  --     messages = {
-  --       pos = "box",
-  --     },
-  --   })
-  --
-  --   --- temp fix strange issue with this new api.
-  --   vim.cmd('echo "Hi towry"')
-  -- end)
-end)
-
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
-  branch = "v2",
-  version = false,
+  version = "^2",
   ---@type AstroCoreOpts
   opts = {
     -- Configure core features of AstroNvim

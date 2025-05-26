@@ -59,6 +59,10 @@ return {
         multi_line = false,
         jump_labels = true,
         keys = { "f", "F", "t", "T", ";", "," },
+        jump = {
+          register = false,
+          autojump = true,
+        },
       },
     },
   },

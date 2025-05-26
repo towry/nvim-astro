@@ -2,7 +2,9 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.editing-support.conform-nvim" },
   -- { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
-  { import = "astrocommunity.completion.blink-cmp" },
+  -- { import = "astrocommunity.completion.blink-cmp" },
+  { import = "astrocommunity.completion.nvim-cmp" },
+  { import = "astrocommunity.completion.blink-cmp-tmux" },
   --- langs
   { import = "astrocommunity.pack.rust" },
   -- { import = "astrocommunity.pack.go" },
@@ -12,7 +14,6 @@ return {
   -- { import = "astrocommunity.pack.ocaml" },
   { import = "astrocommunity.lsp.nvim-lsp-endhints" },
   { import = "astrocommunity.lsp.lsplinks-nvim" },
-  -- { import = "astrocommunity.completion.codeium-nvim" },
   -- edit
   -- { import = "astrocommunity.motion.tabout-nvim" },
   {

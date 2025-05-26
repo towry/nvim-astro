@@ -3,7 +3,8 @@ return {
   { import = "plugins.edit.surround" },
   { import = "plugins.edit.flash" },
   { import = "plugins.edit.text-case" },
-  { import = "plugins.edit.blink" },
+  -- { import = "plugins.edit.blink" },
+  { "HawkinsT/pathfinder.nvim", event = "User AstroFile" },
   {
     "luiscassih/AniKakoune",
     event = "VeryLazy",
@@ -25,6 +26,7 @@ return {
       "InsertEnter",
       "CmdlineEnter",
     },
+    init = function() vim.g.rsi_no_meta = true end,
   },
 
   { import = "plugins.edit.mappings" },

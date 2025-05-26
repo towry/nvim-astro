@@ -8,13 +8,22 @@ return {
     opts = {
       colorscheme = vim.g.colorscheme,
     },
-    build = ":KanagawaCompile",
     dependencies = {
+      {
+        "nickkadutskyi/jb.nvim",
+        event = "VeryLazy",
+        cond = vim.g.colorscheme == "jb",
+        priority = 1000,
+        opts = {
+          transparent = false,
+        },
+      },
       {
         "rebelot/kanagawa.nvim",
         priority = 1000,
         event = "VeryLazy",
         cond = vim.g.colorscheme == "kanagawa",
+        build = ":KanagawaCompile",
         opts = {
           transparent = false,
           compile = true,
@@ -62,7 +71,7 @@ return {
               lotusWhite5 = "#eee8d5",
 
               -- + dragon more darker
-              dragonBlack3 = "#1e1e1f",
+              dragonBlack3 = "#111111",
               dragonYellow = "#978e9b",
             },
             theme = {
@@ -83,8 +92,8 @@ return {
             },
           },
           background = {
-            dark = "wave",
-            -- dark = "dragon",
+            -- dark = "wave",
+            dark = "dragon",
             light = "lotus",
           },
         },
@@ -164,42 +173,6 @@ return {
             nordfox = {},
           },
         },
-      },
-
-      --- rose-pine
-      {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        priority = 1000,
-        event = "VeryLazy",
-        cond = vim.g.colorscheme == "rose-pine",
-        opts = {
-          variant = "auto",
-          dim_inactive_windows = false,
-          extend_background_behind_borders = true,
-          enable = {
-            terminal = true,
-            legacy_highlights = false, -- Improve compatibility for previous versions of Neovim
-            migrations = false, -- Handle deprecated options automatically
-          },
-          styles = {
-            bold = true,
-            italic = false,
-            transparency = false,
-          },
-          -- NOTE: Highlight groups are extended (merged) by default. Disable this
-          -- per group via `inherit = false`
-          highlight_groups = {
-            -- Comment = { fg = "foam" },
-            -- StatusLine = { fg = "love", bg = "love", blend = 15 },
-            -- VertSplit = { fg = "muted", bg = "muted" },
-            -- Visual = { fg = "base", bg = "text", inherit = false },
-          },
-        },
-        config = function(_, opts)
-          require("rose-pine").setup(opts)
-          vim.cmd("colorscheme rose-pine")
-        end,
       },
     },
   },

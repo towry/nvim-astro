@@ -1,0 +1,38 @@
+name: Run :checkhealth
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+    - main
+    - next
+    - towry-push-*
+  push:
+    branches:
+      - main
+
+jobs:
+  checkhealth:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        neovim: [stable, nightly]
+
+    runs-on: ${{ matrix.os }}
+    name: "OS: ${{ matrix.os }} - Neovim: ${{ matrix.neovim }}"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: nvim
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim }}
+
+      - name: Run :checkhealth
+        env:
+          XDG_CONFIG_HOME: ${{ github.workspace }} 
+        uses: ColinKennedy/nvim-checkhealth-gh-action@v1.0.0

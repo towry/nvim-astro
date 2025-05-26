@@ -14,8 +14,7 @@ end)
 return {
   {
     "AstroNvim/astrolsp",
-    branch = "v3",
-    version = false,
+    version = "^3",
     ---@type AstroLSPOpts
     opts = {
       -- Configuration table of features provided by AstroLSP

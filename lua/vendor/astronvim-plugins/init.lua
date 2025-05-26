@@ -11,8 +11,6 @@ local modules = {
   "_astroui_status",
   "autopairs",
   "aerial",
-  "cmp_luasnip",
-  -- "snacks",
   "comment",
   "dap",
   "gitsigns",
@@ -34,6 +32,7 @@ local modules = {
   "ts-context-commentstring",
   "which-key",
   "window-picker",
+  "luasnip"
 }
 
 local M = {}
