@@ -6,6 +6,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     {
+      enabled = false,
       "ravitemer/mcphub.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
@@ -173,7 +174,7 @@ return {
         },
       },
       mcphub = {
-        enabled = true,
+        enabled = false,
         callback = "mcphub.extensions.codecompanion",
         opts = {
           show_result_in_chat = true, -- Show the mcp tool result in the chat buffer
