@@ -116,3 +116,13 @@ do
 end
 
 V.lazy_call(require, "vendor._abbr")
+
+require("vim._extui").enable({
+  enable = true,
+  msg = {
+    pos = "box",
+    box = {
+      timeout = 2000,
+    },
+  },
+})
