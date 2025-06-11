@@ -1,4 +1,4 @@
-vim.g.colorscheme = "kanagawa"
+vim.g.colorscheme = "dracula"
 
 if vim.g.vscode then return {} end
 
@@ -9,6 +9,13 @@ return {
       colorscheme = vim.g.colorscheme,
     },
     dependencies = {
+      {
+        "Mofiqul/dracula.nvim",
+        event = "VeryLazy",
+        cond = vim.g.colorscheme == "dracula",
+        opts = {},
+        priority = 1000,
+      },
       {
         "nickkadutskyi/jb.nvim",
         event = "VeryLazy",
