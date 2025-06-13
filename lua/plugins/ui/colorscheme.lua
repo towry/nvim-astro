@@ -1,4 +1,4 @@
-vim.g.colorscheme = "dracula"
+vim.g.colorscheme = "default"
 
 if vim.g.vscode then return {} end
 
