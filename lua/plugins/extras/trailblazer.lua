@@ -88,6 +88,7 @@ end
 return {
   "LeonHeidelbach/trailblazer.nvim",
   submodules = false,
+  enabled = not V.git_start_nvim(),
   cmd = {
     "TrailBlazerTrackBack",
     "TrailBlazerMoveToNearest",

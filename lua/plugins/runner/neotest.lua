@@ -2,6 +2,7 @@ local prefix = "<localleader>t"
 return {
   "nvim-neotest/neotest",
   lazy = true,
+  enabled = not V.git_start_nvim(),
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
