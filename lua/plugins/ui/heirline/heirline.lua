@@ -19,26 +19,10 @@ return {
       status = {
         -- define the separators between each section
         separators = {
-          left = { "", "█" },
-          right = { "", "" }, -- separator for the right side of the statusline
-          tab = { "", "" },
+          left = { " ", " " },
+          right = { " ", " " }, -- separator for the right side of the statusline
+          tab = { " ", " " },
         },
-        -- add new colors that can be used by heirline
-        colors = function(hl)
-          local get_hlgroup = require("astroui").get_hlgroup
-          -- use helper function to get highlight group properties
-          local comment_fg = get_hlgroup("Comment").fg
-          hl.git_branch_fg = comment_fg
-          hl.git_added = comment_fg
-          hl.git_changed = comment_fg
-          hl.git_removed = comment_fg
-          hl.blank_bg = get_hlgroup("Folded").fg
-          hl.file_info_bg = get_hlgroup("Visual").bg
-          hl.nav_icon_bg = get_hlgroup("String").fg
-          hl.nav_fg = hl.nav_icon_bg
-          hl.folder_icon_bg = get_hlgroup("Error").fg
-          return hl
-        end,
         attributes = {
           mode = { bold = true },
         },
@@ -88,27 +72,6 @@ return {
         -- add the vim mode component
         status.component.mode({
           condition = status.condition.is_active,
-          -- enable mode text with padding as well as an icon before it
-          mode_text = {
-            icon = { kind = "VimIcon", padding = { right = 1, left = 1 } },
-          },
-          -- surround the component with a separators
-          surround = {
-            -- it's a left element, so use the left separator
-            separator = "left",
-            -- set the color of the surrounding based on the current mode using astronvim.utils.status module
-            color = function() return { main = status.hl.mode_bg(), right = "blank_bg" } end,
-          },
-        }),
-        -- we want an empty space here so we can use the component builder to make a new section with just an empty string
-        status.component.builder({
-          { provider = "" },
-          -- define the surrounding separator and colors to be used inside of the component
-          -- and the color to the right of the separated out section
-          surround = {
-            separator = "left",
-            color = { main = "blank_bg", right = "file_info_bg" },
-          },
         }),
         -- add a section for the currently opened file information
         status.component.file_info({
@@ -162,9 +125,9 @@ return {
           }),
         },
 
-        {                                                                       -- tab list
+        { -- tab list
           condition = function() return #vim.api.nvim_list_tabpages() >= 2 end, -- only show tabs if there are more than one
-          status.heirline.make_tablist({                                        -- component for each tab
+          status.heirline.make_tablist({ -- component for each tab
             provider = status.provider.tabnr(),
             hl = function(self) return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true) end,
           }),
