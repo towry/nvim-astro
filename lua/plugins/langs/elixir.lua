@@ -1,5 +1,3 @@
-if vim.lsp.config then vim.lsp.enable("elixirls") end
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
