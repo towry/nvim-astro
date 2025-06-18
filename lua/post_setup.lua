@@ -117,12 +117,12 @@ end
 
 V.lazy_call(require, "vendor._abbr")
 
--- require("vim._extui").enable({
---   enable = true,
---   msg = {
---     pos = "box",
---     box = {
---       timeout = 2000,
---     },
---   },
--- })
+require("vim._extui").enable({
+  enable = true,
+  msg = { -- Options related to the message module.
+    ---@type 'cmd'|'msg' Where to place regular messages, either in the
+    ---cmdline or in a separate ephemeral message window.
+    target = "msg",
+    timeout = 4000, -- Time a message is visible in the message window.
+  },
+})
