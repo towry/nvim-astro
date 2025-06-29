@@ -3,6 +3,8 @@ local V = require("v")
 return {
   {
     "github/copilot.vim",
+    enabled = not V.git_start_nvim(),
+
     specs = {
       {
         "pze/codeium.vim",

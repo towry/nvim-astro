@@ -68,7 +68,7 @@ return {
         },
         fzf_colors = false,
         fzf_opts = {
-          ["--tmux"] = "center,90%,80%,border-native",
+          -- ["--tmux"] = "center,90%,80%,border-native",
           ["--ansi"] = true,
           ["--info"] = "inline-right",
           ["--height"] = "100%",

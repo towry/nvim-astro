@@ -57,6 +57,9 @@ return {
       -- customize language server configuration options passed to `lspconfig`
       ---@diagnostic disable: missing-fields
       config = {
+        elixirls = {
+          cmd = { "elixir-ls" },
+        },
         typos_lsp = {
           setting = {
             diagnosticSeveritjy = "Warning",

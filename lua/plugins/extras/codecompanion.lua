@@ -1,6 +1,7 @@
 return {
   "olimorris/codecompanion.nvim",
   event = { "VeryLazy" },
+  enabled = not V.git_start_nvim(),
   -- commit = "c0a820e01",
   dependencies = {
     "nvim-lua/plenary.nvim",

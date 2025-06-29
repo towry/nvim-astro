@@ -5,6 +5,7 @@ return {
   ---overseer output window again.
   -- https://github.com/stevearc/overseer.nvim
   "stevearc/overseer.nvim",
+  enabled = not V.git_start_nvim(),
   cmd = {
     "OverseerRestartLast",
     "OverseerRun",

@@ -10,6 +10,13 @@ return {
     },
     dependencies = {
       {
+        "Mofiqul/dracula.nvim",
+        event = "VeryLazy",
+        cond = vim.g.colorscheme == "dracula",
+        opts = {},
+        priority = 1000,
+      },
+      {
         "nickkadutskyi/jb.nvim",
         event = "VeryLazy",
         cond = vim.g.colorscheme == "jb",
@@ -71,8 +78,8 @@ return {
               lotusWhite5 = "#eee8d5",
 
               -- + dragon more darker
-              -- dragonBlack3 = "#111111",
-              -- dragonYellow = "#978e9b",
+              dragonBlack3 = "#010101",
+              dragonYellow = "#978e9b",
             },
             theme = {
               all = {
