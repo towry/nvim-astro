@@ -80,8 +80,6 @@ return {
           -- enable the file_icon and disable the highlighting based on filetype
           filename = { fallback = "Empty", modify = ":p:." },
           -- disable some of the info
-          filetype = false,
-          file_read_only = false,
           -- add padding
           padding = { right = 1 },
           -- define the section separator
@@ -104,13 +102,6 @@ return {
 
         status.component.git_branch({
           git_branch = { padding = { left = 1 }, hl = { fg = "fg" } },
-        }),
-
-        -- add a component to display LSP clients, disable showing LSP progress, and use the right separator
-        status.component.lsp({
-          condition = status.condition.is_active,
-          lsp_progress = false,
-          surround = { separator = "right" },
         }),
 
         {

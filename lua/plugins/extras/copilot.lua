@@ -2,6 +2,7 @@ local V = require("v")
 
 return {
   {
+    ---- see https://github.com/github/copilot.vim/issues/82
     "github/copilot.vim",
     enabled = not V.git_start_nvim(),
 

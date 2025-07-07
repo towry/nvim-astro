@@ -94,7 +94,10 @@ return {
                 },
               },
               dragon = {
-                ui = {},
+                ui = {
+                  -- statusline
+                  bg_m3 = "#223249",
+                },
               },
             },
           },
