@@ -154,10 +154,25 @@ local function nvim_augroup(name, ...)
   return id
 end
 
+local is_in_jj_resolve_tool = function()
+  local tail = vim.fn.expand("%:h:t")
+  -- tail is string like: jj-resolve-<rev>
+  -- we need to test the jj-resolve-
+  local args = { "jj-resolve-" }
+
+  for _, v in ipairs(args) do
+    if tail:match(v) then
+      vim.g.nvim_is_start_as_merge_tool = 1
+      return true
+    end
+  end
+  return false
+end
+
 local git_is_perform_merge_in_nvim = function()
   if vim.g.nvim_is_start_as_merge_tool == 1 then return true end
   local tail = vim.fn.expand("%:t")
-  local args = { "MERGE_MSG", "COMMIT_EDITMSG" }
+  local args = { "MERGE_MSG", "COMMIT_EDITMSG", "jj-resolve-" }
   if vim.tbl_contains(args, tail) then
     vim.g.nvim_is_start_as_merge_tool = 1
     return true
@@ -178,7 +193,7 @@ local git_start_nvim = function()
     if is_match then return true end
   end
 
-  return git_is_perform_merge_in_nvim()
+  return git_is_perform_merge_in_nvim() or is_in_jj_resolve_tool()
 end
 
 local function register_global(name, value) _G[name] = value end
