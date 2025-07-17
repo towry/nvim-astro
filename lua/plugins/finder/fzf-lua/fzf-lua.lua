@@ -65,11 +65,14 @@ return {
             vertical = "down:40%",
             border = "single",
           },
+          default = {
+            preview = "bat",
+          },
         },
         fzf_colors = false,
         fzf_opts = {
           -- ["--tmux"] = "center,90%,80%,border-native",
-          ["--ansi"] = true,
+          ["--ansi"] = false,
           ["--info"] = "inline-right",
           ["--height"] = "100%",
           ["--highlight-line"] = true,
@@ -79,6 +82,19 @@ return {
           -- ["--border"] = "none",
           ["--cycle"] = true,
           ["--no-separator"] = "",
+        },
+        files = {
+          git_icons = false,
+          file_icons = false,
+        },
+        grep = {
+          rg_glob = true,
+
+          rg_glob_fn = function(query, opts)
+            local regex, flags = query:match("^(.-)%s%-%-(.*)$")
+            -- If no separator is detected will return the original query
+            return (regex or query), flags
+          end,
         },
         lsp = {
           jump1 = true,
