@@ -10,22 +10,6 @@ return {
     },
     dependencies = {
       {
-        "Mofiqul/dracula.nvim",
-        event = "VeryLazy",
-        cond = vim.g.colorscheme == "dracula",
-        opts = {},
-        priority = 1000,
-      },
-      {
-        "nickkadutskyi/jb.nvim",
-        event = "VeryLazy",
-        cond = vim.g.colorscheme == "jb",
-        priority = 1000,
-        opts = {
-          transparent = false,
-        },
-      },
-      {
         "rebelot/kanagawa.nvim",
         priority = 1000,
         event = "VeryLazy",
