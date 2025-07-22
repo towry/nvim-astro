@@ -110,7 +110,7 @@ function M.folders(opts)
   }
   opts.fzf_opts = {
     ["--preview-window"] = "nohidden,down,50%",
-    ["--preview"] = fzflua.shell.raw_preview_action_cmd(function(items)
+    ["--preview"] = fzflua.shell.stringify_cmd(function(items)
       if has_exa then
         return string.format(
           "cd %s ; eza --color=always --icons=always --group-directories-first -a %s",
@@ -119,7 +119,7 @@ function M.folders(opts)
         )
       end
       return string.format("cd %s ; ls %s", preview_cwd, items[1])
-    end),
+    end, opts, "{}"),
   }
 
   opts.actions = {
@@ -318,7 +318,7 @@ function M.zoxide_folders(opts)
   opts.fzf_opts = {
     ["--tiebreak"] = "index",
     ["--preview-window"] = "nohidden,down,50%",
-    ["--preview"] = fzflua.shell.raw_preview_action_cmd(function(items)
+    ["--preview"] = fzflua.shell.stringify_cmd(function(items)
       local item = (items[1] or ""):gsub("%s%[.*%]$", "")
 
       if has_exa then
@@ -329,7 +329,7 @@ function M.zoxide_folders(opts)
         )
       end
       return string.format("cd %s ; ls %s", preview_cwd, item)
-    end),
+    end, opts, "{}"),
   }
 
   opts.actions = {

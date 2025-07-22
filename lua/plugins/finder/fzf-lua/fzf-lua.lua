@@ -65,9 +65,6 @@ return {
             vertical = "down:40%",
             border = "single",
           },
-          default = {
-            preview = "bat",
-          },
         },
         fzf_colors = false,
         fzf_opts = {
