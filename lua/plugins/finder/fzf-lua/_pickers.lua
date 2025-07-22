@@ -135,11 +135,11 @@ function M.folders(opts)
       end
       require("plugins.utils._folder-action").open(entry_path)
     end,
-    ["ctrl-g"] = function(_, o)
-      opts.cmd = V.util_toggle_cmd_option(o.cmd, "--no-ignore-vcs")
+    ["alt-i"] = function(_, o)
+      opts.cmd = V.util_toggle_cmd_option(o.cmd, "--no-ignore")
       return fzflua.fzf_exec(opts.cmd, opts)
     end,
-    ["ctrl-h"] = function(_, o)
+    ["alt-h"] = function(_, o)
       --- toggle hidden
       opts.cmd = V.util_toggle_cmd_option(o.cmd, "--hidden")
       opts.query = M.get_last_query()
