@@ -135,6 +135,12 @@ return {
             silent = true,
           }
 
+          maps.n["<leader>fb"] = {
+            "<cmd>FzfLua grep_curbuf<cr>",
+            desc = "Find in current buffer",
+            silent = true,
+          }
+
           maps.n["<Leader>fq"] = {
             "<cmd>FzfLua quickfix<cr>",
             desc = "Quickfix List",
