@@ -1,7 +1,7 @@
 local V = require("v")
 
 return {
-  "pze/codeium.vim",
+  "Exafunction/windsurf.vim",
   lazy = true,
   -- event = { "InsertEnter" },
   cmd = { "Codeium" },

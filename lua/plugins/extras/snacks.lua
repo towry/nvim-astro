@@ -381,6 +381,11 @@ return {
     },
     input = {},
     indent = {
+      enabled = true,
+      indent = {
+        only_scope = true,
+      },
+      -- only_current = true,
       filter = function(bufnr)
         return buf_utils.is_valid(bufnr)
           and not buf_utils.is_large(bufnr)
@@ -389,6 +394,7 @@ return {
       end,
     },
     scope = {
+      enabled = true,
       filter = function(bufnr) return buf_utils.is_valid(bufnr) and not buf_utils.is_large(bufnr) end,
     },
     words = {
