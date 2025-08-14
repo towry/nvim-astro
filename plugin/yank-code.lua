@@ -116,13 +116,6 @@ end
 
 -- Create the command
 vim.api.nvim_create_user_command("YankCode", function()
-  -- Check if we're in visual mode
-  -- local mode = vim.fn.mode()
-  -- if mode ~= "v" and mode ~= "V" and mode ~= "\22" then -- \22 is visual block mode
-  --   vim.notify("YankCode must be used in visual mode", vim.log.levels.WARN)
-  --   return
-  -- end
-
   M.yank_code()
 end, {
   desc = "Yank selected code block with file path and line numbers",
