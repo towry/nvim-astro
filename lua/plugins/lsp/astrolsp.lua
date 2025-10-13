@@ -172,6 +172,7 @@ return {
           max_width = 60,
         },
         signature_help = {
+          anchor_bias = "above",
           border = "single",
           title = "Signature",
           max_width = 60,
