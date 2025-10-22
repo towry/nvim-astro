@@ -8,5 +8,5 @@ return {
   { import = "plugins.langs.typescript_custom" },
   { import = "astrocommunity.pack.vue" },
   { import = "astrocommunity.pack.nix" },
-  { import = "astrocommunity.pack.rust" },
+  -- { import = "astrocommunity.pack.rust" },
 }
