@@ -6,7 +6,7 @@ return {
   { import = "astrocommunity.completion.nvim-cmp" },
   { import = "astrocommunity.completion.blink-cmp-tmux" },
   --- langs
-  { import = "astrocommunity.pack.rust" },
+  -- { import = "astrocommunity.pack.rust" },
   -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.python" },

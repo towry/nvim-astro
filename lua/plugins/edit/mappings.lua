@@ -7,8 +7,8 @@ return {
     opts = {
       mappings = {
         i = {
-          ["jj"] = { "<ESC>", nowait = true, noremap = true },
-          ["jw"] = { "<ESC>:update<cr>", nowait = true, noremap = true, silent = true },
+          -- ["jj"] = { "<ESC>", nowait = true, noremap = true },
+          -- ["jw"] = { "<ESC>:update<cr>", nowait = true, noremap = true, silent = true },
         },
 
         -- first key is the mode
@@ -127,7 +127,7 @@ return {
 
           ---- git
           ["<localleader>w"] = V.git_start_nvim() and {
-            ":w|cq",
+            ":w|cq 0",
             nowait = true,
             noremap = true,
             desc = "Git mergetool: prepare write and exit safe",

@@ -171,11 +171,13 @@ return {
           title = "Symbol Hover",
           max_width = 60,
         },
-        signature_help = {
-          border = "single",
-          title = "Signature",
-          max_width = 60,
-        },
+        signature_help = false,
+        -- signature_help = {
+        --   anchor_bias = "above",
+        --   border = "single",
+        --   title = "Signature",
+        --   max_width = 60,
+        -- },
       },
       flags = {},
       -- customize how language servers are attached
