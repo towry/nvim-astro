@@ -31,12 +31,7 @@ setca("altfind", function()
 end)
 setca("ass", "let @/=")
 
-setca("ccr", "CodeCompanionCmd")
-setca("ccc", "CodeCompanionChat")
-setca("cc", "CodeCompanion")
--- inline edit
-setca("cci", "CodeCompanion #buffer")
-setca("cca", "CodeCompanionActions")
+
 
 setca("amh", "MERGE_HEAD")
 setca("arh", "REBASE_HEAD")
